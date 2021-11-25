@@ -72,8 +72,16 @@ Repeat the above command till you get the IP address in ADDRESS tab as shown in 
 18. Open the **deployment.yaml** file from the downloaded files in **Step 1**. Replace your DNS or ingress IP address in `<application_base_url>` place.
     
     Ex: `http://example.com`, `https://example.com`, `http://<ingress_ip_address>`
+	
+19. Read the optional client library license agreement from the following link.
+    
+    [Consent to deploy client libraries](../docs/consent-to-deploy-client-libraries.md)
+	
+20. Note the optional client libraries from the above link as comma separated names and replace it in `<comma_separated_library_names>` place. Save the file after the required values has been replaced.
 
-19. Now, run the following commands one by one:
+![deployment.yaml](images/deployment_yaml.png) 
+
+21. Now, run the following commands one by one:
 
 ```sh
 kubectl apply -f pvclaim_aks.yaml
@@ -91,17 +99,17 @@ kubectl apply -f hpa.yaml
 kubectl apply -f service.yaml
 ```
 
-20. Wait for some time till the Bold Reports On-Premise application deployed to your Microsoft AKS cluster.
+22. Wait for some time till the Bold Reports On-Premise application deployed to your Microsoft AKS cluster.
 
-21. Use the following command to get the pods’ status.
+23. Use the following command to get the pods’ status.
 
 ```sh
 kubectl get pods -n bold-services
 ```
 ![Pod status](images/pod_status.png) 
 
-22. Wait till you see the applications in running state. Then use your DNS or ingress IP address you got from **Step 16** to access the application in the browser.
+24. Wait till you see the applications in running state. Then use your DNS or ingress IP address you got from **Step 16** to access the application in the browser.
 
-23.	Configure the Bold Reports On-Premise application startup to use the application. Please refer the following link for more details on configuring the application startup.
+25.	Configure the Bold Reports On-Premise application startup to use the application. Please refer the following link for more details on configuring the application startup.
     
     https://help.boldreports.com/enterprise-reporting/administrator-guide/application-startup/

@@ -54,8 +54,16 @@ For fresh installation, continue with the following steps to deploy Bold Reports
     Ex: `http://example.com`, `https://example.com`
 
     ![Deployment File Changes](images/deployment_yaml.png)
+	
+12. Read the optional client library license agreement from the following link.
+    
+    [Consent to deploy client libraries](../docs/consent-to-deploy-client-libraries.md)
+	
+13. Note the optional client libraries from the above link as comma separated names and replace it in `<comma_separated_library_names>` place. Save the file after the required values has been replaced.
 
-12. Now, run the following commands one by one:
+![deployment.yaml](images/deployment_yaml.png) 
+
+14. Now, run the following commands one by one:
 
     ```sh
     kubectl apply -f pvclaim_onpremise.yaml
