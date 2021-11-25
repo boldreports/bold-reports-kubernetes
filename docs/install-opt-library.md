@@ -8,7 +8,7 @@
     kubectl exec -it <reports-web_Deployment_Name> -n <your_namespace> -- bash
     ```
 	
-2. Move to the otional library folder with the following command:
+2. Move to the optional library folder with the following command:
 
     ```sh
     cd /application/app_data/optional-libs
