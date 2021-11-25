@@ -24,7 +24,7 @@ By giving consent to install client libraries to connect with Oracle, PostgreSQL
 
 Please refer the phantomjs installation steps from the following link.
     
-    [Consent-to-deploy-phantomjs-webkit](../docs/install-opt-library.md)
+[Consent-to-deploy-phantomjs-webkit](../docs/install-opt-library.md)
 
 
 # Client library names as arguments for Bold Reports deployment in Kubernetes
