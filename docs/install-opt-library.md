@@ -1,11 +1,3 @@
----
-layout: post
-title: Installing Client Libraries in Linux | Bold Reports
-description: Learn  Set up To Install Optional Library in Linux Ubuntu for the Bold Reports Enterprise Edition. Learn  Set up To Install Optional Library in Linux Ubuntu for the Bold Reports Enterprise Edition.
-platform: report-platform
-documentation: ug
----
-
 # Install PhantomJS
 
 > **Important:** PhantomJS is a headless WebKit scriptable with JavaScript. This is free software or open source, and it may contain MIT, BSD, LGPL, GPL, or other similar licenses that contain third-party code. This executable file is necessary to export the data visualization report items during report schedule.
