@@ -1,0 +1,320 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: id-web-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: id-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: id-web
+    spec:
+      containers:
+      - name: id-web-container
+        image: gcr.io/boldreports/bold-identity:3.3.23
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        env:
+        - name: APP_BASE_URL
+          value: <application_base_url>
+        - name: INSTALL_OPTIONAL_LIBS
+          value: <comma_separated_library_names>
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 200
+          periodSeconds: 10
+          timeoutSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-web-volume
+        - mountPath: /application/idp/web/logs
+          name: log4net-config-volume
+      volumes:
+      - name: id-web-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: id-api-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: id-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: id-api
+    spec:
+      containers:
+      - name: id-api-container
+        image: gcr.io/boldreports/bold-idp-api:3.3.23
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 200
+          periodSeconds: 10
+          timeoutSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-api-volume
+        - mountPath: /application/idp/api/logs
+          name: log4net-config-volume
+      volumes:
+      - name: id-api-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: id-ums-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: id-ums
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: id-ums
+    spec:
+      containers:
+      - name: id-ums-container
+        image: gcr.io/boldreports/bold-ums:3.3.23
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 200
+          periodSeconds: 10
+          timeoutSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-ums-volume
+        - mountPath: /application/idp/ums/logs
+          name: log4net-config-volume
+      volumes:
+      - name: id-ums-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-web-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: reports-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-web
+    spec:
+      containers:
+      - name: reports-web-container
+        image: gcr.io/boldreports/boldreports-server:3.3.23
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-web-volume
+        - mountPath: /application/reporting/web/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-web-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-api-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: reports-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-api
+    spec:
+      containers:
+      - name: reports-api-container
+        image: gcr.io/boldreports/boldreports-server-api:3.3.23
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-api-volume
+        - mountPath: /application/reporting/api/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-api-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-jobs-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: reports-jobs
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-jobs
+    spec:
+      containers:
+      - name: reports-jobs-container
+        image: gcr.io/boldreports/boldreports-server-jobs:3.3.23
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-jobs-volume
+        - mountPath: /application/reporting/jobs/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-jobs-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-reportservice-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: reports-reportservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-reportservice
+    spec:
+      containers:
+      - name: reports-reportservice-container
+        image: gcr.io/boldreports/boldreports-designer:3.3.23
+        ports:
+        - containerPort: 80
+        env:
+        - name: widget_reportsng_map_enable
+          value: ""
+        - name: widget_reportsng_map_api_key
+          value: ""
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 40
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-reportservice-volume
+        - mountPath: /application/reporting/reportservice/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-reportservice-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
