@@ -5,6 +5,7 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 1. Download the following files for Bold Reports deployment in On-Premise.
 
     * `namespace.yaml`
+    * `log4net_config.yaml`
     * `pvclaim_onpremise.yaml`
     * `deployment.yaml`
     * `hpa.yaml`
@@ -36,34 +37,40 @@ For fresh installation, continue with the following steps to deploy Bold Reports
     ```sh
     kubectl apply -f namespace.yaml
     ```
+	
+8. Run the following command to create the configmap.
 
-8. Open the **ingress.yaml** file. Uncomment the host value and replace your DNS hostname with `example.com` and save the file.
+	```sh
+	kubectl apply -f log4net_config.yaml
+	```
 
-9. If you have the SSL certificate for your DNS and need to configure the site with your SSL certificate, run the following command to create a TLS secret with your SSL certificate.
+9. Open the **ingress.yaml** file. Uncomment the host value and replace your DNS hostname with `example.com` and save the file.
+
+10. If you have the SSL certificate for your DNS and need to configure the site with your SSL certificate, run the following command to create a TLS secret with your SSL certificate.
 
     ```sh
    kubectl create secret tls boldreports-tls -n bold-services --key <key-path> --cert <certificate-path>
     ```
 
-10. Now, uncomment the `tls` section and replace your DNS hostname with `example.com` in ingress spec and save the file.
+11. Now, uncomment the `tls` section and replace your DNS hostname with `example.com` in ingress spec and save the file.
 
     ![Ingress File Changes](images/ingress_yaml.png)
 
-11. Open the **deployment.yaml** file from the downloaded files in **Step 1**. Replace your DNS in `<application_base_url>` place.
+12. Open the **deployment.yaml** file from the downloaded files in **Step 1**. Replace your DNS in `<application_base_url>` place.
     
     Ex: `http://example.com`, `https://example.com`
 
     ![Deployment File Changes](images/deployment_yaml.png)
 	
-12. Read the optional client library license agreement from the following link.
+13. Read the optional client library license agreement from the following link.
     
     [Consent to deploy client libraries](../docs/consent-to-deploy-client-libraries.md)
 	
-13. Note the optional client libraries from the above link as comma separated names and replace it in `<comma_separated_library_names>` place. Save the file after the required values has been replaced.
+14. Note the optional client libraries from the above link as comma separated names and replace it in `<comma_separated_library_names>` place. Save the file after the required values has been replaced.
 
 ![deployment.yaml](images/deployment_yaml.png) 
 
-14. Now, run the following commands one by one:
+15. Now, run the following commands one by one:
 
     ```sh
     kubectl apply -f pvclaim_onpremise.yaml
@@ -85,17 +92,17 @@ For fresh installation, continue with the following steps to deploy Bold Reports
     kubectl apply -f ingress.yaml
     ```
 
-13. Wait for some time till the Bold Reports On-Premise application deployed to your On-Premise Kubernetes cluster.
+16. Wait for some time till the Bold Reports On-Premise application deployed to your On-Premise Kubernetes cluster.
 
-14. Use the following command to get the pods status.
+17. Use the following command to get the pods status.
 
      ```sh
     kubectl get pods -n bold-services
     ```    
     ![Pods Status](images/pod_status.png)
 
-15. Use your DNS hostname to access the application in the browser.
+18. Use your DNS hostname to access the application in the browser.
 
-16. Configure the Bold Reports On-Premise application startup to use the application. Please refer the following link for more details on configuring the application startup.
+19. Configure the Bold Reports On-Premise application startup to use the application. Please refer the following link for more details on configuring the application startup.
 
     https://help.boldreports.com/enterprise-reporting/administrator-guide/application-startup/
