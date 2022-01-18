@@ -4,13 +4,13 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in Amazon EKS:
 
-    * [namespace.yaml]
-    * [log4net_config.yaml]
-    * [pvclaim_eks.yaml]
-    * [deployment.yaml]
-    * [hpa.yaml]
-    * [service.yaml]
-    * [ingress.yaml]
+    * `namespace.yaml`
+    * `log4net_config.yaml`
+    * `pvclaim_eks.yaml`
+    * `deployment.yaml`
+    * `hpa.yaml`
+    * `service.yaml`
+    * `ingress.yaml`
 
 2. Create an Amazon EKS cluster and [node group](https://docs.aws.amazon.com/eks/latest/userguide/eks-compute.html) to deploy Bold Reports.
 
