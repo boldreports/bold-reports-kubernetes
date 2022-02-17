@@ -6,9 +6,9 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
     * `namespace.yaml`
 	* `log4net_config.yaml`
-    * `pvclaim_aks.yaml`
+    * `pvclaim_gke.yaml`
     * `deployment.yaml`
-    * `hpa.yaml`
+    * `hpa_gke.yaml`
     * `service.yaml`
     * `ingress.yaml`
 
