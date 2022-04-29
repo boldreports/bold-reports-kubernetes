@@ -6,3 +6,7 @@ Bold Reports can be deployed on Kubernetes cluster. You can create Kubernetes cl
 * [Amazon Elastic Kubernetes Service (EKS)](docs/amazon-eks.md)
 * [Azure Kubernetes Service (AKS)](docs/microsoft-aks.md)
 * [On-premise](docs/on-premise.md)
+
+# Upgrade Bold Reports
+
+If you are upgrading Bold Reports to 4.1.78, please follow the steps in this [link](upgrade/4-1_upgrade.md).
