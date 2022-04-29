@@ -9,4 +9,4 @@ Bold Reports can be deployed on Kubernetes cluster. You can create Kubernetes cl
 
 # Upgrade Bold Reports
 
-If you are upgrading Bold Reports to 4.1.78, please follow the steps in this [link](upgrade/upgrade.md).
+If you are upgrading Bold Reports to 4.1.78, please follow the steps in this [link](upgrade/4-1_upgrade.md).
