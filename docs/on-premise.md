@@ -4,13 +4,13 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in On-Premise.
 
-    * `namespace.yaml`
-    * `log4net_config.yaml`
-    * `pvclaim_onpremise.yaml`
-    * `deployment.yaml`
-    * `hpa.yaml`
-    * `service.yaml`
-    * `ingress.yaml`    
+    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v4.2.52/deploy/namespace.yaml)
+    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v4.2.52/deploy/log4net_config.yaml)
+    * [pvclaim_onpremise.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v4.2.52/deploy/pvclaim_onpremise.yaml)
+    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v4.2.52/deploy/deployment.yaml)
+    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v4.2.52/deploy/hpa.yaml)
+    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v4.2.52/deploy/service.yaml)
+    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v4.2.52/deploy/ingress.yaml)
     
 2. Create a folder in your machine to store the shared folders for applications usage.
 
@@ -25,7 +25,7 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 4. Deploy the latest Nginx ingress controller to your cluster using the following command.
 
     ```sh
-    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/cloud/deploy.yaml
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
     ```
 
 5. Map the DNS to your machine IP address, in which you want to access the application.
@@ -48,9 +48,9 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 10. If you have the SSL certificate for your DNS and need to configure the site with your SSL certificate, run the following command to create a TLS secret with your SSL certificate.
 
-    ```sh
-   kubectl create secret tls boldreports-tls -n bold-services --key <key-path> --cert <certificate-path>
-    ```
+```sh
+kubectl create secret tls boldreports-tls -n boldreports--key <key-path> --cert <certificate-path>
+```
 
 11. Now, uncomment the `tls` section and replace your DNS hostname with `example.com` in ingress spec and save the file.
 
