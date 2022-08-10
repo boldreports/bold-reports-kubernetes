@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: boldreports-ingress
@@ -18,7 +18,8 @@ metadata:
     nginx.ingress.kubernetes.io/affinity: cookie
     nginx.ingress.kubernetes.io/session-cookie-hash: sha1
     nginx.ingress.kubernetes.io/session-cookie-name: "boldreports.k8s.pod.id"
-    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "432000"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "200"
     nginx.ingress.kubernetes.io/proxy-body-size: 200m
     nginx.ingress.kubernetes.io/server-snippet: |      
       client_max_body_size 200m;
@@ -435,36 +436,57 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: id-web-service
-          servicePort: 6000
-          
+          service:
+            name: id-web-service
+            port:
+              number: 6000  
+        
       - path: /idapi6001(/|$)(.*)
+        pathType: Prefix
         backend:
-          serviceName: id-api-service
-          servicePort: 6001
-          
+          service:
+            name: id-api-service
+            port:
+              number: 6001
+
       - path: /idums6002(/|$)(.*)
+        pathType: Prefix     
         backend:
-          serviceName: id-ums-service
-          servicePort: 6002
-          
+          service:
+            name: id-ums-service
+            port:
+              number: 6002 
+        
       - path: /reportsweb6550(/|$)(.*)
+        pathType: Prefix 
         backend:
-          serviceName: reports-web-service
-          servicePort: 6550
-          
+          service:
+            name: reports-web-service
+            port:
+              number: 6550
+        
       - path: /reportsapi6551(/|$)(.*)
+        pathType: Prefix 
         backend:
-          serviceName: reports-api-service
-          servicePort: 6551
-          
+          service:
+            name: reports-api-service
+            port: 
+               number: 6551
+        
       - path: /reportsjobs6552(/|$)(.*)
+        pathType: Prefix 
         backend:
-          serviceName: reports-jobs-service
-          servicePort: 6552
-          
+          service:
+            name: reports-jobs-service
+            port: 
+              number: 6552
+        
       - path: /reportsdesigner6553(/|$)(.*)
+        pathType: Prefix 
         backend:
-          serviceName: reports-reportservice-service
-          servicePort: 6553
+          service:
+            name: reports-reportservice-service
+            port: 
+              number: 6553

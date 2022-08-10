@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: id-web-container
-        image: gcr.io/boldreports/bold-identity:refresh_release_4.1.78
+        image: gcr.io/boldreports/bold-identity:4.2.52
         ports:
         - containerPort: 80
         resources:
@@ -65,7 +65,7 @@ spec:
     spec:
       containers:
       - name: id-api-container
-        image: gcr.io/boldreports/bold-idp-api:refresh_release_4.1.78
+        image: gcr.io/boldreports/bold-idp-api:4.2.52
         ports:
         - containerPort: 80
         resources:
@@ -110,7 +110,7 @@ spec:
     spec:
       containers:
       - name: id-ums-container
-        image: gcr.io/boldreports/bold-ums:refresh_release_4.1.78
+        image: gcr.io/boldreports/bold-ums:4.2.52
         ports:
         - containerPort: 80
         resources:
@@ -155,7 +155,7 @@ spec:
     spec:
       containers:
       - name: reports-web-container
-        image: gcr.io/boldreports/boldreports-server:refresh_release_4.1.78
+        image: gcr.io/boldreports/boldreports-server:4.2.52
         ports:
         - containerPort: 80
         resources:
@@ -199,7 +199,7 @@ spec:
     spec:
       containers:
       - name: reports-api-container
-        image: gcr.io/boldreports/boldreports-server-api:refresh_release_4.1.78
+        image: gcr.io/boldreports/boldreports-server-api:4.2.52
         ports:
         - containerPort: 80
         resources:
@@ -243,7 +243,7 @@ spec:
     spec:
       containers:
       - name: reports-jobs-container
-        image: gcr.io/boldreports/boldreports-server-jobs:refresh_release_4.1.78
+        image: gcr.io/boldreports/boldreports-server-jobs:4.2.52
         ports:
         - containerPort: 80
         resources:
@@ -287,7 +287,7 @@ spec:
     spec:
       containers:
       - name: reports-reportservice-container
-        image: gcr.io/boldreports/boldreports-designer:refresh_release_4.1.78
+        image: gcr.io/boldreports/boldreports-designer:4.2.52
         ports:
         - containerPort: 80
         env:

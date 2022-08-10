@@ -1,6 +1,6 @@
 # Upgrading Bold Reports to latest version
 
-This section explains how to upgrade Bold Reports to latest version in your Kubernetes cluster. You can refer to the features and enhancements from this [Release Notes](https://www.boldreports.com/release-history/embedded-reporting/4-1#4-1-78).
+This section explains how to upgrade Bold Reports to latest version in your Kubernetes cluster. You can refer to the features and enhancements from this [Release Notes](https://www.boldreports.com/release-history/embedded-reporting).
 
 
 ## Backup the existing data
@@ -14,16 +14,16 @@ Before upgrading the Bold Reports to latest version, make sure to take the backu
 ## Proceeding with upgrade
 Bold Reports updates the database schema of your current version to the latest version. The upgrade process will retain all the resources and settings from the previous deployment.
 
-You can download the upgrade script from this [link](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v4.1.78/upgrade/4-1_upgrade.sh) or use the below command.
+You can download the upgrade script from this [link](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v4.2.52/upgrade/4-1_upgrade.sh) or use the below command.
 
 ```sh
-curl -o upgrade.sh https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v4.1.78/upgrade/4-1_upgrade.sh
+curl -o upgrade.sh https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v4.2.52/upgrade/4-1_upgrade.sh
 ```
 
 Run the following command to execute the shell script to upgrade Bold Reports.
 
 ```sh
-./upgrade.sh --version="4.1.78" --namespace="default"
+./upgrade.sh --version="4.2.52" --namespace="default"
 ```
 
 <table>
