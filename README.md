@@ -1,12 +1,26 @@
+# What is Bold Reports
+
+Bold Reports is a powerful business intelligence reporting software that helps you to get meaningful insights from your business data and make better decisions.
+
+It is an end-to-end solution for creating, managing, and sharing interactive business reports that includes a powerful report designer for composing easily.
+
+With deep embedding, you can interact more with your data and get insights directly from your application.
+
 # Bold Reports on Kubernetes
 
-Bold Reports can be deployed on Kubernetes cluster. You can create Kubernetes cluster on either cloud or on-premise infrastructure. After completing cluster creation, connect to it and you can download the configuration files [here](deploy/). This directory includes configuration YAML files, which contains all the configuration settings needed to deploy Bold Reports on Kubernetes cluster. The following links explain Bold Reports Kubernetes deployment in a specific cloud and on-premise environments.
+## Prerequisites
 
-* [Google Kubernetes Engine (GKE)](docs/google-gke.md)
-* [Amazon Elastic Kubernetes Service (EKS)](docs/amazon-eks.md)
-* [Azure Kubernetes Service (AKS)](docs/microsoft-aks.md)
-* [On-premise](docs/on-premise.md)
+The following requirements are necessary to run the Bold Reports solution.
 
-# Upgrade Bold Reports
+* Kubernetes cluster
+* File storage
+* Microsoft SQL Server 2012+ | PostgreSQL | MySQL
+* Load balancer: [Nginx](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-manifests/) or [Istio](https://istio.io/latest/docs/setup/getting-started/)
+* Web Browser: Microsoft Edge, Mozilla Firefox, and Chrome.
 
-If you are upgrading Bold Reports to 4.2.52, please follow the steps in this [link](upgrade/4-1_upgrade.md).
+### Deployment Methods
+
+There are two ways to deploy Bold Reports on the Kubernetes cluster with the two types of load balancer. Please refer to the following documents for Bold Reports deployment:
+
+* [Deploy Bold Reports using Ingress Nginx](docs/index.md)
+* [Deploy Bold Reports using Istio](istio/README.md)
