@@ -2,7 +2,7 @@
 
 * [Install Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to deploy Bold Reports using kubectl.
 * [File Storage](pre-requisites.md#file-storage)
-* [Create and connect a cluster](pre-requisites.md#create-a-cluster)
+* [Create and connect a cluster](pre-requisites.md#create-and-connect-a-cluster)
 * [Load Balancing](pre-requisites.md#load-balancing)
 
 # Deploy Bold Reports using kubectl
@@ -16,4 +16,4 @@ Bold Reports can be deployed manually on Kubernetes cluster. You can create Kube
 
 # Upgrade Bold Reports
 
-If you are upgrading Bold Reports to 4.2.52, please follow the steps in this [link](upgrade/4-1_upgrade.md).
+If you are upgrading Bold Reports to 4.2.52, please follow the steps in this [link](/upgrade/4-1_upgrade.md).
