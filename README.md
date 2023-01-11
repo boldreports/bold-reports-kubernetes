@@ -1,3 +1,11 @@
+<a href="https://www.boldreports.com"><img alt="boldreports" width="400" src="https://www.boldreports.com/wp-content/uploads/2019/08/bold-reports-logo.svg"></a>
+<br/>
+<br/>
+
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/boldreports/boldreports-docker?sort=semver)](https://github.com/boldreports/bold-reports-docker/releases)
+[![Documentation](https://img.shields.io/badge/docs-help.boldreports.com-blue.svg)](https://help.boldreports.com/enterprise-reporting/)
+[![File Issues](https://img.shields.io/badge/file_issues-boldreports_support-blue.svg)](https://www.boldreports.com/support)
+
 # What is Bold Reports
 
 Bold Reports is a powerful business intelligence reporting software that helps you to get meaningful insights from your business data and make better decisions.
