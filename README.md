@@ -2,7 +2,7 @@
 <br/>
 <br/>
 
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/boldreports/boldreports-docker?sort=semver)](https://github.com/boldreports/bold-reports-docker/releases)
+
 [![Documentation](https://img.shields.io/badge/docs-help.boldreports.com-blue.svg)](https://help.boldreports.com/enterprise-reporting/)
 [![File Issues](https://img.shields.io/badge/file_issues-boldreports_support-blue.svg)](https://www.boldreports.com/support)
 
