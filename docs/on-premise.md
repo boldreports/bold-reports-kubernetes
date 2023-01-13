@@ -55,9 +55,7 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 12. Open the **deployment.yaml** file from the downloaded files in **Step 1**. Replace your DNS in `<application_base_url>` place.
     
-    Ex: `http://example.com`, `https://example.com`
-
-    ![Deployment File Changes](images/deployment_yaml.png)
+    Ex: `http://example.com`, `https://example.com`    
 	
 13. Read the optional client library license agreement from the following link.
     
