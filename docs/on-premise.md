@@ -18,9 +18,7 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 3. Open **pvclaim_onpremise.yaml** file, downloaded in **Step 1** .Replace the shared folder path in your host machine to the `<local_directory>` place in the file. You can also change the storage size in the YAML file.
 
-    Ex: D://app/shared -> /run/desktop/mnt/host/**d/app/shared**
-    
-    ![Pvclaim_onpremise File Changes](images/onpremise_pvclaim.png)
+    Ex: D://app/shared -> /run/desktop/mnt/host/**d/app/shared**    
 
 4. Deploy the latest Nginx ingress controller to your cluster using the following command.
 
