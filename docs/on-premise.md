@@ -67,8 +67,6 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 	
 14. Note the optional client libraries from the above link as comma separated names and replace it in `<comma_separated_library_names>` place. Save the file after the required values has been replaced.
 
-![deployment.yaml](images/deployment_yaml.png) 
-
 15. Now, run the following commands one by one:
 
     ```sh
