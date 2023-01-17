@@ -32,3 +32,16 @@ There are two ways to deploy Bold Reports on the Kubernetes cluster with the two
 
 * [Deploy Bold Reports using Ingress Nginx](docs/index.md)
 * [Deploy Bold Reports using Istio](istio/README.md)
+
+
+# License
+
+https://www.boldreports.com/terms-of-use/on-premise<br />
+
+The images are provided for your convenience and may contain other software that is licensed differently (Linux system, Bash, etc. from the base distribution, along with any direct or indirect dependencies of the Bold Reports platform).
+
+These pre-built images are provided for convenience and include all optional and additional libraries by default. These libraries may be subject to different licenses than the Bold Reports product.
+
+If you want to install Bold Reports from scratch and precisely control which optional libraries are installed, please download the stand-alone product from boldreports.com. If you have any questions, please contact the Bold Reports team (https://www.boldreports.com/support).
+
+It is the image user's responsibility to ensure that any use of this image complies with any relevant licenses for all software contained within.
