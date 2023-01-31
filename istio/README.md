@@ -12,8 +12,7 @@ Bold Reports can be deployed manually on Kubernetes cluster. You can create Kube
 * [Google Kubernetes Engine (GKE)](google-gke.md)
 * [Amazon Elastic Kubernetes Service (EKS)](amazon-eks.md)
 * [Azure Kubernetes Service (AKS)](microsoft-aks.md)
-* [On-premise](on-premise.md)
 
 # Upgrade Bold Reports
 
-If you are upgrading Bold Reports to 4.2.52, please follow the steps in this [link](/upgrade/4-1_upgrade.md).
+If you are upgrading Bold Reports to 4.2.78, please follow the steps in this [link](/upgrade/4-2_upgrade.md).
