@@ -116,3 +116,20 @@ spec:
     protocol: TCP
   selector:
     app: reports-reportservice
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: reports-viewer-service
+  namespace: bold-services  
+  labels:
+    app: reports-viewer
+spec:
+  type: NodePort
+  ports:
+  - name: reports-viewer-port
+    port: 6554
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: reports-viewer

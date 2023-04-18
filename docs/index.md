@@ -15,4 +15,4 @@
 
 # Upgrade Bold Reports
 
-If you are upgrading Bold Reports to 4.2.85, please follow the steps in this [link](/upgrade/4-2_upgrade.md).
+If you are upgrading Bold Reports to 5.1.20, please follow the steps in this [link](/upgrade/5-1_upgrade.md).
