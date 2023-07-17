@@ -4,14 +4,14 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in AKS:
 
-    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/namespace.yaml)
-    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/log4net_config.yaml)
-    * [pvclaim_aks.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/pvclaim_aks.yaml)
-    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/deployment.yaml)
-    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/hpa.yaml)
-    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/service.yaml)
-    * [istio_gateway.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/istio_gateway.yaml)
-    * [destination_rule.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/destination_rule.yaml)
+    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/5.2.26/deploy/namespace.yaml)
+    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/5.2.26/deploy/log4net_config.yaml)
+    * [pvclaim_aks.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/5.2.26/deploy/pvclaim_aks.yaml)
+    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/5.2.26/deploy/deployment.yaml)
+    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/5.2.26/deploy/hpa.yaml)
+    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/5.2.26/deploy/service.yaml)
+    * [istio_gateway.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/5.2.26/deploy/istio_gateway.yaml)
+    * [destination_rule.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/5.2.26/deploy/destination_rule.yaml)
 
 2. Create a Kubernetes cluster in Microsoft Azure Kubernetes Service (AKS) to deploy Bold Reports.
 
@@ -25,8 +25,8 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 6. Connect with your Microsoft AKS cluster.
 
-7. Install istio ingress gateway in your AKS cluster by following the below link,
-https://docs.microsoft.com/en-us/azure/aks/servicemesh-istio-install
+7. Install istio ingress gateway in your AKS cluster by following the below link, 
+    https://docs.microsoft.com/en-us/azure/aks/servicemesh-istio-install
 
 8.	Wait and get istio ingress gateway externa IP using the following command.
 
@@ -60,6 +60,8 @@ kubectl create secret tls boldreports-tls -n boldreports--key <key-path> --cert 
 16. Open the **deployment.yaml** file from the downloaded files in **Step 1**. Replace your DNS or istio ingress gateway externa IP address in `<application_base_url>` place.
     
     Ex: `http://example.com`, `https://example.com`, `http://<istio_ingress_gateway_externa_IP_address>`
+
+    ![deployment.yaml](/docs/images/deployment_yaml.png) 
 	
 17. Read the optional client library license agreement from the following link.
     
@@ -67,7 +69,7 @@ kubectl create secret tls boldreports-tls -n boldreports--key <key-path> --cert 
 	
 18. Note the optional client libraries from the above link as comma separated names and replace it in `<comma_separated_library_names>` place. Save the file after the required values has been replaced.
 
-![deployment.yaml](/docs/images/deployment_yaml.png) 
+    ![Client library](/docs/images/client-library.png) 
 
 19. Now, run the following commands one by one:
 

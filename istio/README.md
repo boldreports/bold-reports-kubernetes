@@ -15,4 +15,4 @@ Bold Reports can be deployed manually on Kubernetes cluster. You can create Kube
 
 # Upgrade Bold Reports
 
-If you are upgrading Bold Reports to 5.1.20, please follow the steps in this [link](/upgrade/5-1_upgrade.md).
+If you are upgrading Bold Reports to 5.2.26, please follow the steps in this [link](/upgrade/5-2_upgrade.md).
