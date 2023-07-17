@@ -31,7 +31,7 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 ![PV Claim](/docs/images/eks_pvclaim.png)
 
 7. Install istio ingress gateway in your EKS cluster by following the below link,
-https://docs.microsoft.com/en-us/azure/aks/servicemesh-istio-install
+https://aws.amazon.com/blogs/opensource/getting-started-istio-eks/
 
 8.	Wait and get istio ingress gateway externa IP using the following command.
 

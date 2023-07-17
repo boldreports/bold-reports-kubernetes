@@ -26,7 +26,7 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 6. Connect with your Microsoft AKS cluster.
 
 7. Install istio ingress gateway in your AKS cluster by following the below link, 
-    https://docs.microsoft.com/en-us/azure/aks/servicemesh-istio-install
+https://docs.microsoft.com/en-us/azure/aks/servicemesh-istio-install
 
 8.	Wait and get istio ingress gateway externa IP using the following command.
 
