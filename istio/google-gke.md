@@ -4,14 +4,14 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in GKE:
 
-    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/namespace.yaml)
-    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/log4net_config.yaml)
-    * [pvclaim_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/pvclaim_gke.yaml)
-    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/deployment.yaml)
-    * [hpa_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/hpa_gke.yaml)
-    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/service.yaml)
-    * [istio_gateway.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/istio_gateway.yaml)
-    * [destination_rule.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/destination_rule.yaml)
+    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/namespace.yaml)
+    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/log4net_config.yaml)
+    * [pvclaim_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/pvclaim_gke.yaml)
+    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/deployment.yaml)
+    * [hpa_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/hpa_gke.yaml)
+    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/service.yaml)
+    * [istio_gateway.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/istio_gateway.yaml)
+    * [destination_rule.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/destination_rule.yaml)
 
 2. Create a Kubernetes cluster in Google Cloud Platform (GCP) to deploy Bold Reports.
 
@@ -33,8 +33,8 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
    https://cloud.google.com/kubernetes-engine/docs/quickstart
 
-7. Install istio ingress gateway in your AKS cluster by following the below link,
-https://docs.microsoft.com/en-us/azure/aks/servicemesh-istio-install
+7. Install istio ingress gateway in your GKE cluster by following the below link,
+https://istio.io/v1.2/docs/setup/kubernetes/install/platform/gke/
 
 8.	Wait and get istio ingress gateway externa IP using the following command.
 
@@ -58,7 +58,7 @@ jsonpath='{.status.loadBalancer.ingress[0].ip}'.
 14. Run the following command to create a TLS secret with your SSL certificate.
 
 ```sh
-kubectl create secret tls bold-tls -n bold-services --key <key-path> --cert <certificate-path>
+kubectl create secret tls boldreports-tls -n bold-services --key <key-path> --cert <certificate-path>
 ```
 
 15.	Now, uncomment the following section in istio_gateway.yaml file and replace your DNS hostname with example.com and save the file.
@@ -69,13 +69,15 @@ kubectl create secret tls bold-tls -n bold-services --key <key-path> --cert <cer
     
     Ex:  `http://example.com`, `https://example.com`, `http://<istio_ingress_gateway_externa_IP_address>`
 
+    ![deployment.yaml](/docs/images/deployment_yaml.png) 
+
 17. Read the optional client library license agreement from the following link.
 
     [Consent to deploy client libraries](../docs/consent-to-deploy-client-libraries.md)
 
 18. Note the optional client libraries from the above link as comma separated names and replace it in `<comma_separated_library_names>` place. Save the file after the required values has been replaced.
 
-![deployment.yaml](/docs/images/deployment_yaml.png) 
+    ![Client library](/docs/images/client-library.png) 
 
 19.	Now, run the following commands one by one:
 

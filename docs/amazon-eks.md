@@ -4,13 +4,13 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in Amazon EKS:
 
-    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/namespace.yaml)
-    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/log4net_config.yaml)
-    * [pvclaim_eks.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/pvclaim_eks.yaml)
-    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/deployment.yaml)
-    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/hpa.yaml)
-    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/service.yaml)
-    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.1.20/deploy/ingress.yaml)
+    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/namespace.yaml)
+    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/log4net_config.yaml)
+    * [pvclaim_eks.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/pvclaim_eks.yaml)
+    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/deployment.yaml)
+    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/hpa.yaml)
+    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/service.yaml)
+    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.2.26/deploy/ingress.yaml)
 
 2. Create an Amazon EKS cluster and [node group](https://docs.aws.amazon.com/eks/latest/userguide/eks-compute.html) to deploy Bold Reports.
 
@@ -62,7 +62,7 @@ kubectl apply -f log4net_config.yaml
 15. Run the following command to create a TLS secret with your SSL certificate.
 
 ```sh
-kubectl create secret tls bold-tls -n bold-services --key <key-path> --cert <certificate-path>
+kubectl create secret tls boldreports-tls -n bold-services --key <key-path> --cert <certificate-path>
 ```
 
 16. Now, uncomment the `tls` section and replace your DNS hostname with `example.com` in ingress spec and save the file.
@@ -89,13 +89,15 @@ Repeat the above command till you get the value in ADDRESS tab.
     
     Ex:  `http://example.com`, `https://example.com`, `http://<ingress_address>`
 
+    ![Deployment File Changes](images/deployment_yaml.png)
+
 21. Read the optional client library license agreement from the following link.
 
     [Consent to deploy client libraries](../docs/consent-to-deploy-client-libraries.md)
 
-22. By default all the client libraries will be installed for Bold Reports in Kubernetes. Still you can still overwrite them by mentioning the required libraries as comma seperated like below in the environment variable noted from the above link.
+22. Note the optional client libraries from the above link as comma separated names and replace it in `<comma_separated_library_names>` place. Save the file after the required values has been replaced.
 
-<img src="images/deployment_yaml.png" alt="Image" width="700" height="500" style="display: block; margin: 0 auto" />
+    <img src="images/client-library.png" alt="Image" width="700" height="500" style="display: block; margin: 0 auto" />
 
 23. Now, run the following commands one by one:
 
