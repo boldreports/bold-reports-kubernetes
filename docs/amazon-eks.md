@@ -62,7 +62,7 @@ kubectl apply -f log4net_config.yaml
 15. Run the following command to create a TLS secret with your SSL certificate.
 
 ```sh
-kubectl create secret tls bold-tls -n bold-services --key <key-path> --cert <certificate-path>
+kubectl create secret tls boldreports-tls -n bold-services --key <key-path> --cert <certificate-path>
 ```
 
 16. Now, uncomment the `tls` section and replace your DNS hostname with `example.com` in ingress spec and save the file.
