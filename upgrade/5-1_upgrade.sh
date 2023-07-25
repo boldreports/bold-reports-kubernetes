@@ -72,19 +72,19 @@ else
 		if [ ! -d "boldreports_5-1" ]; then mkdir boldreports_5-1; fi
 		
 		# Downloading deployment files.."
-		if [ ! -f "boldreports_5-1/hpa.yaml" ]; then curl -o boldreports_5-1/hpa.yaml https://raw.githubusercontent.com/ranganathan-arumugam/bold-reports-kubernetes/upgrade_test/upgrade/hpa.yaml; fi
+		if [ ! -f "boldreports_5-1/hpa.yaml" ]; then curl -o boldreports_5-1/hpa.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/master/upgrade/hpa.yaml; fi
 
-		if [ ! -f "boldreports_5-1/hpa_gke.yaml" ]; then curl -o boldreports_5-1/hpa_gke.yaml https://raw.githubusercontent.com/ranganathan-arumugam/bold-reports-kubernetes/upgrade_test/upgrade/hpa_gke.yaml; fi
+		if [ ! -f "boldreports_5-1/hpa_gke.yaml" ]; then curl -o boldreports_5-1/hpa_gke.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/master/upgrade/hpa_gke.yaml; fi
 
-		if [ ! -f "boldreports_5-1/service.yaml" ]; then curl -o boldreports_5-1/service.yaml https://raw.githubusercontent.com/ranganathan-arumugam/bold-reports-kubernetes/upgrade_test/upgrade/service.yaml; fi
+		if [ ! -f "boldreports_5-1/service.yaml" ]; then curl -o boldreports_5-1/service.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/master/upgrade/service.yaml; fi
 
-		if [ ! -f "boldreports_5-1/deployment.yaml" ]; then curl -o boldreports_5-1/deployment.yaml https://raw.githubusercontent.com/ranganathan-arumugam/bold-reports-kubernetes/upgrade_test/upgrade/deployment.yaml; fi
+		if [ ! -f "boldreports_5-1/deployment.yaml" ]; then curl -o boldreports_5-1/deployment.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/master/upgrade/deployment.yaml; fi
 
-		if [ ! -f "boldreports_5-1/ingress.yaml" ]; then curl -o boldreports_5-1/ingress.yaml https://raw.githubusercontent.com/ranganathan-arumugam/bold-reports-kubernetes/upgrade_test/upgrade/ingress.yaml; fi
+		if [ ! -f "boldreports_5-1/ingress.yaml" ]; then curl -o boldreports_5-1/ingress.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/master/upgrade/ingress.yaml; fi
 
-		if [ ! -f "boldreports_5-1/destination_rule.yaml" ]; then curl -o boldreports_5-1/destination_rule.yaml https://raw.githubusercontent.com/ranganathan-arumugam/bold-reports-kubernetes/upgrade_test/upgrade/destination_rule.yaml; fi
+		if [ ! -f "boldreports_5-1/destination_rule.yaml" ]; then curl -o boldreports_5-1/destination_rule.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/master/upgrade/destination_rule.yaml; fi
 
-		if [ ! -f "boldreports_5-1/istio_gateway.yaml" ]; then curl -o boldreports_5-1/istio_gateway.yaml https://raw.githubusercontent.com/ranganathan-arumugam/bold-reports-kubernetes/upgrade_test/upgrade/istio_gateway.yaml; fi
+		if [ ! -f "boldreports_5-1/istio_gateway.yaml" ]; then curl -o boldreports_5-1/istio_gateway.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/master/upgrade/istio_gateway.yaml; fi
 		
 		# deployment file changes changes
 		sed -i "s/<namespace>/$namespace/g" boldreports_5-1/hpa.yaml
