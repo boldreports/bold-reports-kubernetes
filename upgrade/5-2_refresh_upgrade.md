@@ -23,7 +23,7 @@ curl -o upgrade.sh https://raw.githubusercontent.com/boldreports/bold-reports-ku
 Run the following command to execute the shell script to upgrade Bold Reports.
 
 ```sh
-./upgrade.sh --version="5.2.26_refresh_release" --namespace="default"
+./upgrade.sh --version="5.3.8" --namespace="default"
 ```
 
 <table>
