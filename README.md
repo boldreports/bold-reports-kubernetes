@@ -10,4 +10,4 @@ Helm must be installed to use the charts.
 Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 
 <!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
-Once Helm is set up properly, add the repo following the Chart documentation which is available in [Bold Reports directory](https://github.com/ranganathan-arumugam/boldreports-helm/blob/reports-helm/helm/README.md).
+Once Helm is set up properly, add the repo following the Chart documentation which is available in [Bold Reports directory](https://github.com/boldreports/bold-reports-kubernetes/blob/helm/README.md).
