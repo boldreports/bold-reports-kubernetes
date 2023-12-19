@@ -114,7 +114,3 @@ autoscaling:
     podsPeriodSeconds: 60
     percentValue: 10
     percentPeriodSeconds: 60
-    
-bingMapWidget:
-  enabled: false
-  apiKey: ''
