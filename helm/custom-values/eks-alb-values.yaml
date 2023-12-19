@@ -1,0 +1,129 @@
+# Default values for boldreports.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+appBaseUrl: ''
+optionalLibs: 'mysql,oracle,postgresql'
+clusterProvider: 'eks'
+
+namespace:
+  name: bold-services
+  annotations: {}
+  labels: {}
+
+persistentVolume:
+  # persistent volumes were global resources. 
+  # so if you already have Bold Reports installed in your cluster, then the previous persistent volume name will conflict with current installation.
+  # Change this name to avoid conflicts with previous Bold Reports persistent volumes.
+  name: bold-fileserver
+  capacity: 3Gi
+  eks:
+    efsFileSystemId: ''
+
+image:
+  idRepo: gcr.io/boldreports
+  reportsRepo: gcr.io/boldreports
+  # Overrides the image tag whose default is the chart appVersion.
+  idTag: 5.3.8
+  reportsTag: 5.3.8
+  pullPolicy: IfNotPresent
+imagePullSecrets: []
+
+versions:
+  idp: "4.14.1"
+  reports: "5.3.8"
+
+loadBalancer:
+  type: alb
+  groupName: 'bold-services'
+  affinityCookie:
+    enable: true
+    affinityCookieExpiration: 600 
+  ssl:
+    enable: true
+    tls: arn
+    arn: ''
+  singleHost: 
+    secretName: bold-tls
+
+instanceConfig:
+  - app: id-web
+    product: boldid
+    replicaCount: 1
+    minReplicas: 1
+    maxReplicas: 20
+    cpuResourceRequests: 250m
+    memoryResourceRequests: 750Mi
+  - app: id-api
+    product: boldid
+    replicaCount: 1
+    minReplicas: 1
+    maxReplicas: 20
+    cpuResourceRequests: 250m
+    memoryResourceRequests: 750Mi
+  - app: id-ums
+    product: boldid
+    replicaCount: 1
+    minReplicas: 1
+    maxReplicas: 20
+    cpuResourceRequests: 250m
+    memoryResourceRequests: 750Mi
+  - app: reports-web
+    product: boldreports
+    replicaCount: 1
+    minReplicas: 1
+    maxReplicas: 20
+    cpuResourceRequests: 250m
+    memoryResourceRequests: 750Mi
+  - app: reports-api
+    product: boldreports
+    replicaCount: 1
+    minReplicas: 1
+    maxReplicas: 20
+    cpuResourceRequests: 250m
+    memoryResourceRequests: 750Mi
+  - app: reports-jobs
+    product: boldreports
+    replicaCount: 1
+    minReplicas: 1
+    maxReplicas: 1
+    cpuResourceRequests: 250m
+    memoryResourceRequests: 750Mi
+  - app: reports-viewer
+    product: boldreports
+    replicaCount: 1
+    minReplicas: 1
+    maxReplicas: 20
+    cpuResourceRequests: 250m
+    memoryResourceRequests: 750Mi
+  - app: reports-reportservice
+    product: boldreports
+    replicaCount: 1
+    minReplicas: 1
+    maxReplicas: 20
+    cpuResourceRequests: 250m
+    memoryResourceRequests: 750Mi
+    
+service:
+  type: ClusterIP
+  port: 80
+  
+autoscaling:
+  enabled: true
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+  behavior:
+    stabilizationWindowSeconds: 60
+    podsValue: 1
+    podsPeriodSeconds: 60
+    percentValue: 10
+    percentPeriodSeconds: 60
+    
+
+## Custom Size PDFExport
+customSizePdfExport:
+  enable: false
+  
+## BrowserTimezone
+browserTimeZone:
+  enable: false
