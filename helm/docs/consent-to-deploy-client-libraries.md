@@ -33,7 +33,6 @@ Find the names of client libraries, which needs to be passed as a comma separate
 
 | Library                   | Name          |
 | -------------             | ------------- |
-| Oracle.ManagedDataAccess  | oracle        |
 | Npgsql 4.0.0              | npgsql        |
 | MySQLConnector 0.45.1     | mysql         |
 

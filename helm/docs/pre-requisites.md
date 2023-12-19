@@ -39,7 +39,7 @@ Ex:  `D://app/shared` -> `/run/desktop/mnt/host/d/app/shared`
 
 ### AKS Cluster
 
-1. Create a Kubernetes cluster in Microsoft Azure Kubernetes Service (AKS) to deploy Bold BI.
+1. Create a Kubernetes cluster in Microsoft Azure Kubernetes Service (AKS) to deploy Bold Reports.
    https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal
 
 2. Connect with your Microsoft AKS cluster.
@@ -47,18 +47,18 @@ Ex:  `D://app/shared` -> `/run/desktop/mnt/host/d/app/shared`
 
 ### On-Premise Cluster
 
-1. Create a Kubernetes onpremise cluster to deploy Bold BI.
+1. Create a Kubernetes onpremise cluster to deploy Bold Reports.
 
 2. Follow the instructions to [Create an On-Premise cluster](https://kubernetes.io/docs/setup/).
 
 
 ## Load Balancing
 
-Currently we have provided support for `Nginx` and `Istio` as Load Balancers in Bold BI. By default Nginx is used as reverse proxy for Bold BI.
+Currently we have provided support for `Nginx` and `Istio` as Load Balancers in Bold Reports. By default Nginx is used as reverse proxy for Bold Reports.
 
 ### Ingress-Nginx
 
-If you need to configure Bold BI with Ingress, [Install Nginx ingress controller](https://kubernetes.github.io/ingress-nginx/deploy/) in your cluster please refer below and run the command accordingly.
+If you need to configure Bold Reports with Ingress, [Install Nginx ingress controller](https://kubernetes.github.io/ingress-nginx/deploy/) in your cluster please refer below and run the command accordingly.
 
 <br/>
 <table>
@@ -91,7 +91,7 @@ If you need to configure Bold BI with Ingress, [Install Nginx ingress controller
 
 ### Istio Ingress Gateway
 
-If you need to configure Bold BI with Istio, [Install Istio ingress gateway](https://istio.io/latest/docs/setup/install/) in your cluster please refer to the corresponing reference links
+If you need to configure Bold Reports with Istio, [Install Istio ingress gateway](https://istio.io/latest/docs/setup/install/) in your cluster please refer to the corresponing reference links
 
 <br/>
 <table>

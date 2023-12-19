@@ -28,12 +28,14 @@ persistentVolume:
       # hostname of the fileshare Ex:premiumstorage1234.file.core.windows.net.
       hostName: ''
 
-# image:
-#   repo: gcr.io/boldbi-294612
-#   # Overrides the image tag whose default is the chart appVersion.
-#   tag: 4.2.68
-#   pullPolicy: IfNotPresent
-# imagePullSecrets: []
+image:
+  repo: gcr.io/boldreports
+  reportsRepo: gcr.io/boldreports
+  # Overrides the image tag whose default is the chart appVersion.
+  idTag: 5.3.8
+  reportsTag: 5.3.8
+  pullPolicy: IfNotPresent
+imagePullSecrets: []
 
 loadBalancer:
   type: nginx

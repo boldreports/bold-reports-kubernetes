@@ -16,7 +16,7 @@ This chart installs [Bold Reports](https://www.boldreports.com/) on Kubernetes. 
 1. Add the Bold Reports helm repository
 
 ```console
-helm repo add boldreports https://boldreports.github.io/boldbi-kubernetes
+helm repo add boldreports https://boldreports.github.io/bold-reports-kubernetes
 helm repo update
 ```
 
@@ -129,7 +129,7 @@ _See [helm install](https://helm.sh/docs/helm/helm_install/) for command documen
 
 ## Upgrade
 
-Run the following command to get the latest version of Bold BI helm chart.
+Run the following command to get the latest version of Bold Reports helm chart.
 
 ```console
 helm repo update
