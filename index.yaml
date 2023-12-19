@@ -1,8 +1,8 @@
 apiVersion: v1
 entries:
-  boldreports:
+  kc269938:
   - apiVersion: v2
-    appVersion: 5.3.10
+    appVersion: 5.3.8
     created: "2023-12-16T17:26:20.3843848+05:30"
     description: Make bolder business decisions with complete reporting solutions
       and unleash the power of your data with paginated, printable reports and make
@@ -10,9 +10,9 @@ entries:
     digest: F06176FA9C35A366E962DF81993E33B6C101F27FC0E9860A010849824906EE07
     home: https://www.boldreports.com/
     icon: https://on-premise-demo.boldreports.com/reporting/images/application/boldreports/main_logo.svg
-    name: boldreports
+    name: kc269938
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-5.3.10.tgz
-    version: 5.3.10
-generated: "2021-12-13T17:26:20.3833077+05:30"
+    - https://boldreports.github.io/bold-reports-kubernetes/kc269938-5.3.8.tgz
+    version: 5.3.8
+generated: "2023-12-16T17:26:20.3833077+05:30"
