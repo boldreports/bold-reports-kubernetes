@@ -1,4 +1,4 @@
-# Enable Puppeteer when upgrade lower version to v5.4.20
+# Enable Puppeteer when upgrade lower version to v5.4 to higher
 
 > **Important:** Puppeteer are necessary to achieve `image and PDF export` functionalities in reports,schedules from Bold Reports. Without these packages, the image and PDF export options in reports and schedules will no longer be available.
 
@@ -10,7 +10,7 @@
 2. Navigate to the following directory
 
     ```sh
-    application/app_data/configuration/reporting
+    cd /application/app_data/configuration/reporting
     ```
     ![puppeteer-location](images/puppeteer-location.png)
 
@@ -18,7 +18,7 @@
 3. Edit the config.xml file by using below command.
 
     ```sh
-        nano config.xml
+    nano config.xml
     ```
 
 3. Add the following line on the config file to enable the puppeteer, save the changes and exit from the bash command.
@@ -31,7 +31,7 @@
 
 4. Restart the report services by using given commands,
 
-Mulitple-Container:
+    Mulitple-Container:
 
     ```sh
     kubectl rollout restart deployment/reports-api-deployment -n {your_namespace}
