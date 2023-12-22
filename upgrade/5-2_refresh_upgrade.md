@@ -46,4 +46,4 @@ Run the following command to execute the shell script to upgrade Bold Reports.
     </tr>
 </table>
 
-After upgrading the bold reports application.Please refer [this](/bold-reports-kubernetes/docs/enable-puppeteer-when-upgrading-lower-version-to-v5.4.20.md) documentation for enable puppeteer.
+After upgrading the bold reports application.Please refer [this](/docs/enable-puppeteer-when-upgrading-lower-version-to-v5.4.20.md) documentation for enable puppeteer.
