@@ -110,3 +110,5 @@ Run the following command to execute the shell script to upgrade Bold Reports.
       </td>
     </tr>
 </table>
+
+After upgrading the bold reports application.Please refer [this](/docs/enable-puppeteer-when-upgrading-lower-version-to-v5.4.20.md) documentation for enable puppeteer.
