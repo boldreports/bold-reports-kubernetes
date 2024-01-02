@@ -28,10 +28,10 @@ The following requirements are necessary to run the Bold Reports solution.
 
 ### Deployment Methods
 
-There are two ways to deploy Bold Reports on the Kubernetes cluster with the two types of load balancer. Please refer to the following documents for Bold Reports deployment:
+There are two ways to deploy Bold Reports on the Kubernetes cluster. Please refer to the following documents for Bold Reports deployment:
 
-* [Deploy Bold Reports using Ingress Nginx](docs/index.md)
-* [Deploy Bold Reports using Istio](istio/README.md)
+* [Deploy Bold Reports using Kubectl](docs/index.md)
+* [Deploy Bold Reports using Helm](helm/README.md)
 
 # License
 
@@ -44,3 +44,9 @@ These pre-built images are provided for convenience and include all optional and
 If you want to install Bold Reports from scratch and precisely control which optional libraries are installed, please download the stand-alone product from boldreports.com. If you have any questions, please contact the Bold Reports team (https://www.boldreports.com/support).
 
 It is the image user's responsibility to ensure that any use of this image complies with any relevant licenses for all software contained within.
+
+## FAQ
+
+[How to auto deploy Bold Reports in Kubernetes cluster?](https://github.com/boldreports/bold-reports-kubernetes/blob/main/docs/bold-reports-auto-deployment.md)
+
+[How to deploy Bold Reports in Elastic Kubernetes Services (EKS) using Application Load Balancer (ALB)?](https://github.com/boldreports/bold-reports-kubernetes/blob/main//docs/FAQ/how-to-deploy-bold-reports-in-eks-using-application-load-balancer.md)
