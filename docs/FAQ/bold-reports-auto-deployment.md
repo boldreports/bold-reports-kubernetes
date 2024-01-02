@@ -659,7 +659,7 @@ kubectl create secret tls bold-tls -n bold-services --key <key-path> --cert <cer
 
 ### Bold Reports on Google Kubernetes Engine   
     
-1. Download the deployment file [here](https://raw.githubusercontent.com/boldreports/boldreports-kubernetes/main/deploy/auto-deployment/deploy_gke.yaml) to deloy Bold Reports on AKS.
+1. Download the deployment file [here](https://raw.githubusercontent.com/boldreports/boldreports-kubernetes/master/deploy/auto-deployment/deploy_gke.yaml) to deloy Bold Reports on AKS.
 
 2. Navigate to the folder where the deployment files were downloaded in **Step 1**.
 
@@ -994,7 +994,7 @@ helm repo update
 helm search repo boldreports
 
 NAME            CHART VERSION   APP VERSION     DESCRIPTION
-boldreports/boldreports   6.18.11           6.18.11         Embed powerful analytics inside your apps and t...
+boldreports/boldreports   5.4.20           5.4.20         Make bolder business decisions with complete reporting solutions...
 ```
 
 _See [helm repo](https://helm.sh/docs/helm/helm_repo/) for command documentation._
@@ -1009,7 +1009,7 @@ kubectl create ns bold-services
 
 ## Install Chart
 
-For the Helm chart, you need to craft a `values.yaml` file. So download the values.yaml file from [here](https://raw.githubusercontent.com/boldreports/boldreports-kubernetes/main/helm/custom-values/values.yaml) and make needed changes based on your cluster provider.
+For the Helm chart, you need to craft a `values.yaml` file. So download the values.yaml file from [here](https://raw.githubusercontent.com/boldreports/boldreports-kubernetes/master/helm/custom-values/values.yaml) and make needed changes based on your cluster provider.
 
 The following table allows you to craft the values.yaml file with required values for Bold reports deployment. so please read the description carefully and enter the values in values.yaml file.
 
