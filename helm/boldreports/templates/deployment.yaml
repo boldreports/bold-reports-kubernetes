@@ -89,11 +89,11 @@ spec:
         - mountPath: /application/app_data
           name: {{ $service.app }}-volume
         {{- if eq $service.app "id-web" }}
-        - mountPath: /application/idp/web/logs/k8s
+        - mountPath: /application/idp/web/logs
         {{- else if eq $service.app "id-api" }}
-        - mountPath: /application/idp/api/logs/k8s
+        - mountPath: /application/idp/api/logs
         {{- else if eq $service.app "id-ums" }}
-        - mountPath: /application/idp/ums/logs/k8s
+        - mountPath: /application/idp/ums/logs
         {{- else if eq $service.app "reports-web" }}
         - mountPath: /application/reporting/web/logs
         {{- else if eq $service.app "reports-api" }}
