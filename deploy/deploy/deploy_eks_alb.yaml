@@ -1,0 +1,1051 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bold-services
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: efs-sc
+  namespace: bold-services
+provisioner: efs.csi.aws.com
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+ name: bold-fileserver
+ namespace: bold-services
+spec:
+ capacity:
+   storage: 3Gi
+ accessModes:
+ - ReadWriteMany
+ persistentVolumeReclaimPolicy: Retain
+ storageClassName: efs-sc
+ csi:
+   driver: efs.csi.aws.com
+   volumeHandle: <efs_file_system_id>
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: bold-services-fileserver-claim
+ namespace: bold-services
+spec:
+ accessModes:
+ - ReadWriteMany
+ storageClassName: efs-sc
+ volumeName: bold-fileserver
+ resources:
+   requests:
+     storage: 3Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:  
+  name: bold-license-key
+  namespace: bold-services
+type: Opaque
+stringData:
+  #  The Bold Reports licnece key which you have purchesed.
+  BOLD_SERVICES_UNLOCK_KEY: ""
+---
+apiVersion: v1
+kind: Secret
+metadata:  
+  name: bold-user-secret
+  namespace: bold-services
+type: Opaque
+stringData:
+  # It should be a valid email.
+  BOLD_SERVICES_USER_EMAIL: ""
+
+  # It should meet our password requirements.
+  BOLD_SERVICES_USER_PASSWORD: ""
+---
+apiVersion: v1
+kind: Secret
+metadata:  
+  name: bold-db-secret
+  namespace: bold-services
+type: Opaque
+stringData:
+  # Type of a database server can be used for configuring the Bold Reports, for example, mssql, mysql, and postgresql.
+  BOLD_SERVICES_DB_TYPE: ""
+
+  # Name of the Database Server
+  BOLD_SERVICES_DB_HOST: ""
+
+  # The system will use the following default port numbers based on the database server type.
+  # PostgrSQL – 5432 and MySQL -3306
+  # Please specify the port number for your database server if it is configured on a different port.
+  # For MS SQL Server, this parameter is not necessary.
+  BOLD_SERVICES_DB_PORT: ""
+
+  # Username for the database server
+  # Please refer to this documentation for information on the user's permissions.
+  # https://help.boldreports.com/enterprise-reporting/administrator-guide/faq/what-are-the-database-permissions-required-to-set-up-bold-reports/
+  BOLD_SERVICES_DB_USER: ""
+
+  # The database user's password
+  BOLD_SERVICES_DB_PASSWORD: ""
+
+  # If the database name is not specified, the system will create a new database called bold services.
+  # If you specify a database name, it should already exist on the server.
+  BOLD_SERVICES_DB_NAME: ""
+
+  # For PostgreSQL DB Servers, this is an optional parameter.
+  # The system will use the database name postgres by default.
+  # If your database server uses a different default database, please provide it here.
+  BOLD_SERVICES_POSTGRESQL_MAINTENANCE_DB: ""
+
+  # If your database server requires additional connection string parameters, include them here.
+  # Connection string parameters can be found in the official document.
+  # My SQL: https://dev.mysql.com/doc/connector-net/en/connector-net-8-0-connection-options.html
+  # PostgreSQL: https://www.npgsql.org/doc/connection-string-parameters.html
+  # MS SQL: https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring
+  # Note: A semicolon(;) should be used to separate multiple parameters.
+  BOLD_SERVICES_DB_ADDITIONAL_PARAMETERS: ""
+---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: bold-secret
+#   namespace: bold-services
+# type: Opaque
+# stringData:
+#   widget_bing_map_enable_secret: ""
+#   widget_bing_map_api_key_secret: ""
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log4net-config
+  namespace: bold-services
+data:
+  Log4Net.config: |
+    <?xml version="1.0" encoding="utf-8" ?>
+    <configuration>
+      <log4net threshold="ALL">
+        <root>
+          <level value="ALL" />
+           <!-- <appender-ref ref="ConsoleAppender" /> -->
+          <appender-ref ref="FILE_DEBUG_APPENDER" />
+          <appender-ref ref="FILE_ERROR_APPENDER" />
+        </root>
+        <!-- === File Appender for NON-ERROR messages file === -->
+        <appender name="FILE_DEBUG_APPENDER" type="log4net.Appender.RollingFileAppender" class="ch.qos.logback.classic.AsyncAppender">
+          <file type="log4net.Util.PatternString" value="%property{AppDataPath}/logs/%property{loggername}/debug-info-%env{HOSTNAME}.txt" />
+          <filter type="log4net.Filter.LevelMatchFilter">
+            <levelToMatch value="INFO" />
+          </filter>
+          <filter type="log4net.Filter.DenyAllFilter" />
+          <additivity value="true" />
+          <appendToFile value="true" />
+          <maxSizeRollBackups value="1" />
+          <maximumFileSize value="300KB" />
+          <rollingStyle value="Size" />
+          <staticLogFileName value="true" />
+          <layout type="log4net.Layout.PatternLayout">
+            <header type="log4net.Util.PatternString" value="#Software: %property{loggername} %newline#Date: %date %newline#Fields: date thread namespace methodname message %newline" />
+            <conversionPattern value="%date	[%thread]	%message%newline" />
+          </layout>
+        </appender>
+        <!-- === File Appender for ERROR messages file === -->
+        <appender name="FILE_ERROR_APPENDER" type="log4net.Appender.RollingFileAppender" class="ch.qos.logback.classic.AsyncAppender">
+          <file type="log4net.Util.PatternString" value="%property{AppDataPath}/logs/%property{loggername}/errors-%env{HOSTNAME}.txt" />
+          <filter type="log4net.Filter.LevelMatchFilter">
+            <levelToMatch value="ERROR" />
+          </filter>
+          <filter type="log4net.Filter.DenyAllFilter" />
+          <additivity value="true" />
+          <appendToFile value="true" />
+          <maxSizeRollBackups value="10" />
+          <maximumFileSize value="100KB" />
+          <rollingStyle value="Size" />
+          <staticLogFileName value="true" />
+          <layout type="log4net.Layout.PatternLayout">
+            <header type="log4net.Util.PatternString" value="#Software: %property{loggername} %newline#Date: %date %newline#Fields: date thread namespace methodname message %newline" />
+            <conversionPattern value="%date	[%thread]	%-5level	%message%newline" />
+          </layout>
+        </appender>
+        <!-- === Console Appender to use in BufferingForwardingAppender === -->
+        <appender name="ConsoleAppender" type="log4net.Appender.ConsoleAppender">
+          <layout type="log4net.Layout.PatternLayout">
+            <conversionPattern type="log4net.Util.PatternString" value="%newline%%-5level  %property{loggername}  %env{HOSTNAME}  %%date	[%%thread]	%%message%newline" />
+          </layout>
+        </appender>  
+      </log4net>
+    </configuration>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: id-web-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: id-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: id-web
+    spec:
+      containers:
+      - name: id-web-container
+        image: gcr.io/boldreports/bold-identity:5.3.8
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        env:
+        - name: BOLD_SERVICES_HOSTING_ENVIRONMENT
+          value: k8s
+        - name: APP_BASE_URL
+          value: <application_base_url>
+        - name: INSTALL_OPTIONAL_LIBS
+          value: <comma_separated_library_names>
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-web-volume
+        - mountPath: /application/idp/web/logs
+          name: log4net-config-volume
+      volumes:
+      - name: id-web-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: id-api-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: id-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: id-api
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-api-volume
+      containers:
+      - name: id-api-container
+        image: gcr.io/boldreports/bold-idp-api:5.3.8
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        env:
+        - name: BOLD_SERVICES_HOSTING_ENVIRONMENT
+          value: k8s
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-api-volume
+        - mountPath: /application/idp/api/logs
+          name: log4net-config-volume
+      volumes:
+      - name: id-api-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: id-ums-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: id-ums
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: id-ums
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-ums-volume
+      containers:
+      - name: id-ums-container
+        image: gcr.io/boldreports/bold-ums:5.3.8
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        env:
+        - name: BOLD_SERVICES_HOSTING_ENVIRONMENT
+          value: k8s
+        envFrom:
+        - secretRef:
+              name: bold-user-secret
+        - secretRef:
+              name: bold-db-secret
+        - secretRef:
+              name: bold-license-key
+        - configMapRef:
+              name: branding-config
+              optional: true
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-ums-volume
+        - mountPath: /application/idp/ums/logs
+          name: log4net-config-volume
+      volumes:
+      - name: id-ums-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-web-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: reports-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-web
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-web-volume
+      containers:
+      - name: reports-web-container
+        image: gcr.io/boldreports/boldreports-server:5.3.8
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        env:
+        - name: BOLD_SERVICES_HOSTING_ENVIRONMENT
+          value: k8s
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-web-volume
+        - mountPath: /application/reports/web/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-web-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-api-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: reports-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-api
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-api-volume
+      containers:
+      - name: reports-api-container
+        image: gcr.io/boldreports/boldreports-server-api:5.3.8
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        env:
+        - name: BOLD_SERVICES_HOSTING_ENVIRONMENT
+          value: k8s
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-api-volume
+        - mountPath: /application/reports/api/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-api-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-jobs-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: reports-jobs
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-jobs
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-jobs-volume
+      containers:
+      - name: reports-jobs-container
+        image: gcr.io/boldreports/boldreports-server-jobs:5.3.8
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        env:
+        - name: BOLD_SERVICES_HOSTING_ENVIRONMENT
+          value: k8s
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-jobs-volume
+        - mountPath: /application/reports/jobs/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-jobs-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-viewer-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: reports-viewer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-viewer
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-viewer-volume
+      containers:
+      - name: reports-viewer-container
+        image: gcr.io/boldreports/boldreports-viewer:5.3.8
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        env:
+        - name: BOLD_SERVICES_HOSTING_ENVIRONMENT
+          value: k8s
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-viewer-volume
+        - mountPath: /application/reports/jobs/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-viewer-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-reportservice-deployment
+  namespace: bold-services
+spec:
+  selector:
+    matchLabels:
+      app: reports-reportservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-reportservice
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-reportservice-volume
+      containers:
+      - name: reports-reportservice-container
+        image: gcr.io/boldreports/boldreports-designer:5.3.8
+        ports:
+        - containerPort: 80
+        env:
+        - name: BOLD_SERVICES_HOSTING_ENVIRONMENT
+          value: k8s
+        - name: AppSettings__locale-path
+          value: ""
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-reportservice-volume
+        - mountPath: /application/reports/reportservice/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-reportservice-volume
+        persistentVolumeClaim:
+          claimName: bold-services-fileserver-claim
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: id-web-service
+  namespace: bold-services
+  labels:
+    app: id-web
+spec:
+  type: NodePort
+  ports:
+  - name: id-web-port
+    port: 6000
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: id-web
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: id-api-service
+  namespace: bold-services
+  labels:
+    app: id-api
+spec:
+  type: NodePort
+  ports:
+  - name: id-api-port
+    port: 6001
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: id-api
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: id-ums-service
+  namespace: bold-services
+  labels:
+    app: id-ums
+spec:
+  type: NodePort
+  ports:
+  - name: id-ums-port
+    port: 6002
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: id-ums
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: reports-web-service
+  namespace: bold-services
+  labels:
+    app: reports-web
+spec:
+  type: NodePort
+  ports:
+  - name: reports-web-port
+    port: 6550
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: reports-web
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: reports-api-service
+  namespace: bold-services
+  labels:
+    app: reports-api
+spec:
+  type: NodePort
+  ports:
+  - name: reports-api-port
+    port: 6551
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: reports-api
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: reports-jobs-service
+  namespace: bold-services
+  labels:
+    app: reports-jobs
+spec:
+  type: NodePort
+  ports:
+  - name: reports-jobs-port
+    port: 6552
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: reports-jobs
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: reports-viewer-service
+  namespace: bold-services  
+  labels:
+    app: reports-viewer
+spec:
+  type: NodePort
+  ports:
+  - name: reports-viewer-port
+    port: 6554
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: reports-viewer
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: reports-reportservice-service
+  namespace: bold-services  
+  labels:
+    app: reports-reportservice
+spec:
+  type: NodePort
+  ports:
+  - name: reports-reportservice-port
+    port: 6553
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: reports-reportservice
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: id-web-hpa
+  namespace: bold-services
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: id-web-deployment
+  minReplicas: 1
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: id-api-hpa
+  namespace: bold-services
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: id-api-deployment
+  minReplicas: 1
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: id-ums-hpa
+  namespace: bold-services
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: id-ums-deployment
+  minReplicas: 1
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: reports-web-hpa
+  namespace: bold-services
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reports-web-deployment
+  minReplicas: 1
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: reports-api-hpa
+  namespace: bold-services
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reports-api-deployment
+  minReplicas: 1
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stareportslizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: reports-jobs-hpa
+  namespace: bold-services
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reports-jobs-deployment
+  minReplicas: 1
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stareportslizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+      - type: Percent
+        value: 10
+        periodSeconds: 60   
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: reports-viewer-hpa
+  namespace: bold-services
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reports-viewer-deployment
+  minReplicas: 1
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: reports-reportservice-hpa
+  namespace: bold-services
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reports-reportservice-deployment
+  minReplicas: 1
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+      - type: Percent
+        value: 10
+        periodSeconds: 60
