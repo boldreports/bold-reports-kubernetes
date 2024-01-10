@@ -25,7 +25,7 @@ metadata:
     {{- if .Values.loadBalancer.affinityCookie.enable }}
     nginx.ingress.kubernetes.io/affinity: cookie
     nginx.ingress.kubernetes.io/session-cookie-hash: sha1
-    nginx.ingress.kubernetes.io/session-cookie-name: "boldreports.k8s.pod.id"
+    nginx.ingress.kubernetes.io/session-cookie-name: "bold.k8s.pod.id"
     nginx.ingress.kubernetes.io/session-cookie-max-age: "{{ $.Values.loadBalancer.affinityCookie.affinityCookieExpiration }}"
     {{- end }}
     nginx.ingress.kubernetes.io/proxy-body-size: 200m
@@ -237,7 +237,7 @@ metadata:
         proxy_pass http://upstream_balancer;
         proxy_redirect                          off;
       }
-
+      
       location ~* "^/reporting/reportservice(/|$)(.*)" {
         set $namespace      $boldreports_namespace;
         set $ingress_name   "boldreports-ingress";
@@ -600,11 +600,11 @@ spec:
             backend:
               {{- if $ingressApiIsStable }}
               service:
-                name: eports-api-service
+                name: reports-api-service
                 port:
                   number: 6551
               {{- else }}
-              serviceName: eports-api-service
+              serviceName: reports-api-service
               servicePort: 6551
               {{- end }}
                   

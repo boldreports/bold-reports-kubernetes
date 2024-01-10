@@ -41,21 +41,21 @@ spec:
       containers:
       - name: {{ $service.app }}-container
         {{- if eq $service.app "id-web" }}
-        image: "{{ $.Values.image.repo }}/bold-identity:{{ $.Values.image.tag }}"
+        image: "{{ $.Values.image.repo }}/bold-identity:{{ $.Values.image.idTag }}"
         {{- else if eq $service.app "id-api" }}
-        image: "{{ $.Values.image.repo }}/bold-idp-api:{{ $.Values.image.tag }}"
+        image: "{{ $.Values.image.repo }}/bold-idp-api:{{ $.Values.image.idTag }}"
         {{- else if eq $service.app "id-ums" }}
-        image: "{{ $.Values.image.repo }}/bold-ums:{{ $.Values.image.tag }}"
+        image: "{{ $.Values.image.repo }}/bold-ums:{{ $.Values.image.idTag }}"
         {{- else if eq $service.app "reports-web" }}
-        image: "{{ $.Values.image.repo }}/boldreports-server:{{ $.Values.image.tag }}"
+        image: "{{ $.Values.image.repo }}/boldreports-server:{{ $.Values.image.reportsTag }}"
         {{- else if eq $service.app "reports-api" }}
-        image: "{{ $.Values.image.repo }}/boldreports-server-api:{{ $.Values.image.tag }}"
+        image: "{{ $.Values.image.repo }}/boldreports-server-api:{{ $.Values.image.reportsTag }}"
         {{- else if eq $service.app "reports-jobs" }}
-        image: "{{ $.Values.image.repo }}/boldreports-server-jobs:{{ $.Values.image.tag }}"
+        image: "{{ $.Values.image.repo }}/boldreports-server-jobs:{{ $.Values.image.reportsTag }}"
         {{- else if eq $service.app "reports-reportservice" }}
-        image: "{{ $.Values.image.repo }}/boldreports-designer:{{ $.Values.image.tag }}"
+        image: "{{ $.Values.image.repo }}/boldreports-designer:{{ $.Values.image.reportsTag }}"
         {{- else if eq $service.app "reports-viewer" }}
-        image: "{{ $.Values.image.repo }}/boldreports-viewer:{{ $.Values.image.tag }}"
+        image: "{{ $.Values.image.repo }}/boldreports-viewer:{{ $.Values.image.reportsTag }}"
         {{- end }}
         ports:
         - containerPort: 80
@@ -89,11 +89,11 @@ spec:
         - mountPath: /application/app_data
           name: {{ $service.app }}-volume
         {{- if eq $service.app "id-web" }}
-        - mountPath: /application/idp/web/logs
+        - mountPath: /application/idp/web/logs/k8s
         {{- else if eq $service.app "id-api" }}
-        - mountPath: /application/idp/api/logs
+        - mountPath: /application/idp/api/logs/k8s
         {{- else if eq $service.app "id-ums" }}
-        - mountPath: /application/idp/ums/logs
+        - mountPath: /application/idp/ums/logs/k8s
         {{- else if eq $service.app "reports-web" }}
         - mountPath: /application/reporting/web/logs
         {{- else if eq $service.app "reports-api" }}

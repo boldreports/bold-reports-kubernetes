@@ -56,7 +56,7 @@ kind: VirtualService
 metadata:
   labels:
     {{- include "boldreports.labels" . | nindent 4 }}
-  name: boldreports-virtual-service
+  name: bold-virtual-service
 {{ include "boldreports.namespace" . | indent 2 }}
 spec:
   {{- if .Values.loadBalancer.multipleHost }}
