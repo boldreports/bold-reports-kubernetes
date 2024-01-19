@@ -56,7 +56,11 @@ kind: VirtualService
 metadata:
   labels:
     {{- include "boldreports.labels" . | nindent 4 }}
+  {{- if .Values.istioConfig.virtualServiceName }}
+  name: {{ .Values.istioConfig.virtualServiceName }}
+  {{- else }}
   name: bold-virtual-service
+  {{- end }}
 {{ include "boldreports.namespace" . | indent 2 }}
 spec:
   {{- if .Values.loadBalancer.multipleHost }}
@@ -69,7 +73,11 @@ spec:
   - {{ (split "/" .Values.appBaseUrl)._2 }}
   {{- end }}
   gateways:
+  {{- if .Values.istioConfig.gatewayName }}
+  - {{ .Values.istioConfig.gatewayName }}
+  {{- else }}
   - bold-gateway
+  {{- end }}
   http:
   - match:
     - uri:
