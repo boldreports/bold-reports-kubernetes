@@ -4,8 +4,11 @@
 
 * [Azure Kubernetes Service (AKS)](#aks-file-storage)
 * [Amazon Elastic Kubernetes Service (EKS)](#eks-file-storage)
+* [Google Kubernetes Engine (GKE)](#gke-file-storage)
 
 ### AKS File Storage
+
+#### SMB
 
 1. Create a File share instance in your storage account and note the File share name to store the shared folders for application usage.
 
@@ -19,6 +22,16 @@ For encoding the values to base64 please run the following command in powershell
 
 ![File Share details](images/aks-file-storage.png)
 
+#### NFS
+
+1. Create an NFS file share instance within your premium storage account. Take note of the storage account and file share name, as these will be used to store shared folders for application usage.
+
+2. Identify the hostname in the properties of the file share. Make a note of the hostname as illustrated in the image below.
+
+   ![File Share details](images/nfs-hostname.png)
+
+> **NOTE:** The premium storage account of the NFS fileshare must be within the same subscription as the AKS cluster.
+
 ### EKS File Storage
 
 1. Deploy the EFS CSI Driver to your cluster and create an Amazon Elastic File System (EFS) volume to store the shared folders for application usage by following the below link.
@@ -29,10 +42,22 @@ For encoding the values to base64 please run the following command in powershell
 
 ![AWS EFS](images/aws-efs.png)
 
+### GKE File Storage
+
+1. Create a Google filestore instance to store the shared folders for application usage.
+
+   https://console.cloud.google.com/filestore 
+
+2. Note the **File share name** and **IP address** after creating filestore instance.
+
+![File Share details](images/gke_file_share_details.png)
+
+
 ## Create and connect a cluster
 
 * [Azure Kubernetes Service (AKS)](#aks-cluster)
 * [Amazon Elastic Kubernetes Service (EKS)](#eks-cluster)
+* [Google Kubernetes Engine (GKE)](#gke-cluster)
 
 ### AKS Cluster
 
@@ -50,7 +75,17 @@ For encoding the values to base64 please run the following command in powershell
 
 2. Connect to your Amazon EKS cluster.
    https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/
-  
+
+ ### GKE Cluster
+
+1. Create a Kubernetes cluster in Google Cloud Platform (GCP) to deploy Bold Reports.
+
+   https://console.cloud.google.com/kubernetes 
+
+2. Connect with your GKE cluster.
+
+   https://cloud.google.com/kubernetes-engine/docs/quickstart
+ 
 ## Load Balancing
 
 Currently we have provided support for `Nginx` and `Istio` as Load Balancers in Bold Reports. By default Nginx is used as reverse proxy for Bold Reports.
@@ -85,6 +120,14 @@ If you need to configure Bold Reports with Ingress, [Install Nginx ingress contr
        kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/aws/deploy.yaml 
       </td>
     </tr>
+    <tr>
+      <td>
+       GKE Cluster
+      </td>
+      <td>
+       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+      </td>
+    </tr>
 </table>
 <br/>
 
@@ -116,6 +159,14 @@ If you need to configure Bold Reports with Istio, [Install Istio ingress gateway
       </td>
       <td>
        https://aws.amazon.com/blogs/opensource/getting-started-istio-eks/
+      </td>
+    </tr>
+    <tr>
+      <td>
+       GKE Cluster
+      </td>
+      <td>
+      https://cloud.google.com/istio/docs/istio-on-gke/installing
       </td>
     </tr>
 </table>

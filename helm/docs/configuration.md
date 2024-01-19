@@ -106,7 +106,63 @@ persistentVolume:
 
 > **NOTE:** The Azure storage account credentials will be maintained in a secret named `bold-azure-secret`
 
-2. EKS
+2. AKS WITH NFS FILESHARE
+
+```console
+clusterProvider: aks
+    
+persistentVolume:
+  aks:
+    nfs:
+      # fileshare name as 'storageaccountname/filesharename'.
+      fileShareName: '<storageaccountname/filesharename>'
+
+      # hostname of the fileshare Ex:premiumstorage1234.file.core.windows.net.
+      hostName: '<hostname>'
+```
+
+<br/>
+<table>
+    <tr>
+      <td>
+       <b>Name</b>
+      </td>
+      <td>
+       <b>Description</b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       clusterProvider
+      </td>
+      <td>
+       The type of kubernetes cluster provider you are using. In this case the clusterProvider value is <i>aks</i>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       persistentVolume.aks.nfs.fileShareName
+      </td>
+      <td>
+       The <i>Storage account</i> and <i>File share name</i> of your nfs File share instance.
+       Ex: Ex:premiumstorage1234/boldbi
+      </td>
+    </tr>
+    <tr>
+      <td>
+       persistentVolume.aks.nfs.hostName
+      </td>
+      <td>
+       The host name of your nfs fileshare instance.
+       Ex: premiumstore12345.file.core.windows.net
+      </td>
+    </tr>
+</table>
+<br/>
+
+> **NOTE:** The premium storage account of the NFS fileshare must be within the same subscription as the AKS cluster.
+
+3. EKS
 
 ```console
 clusterProvider: eks
@@ -140,6 +196,53 @@ persistentVolume:
       </td>
       <td>
        The <i>File system ID</i> of your EFS file system.
+      </td>
+    </tr>
+</table>
+<br/>
+
+4. GKE
+
+```console
+clusterProvider: gke
+    
+persistentVolume:
+  gke:
+    fileShareName: <file_share_name>
+    fileShareIp: <file_share_ip_address>
+```
+<br/>
+<table>
+    <tr>
+      <td>
+       <b>Name</b>
+      </td>
+      <td>
+       <b>Description</b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       clusterProvider
+      </td>
+      <td>
+       The type of kubernetes cluster provider you are using. In this case the clusterProvider value is <i>gke</i>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       persistentVolume.gke.fileShareName
+      </td>
+      <td>
+       The <i>File share name</i> of your filestore instance.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       persistentVolume.gke.fileShareIp
+      </td>
+      <td>
+       The <i>IP address</i> of your filestore instance.
       </td>
     </tr>
 </table>
