@@ -41,21 +41,21 @@ spec:
       containers:
       - name: {{ $service.app }}-container
         {{- if eq $service.app "id-web" }}
-        image: "{{ $.Values.image.repo }}/bold-identity:{{ $.Values.image.idTag }}"
+        image: "{{ $.Values.image.idRepo }}/bold-identity:{{ $.Values.image.idTag }}"
         {{- else if eq $service.app "id-api" }}
-        image: "{{ $.Values.image.repo }}/bold-idp-api:{{ $.Values.image.idTag }}"
+        image: "{{ $.Values.image.idRepo }}/bold-idp-api:{{ $.Values.image.idTag }}"
         {{- else if eq $service.app "id-ums" }}
-        image: "{{ $.Values.image.repo }}/bold-ums:{{ $.Values.image.idTag }}"
+        image: "{{ $.Values.image.idRepo }}/bold-ums:{{ $.Values.image.idTag }}"
         {{- else if eq $service.app "reports-web" }}
-        image: "{{ $.Values.image.repo }}/boldreports-server:{{ $.Values.image.reportsTag }}"
+        image: "{{ $.Values.image.reportsRepo }}/boldreports-server:{{ $.Values.image.reportsTag }}"
         {{- else if eq $service.app "reports-api" }}
-        image: "{{ $.Values.image.repo }}/boldreports-server-api:{{ $.Values.image.reportsTag }}"
+        image: "{{ $.Values.image.reportsRepo }}/boldreports-server-api:{{ $.Values.image.reportsTag }}"
         {{- else if eq $service.app "reports-jobs" }}
-        image: "{{ $.Values.image.repo }}/boldreports-server-jobs:{{ $.Values.image.reportsTag }}"
+        image: "{{ $.Values.image.reportsRepo }}/boldreports-server-jobs:{{ $.Values.image.reportsTag }}"
         {{- else if eq $service.app "reports-reportservice" }}
-        image: "{{ $.Values.image.repo }}/boldreports-designer:{{ $.Values.image.reportsTag }}"
+        image: "{{ $.Values.image.reportsRepo }}/boldreports-designer:{{ $.Values.image.reportsTag }}"
         {{- else if eq $service.app "reports-viewer" }}
-        image: "{{ $.Values.image.repo }}/boldreports-viewer:{{ $.Values.image.reportsTag }}"
+        image: "{{ $.Values.image.reportsRepo }}/boldreports-viewer:{{ $.Values.image.reportsTag }}"
         {{- end }}
         ports:
         - containerPort: 80

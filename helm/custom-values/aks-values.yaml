@@ -29,7 +29,7 @@ persistentVolume:
       hostName: ''
 
 image:
-  repo: gcr.io/boldreports
+  idRepo: gcr.io/boldreports
   reportsRepo: gcr.io/boldreports
   # Overrides the image tag whose default is the chart appVersion.
   idTag: 5.4.20

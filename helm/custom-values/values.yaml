@@ -27,9 +27,11 @@ persistentVolume:
     hostPath: ''
     
 image:
-  repo: gcr.io/boldreports
+  idRepo: gcr.io/boldreports
+  reportsRepo: gcr.io/boldreports
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 5.4.20
+  idTag: 5.4.20
+  reportsTag: 5.4.20
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
@@ -42,7 +44,7 @@ loadBalancer:
   # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
   # ingressClassName: nginx
   singleHost: 
-    secretName: boldreports-tls
+    secretName: bold-tls
   # multipleHost:
     # hostArray:
       # - hosts: 

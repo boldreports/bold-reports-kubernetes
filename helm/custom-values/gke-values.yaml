@@ -1,10 +1,10 @@
-# Default values for bold-services.
+# Default values for boldreports.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 namespace: bold-services
 appBaseUrl: ''
-optionalLibs: ''
-clusterProvider: ''
+optionalLibs: 'mysql,oracle,npgsql'
+clusterProvider: 'gke'
 
 persistentVolume:
   # persistent volumes were global resources. 
@@ -15,19 +15,9 @@ persistentVolume:
   gke:
     fileShareName: ''
     fileShareIp: ''
-  eks:
-    efsFileSystemId: ''
-  aks:
-    fileShareName: ''
-    # base64 string
-    azureStorageAccountName: ''
-    # base64 string
-    azureStorageAccountKey: ''
-  onpremise:
-    hostPath: ''
-    
+
 image:
-  idRepo: gcr.io/boldreports
+  idrepo: gcr.io/boldreports
   reportsRepo: gcr.io/boldreports
   # Overrides the image tag whose default is the chart appVersion.
   idTag: 5.4.20
@@ -44,13 +34,13 @@ loadBalancer:
   # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
   # ingressClassName: nginx
   singleHost: 
-    secretName: boldreports-tls
+    secretName: bold-tls
   # multipleHost:
     # hostArray:
       # - hosts: 
           # - kubernetes.docker.internal
           # - example.com
-        # secretName: boldreports-tls
+        # secretName: bold-tls
 
 instanceConfig:
   - app: id-web
@@ -101,11 +91,7 @@ instanceConfig:
     maxReplicas: 20
     cpuResourceRequests: 250m
     memoryResourceRequests: 750Mi
-    
-service:
-  type: ClusterIP
-  port: 80
-  
+
 autoscaling:
   enabled: true
   targetCPUUtilizationPercentage: 80
