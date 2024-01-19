@@ -37,7 +37,7 @@ The section explains how to deploy [Bold Reports](https://www.boldreports.com/) 
 
 8. Open the **deploy_eks_alb.yaml** file that was downloaded in Step 6. Replace the file system ID that was created in Step 2 with the `<efs_file_system_id>` placeholder in the file.
 
-   ![PV Claim](../images/deploy/eks/pvclaim.png)
+   ![PV Claim](./images/alb_efs_file_system.png)
 
 9. Enter the necessary variable information in the **deploy_eks_alb.yaml** file to complete the auto-deployment, as detailed below.
 
@@ -139,7 +139,7 @@ The section explains how to deploy [Bold Reports](https://www.boldreports.com/) 
 
 11. Download the `ingress_alb.yaml` file from [here](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v5.3.8/deploy/deploy/ingress_alb.yaml).Uncomment the host value and replace your DNS hostname with `example.com` in ingress_alb.yaml file in line **18**.
 
-      ![DNS](../images/faq/ingress_alb_host.png)
+      ![DNS](./images/ingress_alb_host.png)
 
 	**Note:** Here you need to mention the host without the HTTP or HTTPS protocol.
 	
@@ -154,16 +154,16 @@ The section explains how to deploy [Bold Reports](https://www.boldreports.com/) 
         
 	* Now, uncomment the `tls` section and replace your DNS hostname with `example.com` in ingress spec and save the file.
 
-		![ingress DNS](../images/faq/tls_ingress_alb.png)
+		![ingress DNS](./images/tls_ingress_alb.png)
 	
     **B. SSL configuration using ACM ARN:**
        * Create an ACM Certificate for your domain and verify ownership. Note down the `Amazon Resource Name (ARN) of the Certificate` you just created. Find the ARN in the ACM Management Console as follows.
        
-       		![ACM ARN](../images/faq/AWS_ACM_ARN.png)
+       		![ACM ARN](./images/AWS_ACM_ARN.png)
        
        * Now, uncommand the following lines and replace your Arn with `Amazon Resource Name (ARN) of the Certificate` in the ingress annotation and save the file.
 
-		 ![ACM ARN](../images/faq/ingress_ARN.png)	
+		 ![ACM ARN](./images/ingress_ARN.png)	
 
 13. Apply the `ingress_alb.yaml` by running the following command.
 
@@ -176,13 +176,13 @@ The section explains how to deploy [Bold Reports](https://www.boldreports.com/) 
 	kubectl get ingress -n bold-services
 	```
 	Repeat the above command till you get the value in the ADDRESS tab.
-	![Ingress Address](../images/faq/ingress_alb_address.png) 
+	![Ingress Address](./images/alb_ingress_address.png) 
 	
 15. Replace your DNS or Ingress address in `<application_base_url>` place of the **deploy_eks_alb.yaml** file with http or https protocal.
 
     Ex:  `http://example.com`, `https://example.com`, `http://<ingress_address>`
     
-    ![App_Base_Url](../images/faq/alb_app_base_url.png) 
+    ![App_Base_Url](./images/alb_app_base_url.png) 
     
 16. Read the optional client library license agreement from the following link.
 
@@ -190,7 +190,7 @@ The section explains how to deploy [Bold Reports](https://www.boldreports.com/) 
     
 17. By default, all client libraries for Bold Reports will be installed in Kubernetes. However, overwrite them by specifying the required libraries as a comma-separated list in the environment variable noted from the above link.
 
-    ![Optinal_Lib](../images/faq/alb_optional_lib.png) 
+    ![Optinal_Lib](./images/alb-client-libary.png) 
 
 18. Now, run the following commands to deploy Bold Reports in your kubernetes cluster.
 
@@ -203,8 +203,8 @@ The section explains how to deploy [Bold Reports](https://www.boldreports.com/) 
      ```sh
     kubectl get pods -n bold-services
      ```
-    ![Pod status](../images/deploy/pod_status.png) 
+    ![Pod status](./images/alb_pod_status.png) 
 
 20. Wait till you see the applications in running state. Then, use your DNS or Ingress address you got from **Step 15**.
 
-    ![Browser_veiw](../images/deploy/Browser_veiw.png) 
+    <!-- ![Browser_veiw](../images/Browser_veiw.png)  -->

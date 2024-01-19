@@ -1,4 +1,4 @@
-# Enable Puppeteer when upgrading lower version to v5.4 to higher
+# Enable Puppeteer when upgrading lower version to v5.4 or higher
 
 > **Important:** Puppeteer are necessary to achieve `image and PDF export` functionalities in reports,schedules from Bold Reports. Without these packages, the image and PDF export options in reports and schedules will no longer be available.
 

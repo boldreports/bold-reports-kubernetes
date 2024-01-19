@@ -47,4 +47,4 @@ It is the image user's responsibility to ensure that any use of this image compl
 
 ## FAQ
 
-[How to deploy Bold Reports in Elastic Kubernetes Services (EKS) using Application Load Balancer (ALB)?](https://github.com/boldreports/bold-reports-kubernetes/blob/master/helm/docs/FAQ/how-to-deploy-bold-reports-in-eks-using-application-load-balancer.md)
+[How to deploy Bold Reports in Elastic Kubernetes Services (EKS) using Application Load Balancer (ALB)?](/docs/FAQ/how-to-deploy-bold-reports-in-eks-using-application-load-balancer.md)
