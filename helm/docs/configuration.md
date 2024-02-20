@@ -14,6 +14,8 @@ Read the optional client library license agreement from the following link.
 
 If you wish to inlcude only specific client libraries note the optional client libraries from the above link as comma separated names in your values.yaml file.
 
+  ![Client library](/helm/docs/images/client-library.png)
+
 ## Persistent Volume
 
 ### Name
@@ -145,7 +147,7 @@ persistentVolume:
       </td>
       <td>
        The <i>Storage account</i> and <i>File share name</i> of your nfs File share instance.
-       Ex: Ex:premiumstorage1234/boldbi
+       Ex: Ex:premiumstorage1234/boldreports
       </td>
     </tr>
     <tr>
