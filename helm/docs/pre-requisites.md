@@ -135,12 +135,12 @@ If you need to configure Bold Reports with Ingress, [Install Nginx ingress contr
 
 If you need to configure Bold Reports with Istio, 
 
-Step 1: Please update the Loadbalancer type to `istio` in values.yaml file. 
+1. Please update the Loadbalancer type to `istio` in values.yaml file. 
 
    ![Istio-Ingress](/helm/docs/images/istio-config.png)
 
  
-Step 2: [Install Istio ingress gateway](https://istio.io/latest/docs/setup/install/) in your cluster please refer to the corresponing reference links
+2. [Install Istio ingress gateway](https://istio.io/latest/docs/setup/install/) in your cluster please refer to the corresponing reference links
 
 <br/>
 <table>
