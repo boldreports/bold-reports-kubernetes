@@ -44,7 +44,3 @@ These pre-built images are provided for convenience and include all optional and
 If you want to install Bold Reports from scratch and precisely control which optional libraries are installed, please download the stand-alone product from boldreports.com. If you have any questions, please contact the Bold Reports team (https://www.boldreports.com/support).
 
 It is the image user's responsibility to ensure that any use of this image complies with any relevant licenses for all software contained within.
-
-## FAQ
-
-[How to deploy Bold Reports in Elastic Kubernetes Services (EKS) using Application Load Balancer (ALB)?](/docs/FAQ/how-to-deploy-bold-reports-in-eks-using-application-load-balancer.md)
