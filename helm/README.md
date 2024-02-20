@@ -83,7 +83,7 @@ For Helm chart, you'll need to craft a `values.yaml`.
       </td>
       <td>
        The type of kubernetes cluster provider you are using.<br/>
-       The recommended values are '<i>eks,aks</i>'
+       The recommended values are '<i>eks,aks,gke</i>'
       </td>
     </tr>
     <tr>
