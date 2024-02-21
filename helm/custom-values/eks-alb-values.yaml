@@ -95,7 +95,7 @@ instanceConfig:
     product: boldreports
     replicaCount: 1
     minReplicas: 1
-    maxReplicas: 20
+    maxReplicas: 1
     cpuResourceRequests: 250m
     memoryResourceRequests: 750Mi
     
@@ -114,11 +114,3 @@ autoscaling:
     percentValue: 10
     percentPeriodSeconds: 60
     
-
-## Custom Size PDFExport
-customSizePdfExport:
-  enable: false
-  
-## BrowserTimezone
-browserTimeZone:
-  enable: false

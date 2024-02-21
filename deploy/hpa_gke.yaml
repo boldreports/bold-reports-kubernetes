@@ -139,7 +139,7 @@ spec:
     kind: Deployment
     name: reports-jobs-deployment
   minReplicas: 1
-  maxReplicas: 20
+  maxReplicas: 1
   metrics:
   - type: Resource
     resource:
@@ -165,7 +165,7 @@ spec:
     kind: Deployment
     name: reports-reportservice-deployment
   minReplicas: 1
-  maxReplicas: 20
+  maxReplicas: 1
   metrics:
   - type: Resource
     resource:
