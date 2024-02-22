@@ -17,6 +17,8 @@ This chart installs [Bold Reports](https://www.boldreports.com/) on Kubernetes. 
 
 ```console
 helm repo add boldreports https://boldreports.github.io/bold-reports-kubernetes
+```
+```
 helm repo update
 ```
 
@@ -24,10 +26,10 @@ helm repo update
 
 ```console
 helm search repo boldreports
+```
 
 NAME            CHART VERSION   APP VERSION     DESCRIPTION
 boldreports/boldreports   5.4.20           5.4.20         Make bolder business decisions with complete reporting solutions...
-```
 
 _See [helm repo](https://helm.sh/docs/helm/helm_repo/) for command documentation._
 
