@@ -28,10 +28,10 @@ The following requirements are necessary to run the Bold Reports solution.
 
 ### Deployment Methods
 
-There are two ways to deploy Bold Reports on the Kubernetes cluster with the two types of load balancer. Please refer to the following documents for Bold Reports deployment:
+There are two ways to deploy Bold Reports on the Kubernetes cluster. Please refer to the following documents for Bold Reports deployment:
 
-* [Deploy Bold Reports using Ingress Nginx](docs/index.md)
-* [Deploy Bold Reports using Istio](istio/README.md)
+* [Deploy Bold Reports using Kubectl](docs/index.md)
+* [Deploy Bold Reports using Helm](helm/README.md)
 
 # License
 
