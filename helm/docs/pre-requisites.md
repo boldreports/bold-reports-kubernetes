@@ -109,7 +109,7 @@ If you need to configure Bold Reports with Ingress, [Install Nginx ingress contr
        AKS Cluster
       </td>
       <td>
-       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/cloud/deploy.yaml
+       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
       </td>
     </tr>
     <tr>
@@ -117,7 +117,7 @@ If you need to configure Bold Reports with Ingress, [Install Nginx ingress contr
        EKS Cluster
       </td>
       <td>
-       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/aws/deploy.yaml 
+       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/aws/deploy.yaml 
       </td>
     </tr>
     <tr>
@@ -125,7 +125,7 @@ If you need to configure Bold Reports with Ingress, [Install Nginx ingress contr
        GKE Cluster
       </td>
       <td>
-       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
       </td>
     </tr>
 </table>
