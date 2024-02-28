@@ -26,7 +26,7 @@ helm repo update
 helm search repo boldreports
 
 NAME            CHART VERSION   APP VERSION     DESCRIPTION
-boldreports/boldreports   5.4.20           5.4.20         Make bolder business decisions with complete reporting solutions...
+boldreports/boldreports   5.4.30           5.4.30         Make bolder business decisions with complete reporting solutions...
 ```
 
 _See [helm repo](https://helm.sh/docs/helm/helm_repo/) for command documentation._
