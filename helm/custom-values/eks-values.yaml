@@ -19,8 +19,8 @@ image:
   idRepo: gcr.io/boldreports
   reportsRepo: gcr.io/boldreports
   # Overrides the image tag whose default is the chart appVersion.
-  idTag: 5.4.20
-  reportsTag: 5.4.20
+  idTag: 5.4.30
+  reportsTag: 5.4.30
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
