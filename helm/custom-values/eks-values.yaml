@@ -16,11 +16,11 @@ persistentVolume:
     efsFileSystemId: ''
     
 image:
-  idRepo: gcr.io/boldreports
-  reportsRepo: gcr.io/boldreports
+  idRepo: us-docker.pkg.dev/boldreports/v6-1-34
+  reportsRepo: us-docker.pkg.dev/boldreports/v6-1-34
   # Overrides the image tag whose default is the chart appVersion.
-  idTag: 5.4.30
-  reportsTag: 5.4.30
+  idTag: 6.1.34
+  reportsTag: 6.1.34
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
@@ -85,6 +85,12 @@ instanceConfig:
     cpuResourceRequests: 250m
     memoryResourceRequests: 750Mi
   - app: reports-viewer
+    replicaCount: 1
+    minReplicas: 1
+    maxReplicas: 20
+    cpuResourceRequests: 250m
+    memoryResourceRequests: 750Mi
+  - app: bold-etl
     replicaCount: 1
     minReplicas: 1
     maxReplicas: 20

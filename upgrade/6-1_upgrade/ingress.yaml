@@ -1,17 +1,10 @@
-{{- if eq .Values.loadBalancer.type "nginx" }}
-{{- $ingressApiIsStable := eq (include "ingress.isStable" .) "true" -}}
-{{- $ingressSupportsIngressClassName := eq (include "ingress.supportsIngressClassName" .) "true" -}}
-{{- $ingressSupportsPathType := eq (include "ingress.supportsPathType" .) "true" -}}
-{{- $ingressPathType := "Prefix" -}}
-apiVersion: {{ template "ingress.apiVersion" . }}
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  labels:
-    {{- include "boldreports.labels" . | nindent 4 }}
-  name: boldreports-ingress
-{{ include "boldreports.namespace" . | indent 2 }}
+  name: <ingress_name>
+  namespace: <namespace>
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
     nginx.ingress.kubernetes.io/proxy-buffers: "4 256k"
@@ -22,20 +15,15 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
-    {{- if .Values.loadBalancer.affinityCookie.enable }}
     nginx.ingress.kubernetes.io/affinity: cookie
     nginx.ingress.kubernetes.io/session-cookie-hash: sha1
-    nginx.ingress.kubernetes.io/session-cookie-name: "bold.k8s.pod.id"
-    nginx.ingress.kubernetes.io/session-cookie-max-age: "{{ $.Values.loadBalancer.affinityCookie.affinityCookieExpiration }}"
-    {{- end }}
+    nginx.ingress.kubernetes.io/session-cookie-name: "boldreports.k8s.pod.id"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "432000"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "200"
     nginx.ingress.kubernetes.io/proxy-body-size: 200m
-    nginx.ingress.kubernetes.io/server-snippet: |
+    nginx.ingress.kubernetes.io/server-snippet: |      
       client_max_body_size 200m;
-      {{- if eq .Release.Namespace "default" }}
-      set $boldreports_namespace "{{ .Values.namespace }}";
-      {{- else }}
-      set $boldreports_namespace "{{ .Release.Namespace }}";
-      {{- end }}     
+      set $boldreports_namespace "<namespace>";
       
       location ~* "^/reporting/api(/|$)(.*)" {
         set $namespace      $boldreports_namespace;
@@ -104,73 +92,6 @@ metadata:
         proxy_redirect                          off;
       }
       
-      location ~* "^/reporting/jobs(/|$)(.*)" {
-        set $namespace      $boldreports_namespace;
-        set $ingress_name   "boldreports-ingress";
-        set $service_name   "";
-        set $service_port   "";
-        set $location_path  "/reportsjobs6552/reporting/jobs(/|${literal_dollar})(.*)";
-        rewrite_by_lua_block {
-                lua_ingress.rewrite({
-                        force_ssl_redirect = false,
-                        ssl_redirect = true,
-                        force_no_ssl_redirect = false,
-                        use_port_in_redirects = false,
-                })
-                balancer.rewrite()
-                plugins.run()
-        }
-        header_filter_by_lua_block {
-                lua_ingress.header()
-                plugins.run()
-        }
-        body_filter_by_lua_block {
-        }
-        log_by_lua_block {
-                balancer.log()
-                monitor.call()
-                plugins.run()
-        }
-        port_in_redirect off;
-        set $balancer_ewma_score -1;
-        set $proxy_upstream_name "${boldreports_namespace}-reports-jobs-service-6552";
-        set $proxy_host          $proxy_upstream_name;
-        set $pass_access_scheme  $scheme;
-        set $pass_server_port    $server_port;
-        set $best_http_host      $http_host;
-        set $pass_port           $pass_server_port;
-        set $proxy_alternative_upstream_name "";
-        proxy_set_header Host                   $best_http_host;
-        proxy_set_header                        Upgrade           $http_upgrade;
-        proxy_set_header                        Connection        $connection_upgrade;
-        proxy_set_header X-Request-ID           $req_id;
-        proxy_set_header X-Real-IP              $remote_addr;
-        proxy_set_header X-Forwarded-For        $remote_addr;
-        proxy_set_header X-Forwarded-Host       $best_http_host;
-        proxy_set_header X-Forwarded-Port       $pass_port;
-        proxy_set_header X-Forwarded-Proto      $pass_access_scheme;
-        proxy_set_header X-Scheme               $pass_access_scheme;
-        proxy_set_header X-Original-Forwarded-For $http_x_forwarded_for;
-        proxy_set_header Proxy                  "";
-        proxy_connect_timeout                   300s;
-        proxy_send_timeout                      300s;
-        proxy_read_timeout                      300s;
-        proxy_buffering                         off;
-        proxy_buffer_size                       4k;
-        proxy_buffers                           4 4k;
-        proxy_max_temp_file_size                1024m;
-        proxy_request_buffering                 on;
-        proxy_http_version                      1.1;
-        proxy_cookie_domain                     off;
-        proxy_cookie_path                       off;
-        proxy_next_upstream                     error timeout;
-        proxy_next_upstream_timeout             0;
-        proxy_next_upstream_tries               3;
-        rewrite "(?i)/reportsjobs6552/reporting/jobs(/|$)(.*)" /$2 break;
-        proxy_pass http://upstream_balancer;
-        proxy_redirect                          off;
-      }
-      
       location ~* "^/reporting/viewer(/|$)(.*)" {
         set $namespace      $boldreports_namespace;
         set $ingress_name   "boldreports-ingress";
@@ -234,6 +155,73 @@ metadata:
         proxy_next_upstream_timeout             0;
         proxy_next_upstream_tries               3;
         rewrite "(?i)/reportsviewer6554/reporting/viewer(/|$)(.*)" /$2 break;
+        proxy_pass http://upstream_balancer;
+        proxy_redirect                          off;
+      }
+
+      location ~* "^/reporting/jobs(/|$)(.*)" {
+        set $namespace      $boldreports_namespace;
+        set $ingress_name   "boldreports-ingress";
+        set $service_name   "";
+        set $service_port   "";
+        set $location_path  "/reportsjobs6552/reporting/jobs(/|${literal_dollar})(.*)";
+        rewrite_by_lua_block {
+                lua_ingress.rewrite({
+                        force_ssl_redirect = false,
+                        ssl_redirect = true,
+                        force_no_ssl_redirect = false,
+                        use_port_in_redirects = false,
+                })
+                balancer.rewrite()
+                plugins.run()
+        }
+        header_filter_by_lua_block {
+                lua_ingress.header()
+                plugins.run()
+        }
+        body_filter_by_lua_block {
+        }
+        log_by_lua_block {
+                balancer.log()
+                monitor.call()
+                plugins.run()
+        }
+        port_in_redirect off;
+        set $balancer_ewma_score -1;
+        set $proxy_upstream_name "${boldreports_namespace}-reports-jobs-service-6552";
+        set $proxy_host          $proxy_upstream_name;
+        set $pass_access_scheme  $scheme;
+        set $pass_server_port    $server_port;
+        set $best_http_host      $http_host;
+        set $pass_port           $pass_server_port;
+        set $proxy_alternative_upstream_name "";
+        proxy_set_header Host                   $best_http_host;
+        proxy_set_header                        Upgrade           $http_upgrade;
+        proxy_set_header                        Connection        $connection_upgrade;
+        proxy_set_header X-Request-ID           $req_id;
+        proxy_set_header X-Real-IP              $remote_addr;
+        proxy_set_header X-Forwarded-For        $remote_addr;
+        proxy_set_header X-Forwarded-Host       $best_http_host;
+        proxy_set_header X-Forwarded-Port       $pass_port;
+        proxy_set_header X-Forwarded-Proto      $pass_access_scheme;
+        proxy_set_header X-Scheme               $pass_access_scheme;
+        proxy_set_header X-Original-Forwarded-For $http_x_forwarded_for;
+        proxy_set_header Proxy                  "";
+        proxy_connect_timeout                   300s;
+        proxy_send_timeout                      300s;
+        proxy_read_timeout                      300s;
+        proxy_buffering                         off;
+        proxy_buffer_size                       4k;
+        proxy_buffers                           4 4k;
+        proxy_max_temp_file_size                1024m;
+        proxy_request_buffering                 on;
+        proxy_http_version                      1.1;
+        proxy_cookie_domain                     off;
+        proxy_cookie_path                       off;
+        proxy_next_upstream                     error timeout;
+        proxy_next_upstream_timeout             0;
+        proxy_next_upstream_tries               3;
+        rewrite "(?i)/reportsjobs6552/reporting/jobs(/|$)(.*)" /$2 break;
         proxy_pass http://upstream_balancer;
         proxy_redirect                          off;
       }
@@ -371,7 +359,7 @@ metadata:
         proxy_pass http://upstream_balancer;
         proxy_redirect                          off;        
       }
-      
+
       location ~* "^/api(/|$)(.*)" {
         set $namespace      $boldreports_namespace;
         set $ingress_name   "boldreports-ingress";
@@ -573,165 +561,82 @@ metadata:
         proxy_redirect                          off;
       }
 spec:
-  {{- if and $ingressSupportsIngressClassName .Values.loadBalancer.ingressClassName }}
-  ingressClassName: {{ .Values.loadBalancer.ingressClassName }}
-  {{- end }}
-  {{- if eq (split ":" .Values.appBaseUrl)._0 "https" }}
-  tls:   
-    {{- if .Values.loadBalancer.multipleHost }}
-    {{- range $host := .Values.loadBalancer.multipleHost.hostArray }}
-    - hosts:
-      {{- range $dns := $host.hosts }}
-        - {{ $dns }}
-      {{- end }}
-      secretName: {{ $host.secretName }}
-    {{- end }}
-    {{- else }}
-    - hosts:
-        - {{ (split "/" .Values.appBaseUrl)._2 }}
-      secretName: {{ .Values.loadBalancer.singleHost.secretName }}
-    {{- end }}
-  {{- end }}
+  # tls:
+  # - hosts:
+    # - <dns_name>
+    # secretName: <tls_secret_name>
   rules:
-    {{- if .Values.loadBalancer.multipleHost }}
-    - http:
-    {{- else }}
-    - host: {{ (split "/" .Values.appBaseUrl)._2 }}
-      http:
-    {{- end }}
-        paths:
-          - path: /
-            {{- if $ingressSupportsPathType }}
-            pathType: {{ $ingressPathType }}
-            {{- end }}
-            backend:
-              {{- if $ingressApiIsStable }}
-              service:
-                name: id-web-service
-                port:
-                  number: 6000
-              {{- else }}
-              serviceName: id-web-service
-              servicePort: 6000
-              {{- end }}
-              
-          - path: /idapi6001(/|$)(.*)
-            {{- if $ingressSupportsPathType }}
-            pathType: {{ $ingressPathType }}
-            {{- end }}
-            backend:
-              {{- if $ingressApiIsStable }}
-              service:
-                name: id-api-service
-                port:
-                  number: 6001
-              {{- else }}
-              serviceName: id-api-service
-              servicePort: 6001
-              {{- end }}
-                  
-          - path: /idums6002(/|$)(.*)
-            {{- if $ingressSupportsPathType }}
-            pathType: {{ $ingressPathType }}
-            {{- end }}
-            backend:
-              {{- if $ingressApiIsStable }}
-              service:
-                name: id-ums-service
-                port:
-                  number: 6002
-              {{- else }}
-              serviceName: id-ums-service
-              servicePort: 6002
-              {{- end }}
-                  
-          - path: /reportsweb6550(/|$)(.*)
-            {{- if $ingressSupportsPathType }}
-            pathType: {{ $ingressPathType }}
-            {{- end }}
-            backend:
-              {{- if $ingressApiIsStable }}
-              service:
-                name: reports-web-service
-                port:
-                  number: 6550
-              {{- else }}
-              serviceName: reports-web-service
-              servicePort: 6550
-              {{- end }}
-                  
-          - path: /reportsapi6551(/|$)(.*)
-            {{- if $ingressSupportsPathType }}
-            pathType: {{ $ingressPathType }}
-            {{- end }}
-            backend:
-              {{- if $ingressApiIsStable }}
-              service:
-                name: reports-api-service
-                port:
-                  number: 6551
-              {{- else }}
-              serviceName: reports-api-service
-              servicePort: 6551
-              {{- end }}
-                  
-          - path: /reportsjobs6552(/|$)(.*)
-            {{- if $ingressSupportsPathType }}
-            pathType: {{ $ingressPathType }}
-            {{- end }}
-            backend:
-              {{- if $ingressApiIsStable }}
-              service:
-                name: reports-jobs-service
-                port:
-                  number: 6552
-              {{- else }}
-              serviceName: reports-jobs-service
-              servicePort: 6552
-              {{- end }}
+  - #host: <dns_name>
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: id-web-service
+            port:
+              number: 6000  
+        
+      - path: /idapi6001(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: id-api-service
+            port:
+              number: 6001
 
-          - path: /reportsviewer6554(/|$)(.*)
-            {{- if $ingressSupportsPathType }}
-            pathType: {{ $ingressPathType }}
-            {{- end }}
-            backend:
-              {{- if $ingressApiIsStable }}
-              service:
-                name: reports-viewer-service
-                port:
-                  number: 6554
-              {{- else }}
-              serviceName: reports-viewer-service
-              servicePort: 6554
-              {{- end }}
-                  
-          - path: /reportsdesigner6553(/|$)(.*)
-            {{- if $ingressSupportsPathType }}
-            pathType: {{ $ingressPathType }}
-            {{- end }}
-            backend:
-              {{- if $ingressApiIsStable }}
-              service:
-                name: reports-reportservice-service
-                port:
-                  number: 6553
-              {{- else }}
-              serviceName: reports-reportservice-service
-              servicePort: 6553
-              {{- end }}
+      - path: /idums6002(/|$)(.*)
+        pathType: Prefix     
+        backend:
+          service:
+            name: id-ums-service
+            port:
+              number: 6002 
+        
+      - path: /reportsweb6550(/|$)(.*)
+        pathType: Prefix 
+        backend:
+          service:
+            name: reports-web-service
+            port:
+              number: 6550
+        
+      - path: /reportsapi6551(/|$)(.*)
+        pathType: Prefix 
+        backend:
+          service:
+            name: reports-api-service
+            port: 
+               number: 6551
+        
+      - path: /reportsdesigner6553(/|$)(.*)
+        pathType: Prefix 
+        backend:
+          service:
+            name: reports-reportservice-service
+            port: 
+              number: 6553
 
-          - path: /boldetl/(/|$)(.*)
-            {{- if $ingressSupportsPathType }}
-            pathType: {{ $ingressPathType }}
-            {{- end }}
-            backend:
-              {{- if $ingressApiIsStable }}
-              service:
-                name: bold-etl-service
-                port:
-                  number: 6009
-              {{- else }}
-              serviceName: bold-etl-service
-              servicePort: 6009
-              {{- end }}
-{{- end }}
+      - path: /reportsviewer6554(/|$)(.*)
+        pathType: Prefix 
+        backend:
+          service:
+            name: reports-viewer-service
+            port: 
+              number: 6554
+
+      - path: /reportsjobs6552(/|$)(.*)
+        pathType: Prefix 
+        backend:
+          service:
+            name: reports-jobs-service
+            port: 
+              number: 6552
+
+      - path: /boldetl/(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: bold-etl-service
+            port:
+              number: 6009
