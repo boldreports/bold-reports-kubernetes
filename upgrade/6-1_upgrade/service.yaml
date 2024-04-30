@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: id-web-service
-  namespace: bold-services
+  namespace: <namespace>
   labels:
     app: id-web
 spec:
@@ -19,7 +19,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: id-api-service
-  namespace: bold-services
+  namespace: <namespace>
   labels:
     app: id-api
 spec:
@@ -36,7 +36,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: id-ums-service
-  namespace: bold-services
+  namespace: <namespace>
   labels:
     app: id-ums
 spec:
@@ -53,7 +53,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: reports-web-service
-  namespace: bold-services
+  namespace: <namespace>
   labels:
     app: reports-web
 spec:
@@ -70,7 +70,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: reports-api-service
-  namespace: bold-services
+  namespace: <namespace>
   labels:
     app: reports-api
 spec:
@@ -87,7 +87,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: reports-jobs-service
-  namespace: bold-services
+  namespace: <namespace>
   labels:
     app: reports-jobs
 spec:
@@ -104,7 +104,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: reports-reportservice-service
-  namespace: bold-services  
+  namespace: <namespace>  
   labels:
     app: reports-reportservice
 spec:
@@ -121,7 +121,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: reports-viewer-service
-  namespace: bold-services  
+  namespace: <namespace>  
   labels:
     app: reports-viewer
 spec:
@@ -138,7 +138,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: bold-etl-service
-  namespace: bold-services  
+  namespace: <namespace>  
   labels:
     app: bold-etl
 spec:

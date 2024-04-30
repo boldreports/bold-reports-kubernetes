@@ -51,6 +51,13 @@ spec:
             name: reports-reportservice-service
             port:
               number: 6553
+      - path: "/etlservice/*"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: bold-etl-service
+            port:
+              number: 6009
       - path: "/reporting/viewer/*"
         pathType: ImplementationSpecific
         backend:

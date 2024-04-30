@@ -36,6 +36,8 @@ spec:
     port: 6553
     {{- else if eq $service.app "reports-viewer" }}
     port: 6554
+    {{- else if eq $service.app "bold-etl" }}
+    port: 6009
     {{- end }}
     targetPort: {{ $.Values.service.port }}
     protocol: TCP
