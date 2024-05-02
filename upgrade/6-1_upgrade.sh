@@ -71,14 +71,14 @@ else
 		if [ ! -d "boldreports_6-1" ]; then mkdir boldreports_6-1; fi
 		
 		# Downloading deployment files.."
-		if [ ! -f "boldreports_6-1/hpa.yaml" ]; then curl -o boldreports_6-1/hpa.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1/upgrade/6-1_upgrade/hpa.yaml; fi
-		if [ ! -f "boldreports_6-1/hpa_gke.yaml" ]; then curl -o boldreports_6-1/hpa_gke.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1/upgrade/6-1_upgrade/hpa_gke.yaml; fi
-		if [ ! -f "boldreports_6-1/service.yaml" ]; then curl -o boldreports_6-1/service.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1/upgrade/6-1_upgrade/service.yaml; fi
-		if [ ! -f "boldreports_6-1/deployment.yaml" ]; then curl -o boldreports_6-1/deployment.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1/upgrade/6-1_upgrade/deployment.yaml; fi
-		if [ ! -f "boldreports_6-1/ingress.yaml" ]; then curl -o boldreports_6-1/ingress.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1/upgrade/6-1_upgrade/ingress.yaml; fi
-		if [ ! -f "boldreports_6-1/destination_rule.yaml" ]; then curl -o boldreports_6-1/destination_rule.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1/upgrade/6-1_upgrade/destination_rule.yaml; fi
-		if [ ! -f "boldreports_6-1/istio_gateway.yaml" ]; then curl -o boldreports_6-1/istio_gateway.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1/upgrade/6-1_upgrade/istio_gateway.yaml; fi
-		if [ ! -f "boldreports_6-1/log4net_config.yaml" ]; then curl -o boldreports_6-1/log4net_config.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1/upgrade/6-1_upgrade/log4net_config.yaml; fi
+		if [ ! -f "boldreports_6-1/hpa.yaml" ]; then curl -o boldreports_6-1/hpa.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.34/upgrade/6-1_upgrade/hpa.yaml; fi
+		if [ ! -f "boldreports_6-1/hpa_gke.yaml" ]; then curl -o boldreports_6-1/hpa_gke.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.34/upgrade/6-1_upgrade/hpa_gke.yaml; fi
+		if [ ! -f "boldreports_6-1/service.yaml" ]; then curl -o boldreports_6-1/service.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.34/upgrade/6-1_upgrade/service.yaml; fi
+		if [ ! -f "boldreports_6-1/deployment.yaml" ]; then curl -o boldreports_6-1/deployment.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.34/upgrade/6-1_upgrade/deployment.yaml; fi
+		if [ ! -f "boldreports_6-1/ingress.yaml" ]; then curl -o boldreports_6-1/ingress.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.34/upgrade/6-1_upgrade/ingress.yaml; fi
+		if [ ! -f "boldreports_6-1/destination_rule.yaml" ]; then curl -o boldreports_6-1/destination_rule.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.34/upgrade/6-1_upgrade/destination_rule.yaml; fi
+		if [ ! -f "boldreports_6-1/istio_gateway.yaml" ]; then curl -o boldreports_6-1/istio_gateway.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.34/upgrade/6-1_upgrade/istio_gateway.yaml; fi
+		if [ ! -f "boldreports_6-1/log4net_config.yaml" ]; then curl -o boldreports_6-1/log4net_config.yaml https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.34/upgrade/6-1_upgrade/log4net_config.yaml; fi
 		
 		# deployment file changes changes
 		sed -i "s/<namespace>/$namespace/g" boldreports_6-1/hpa.yaml
