@@ -11,8 +11,8 @@ The following steps will guide you through the process of deploying Bold Reports
 The following requirements are necessary to deploy the Bold Reports solution using Kubectl:
 
 * [Install Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl): Make sure you install kubectl on your local machine to facilitate the deployment process.
-* [NAS File System](../pre-requisites.md#ack-file-system): Set up a NAS file system to store the required data for Bold Reports.
-* [Create and connect a ACK cluster](../pre-requisites.md#ack-cluster): Create and connect an ACK cluster in Alibaba Cloud that will hostBold Reports deployment.
+* [NAS File System](./pre-requisites.md#ack-file-system): Set up a NAS file system to store the required data for Bold Reports.
+* [Create and connect a ACK cluster](./pre-requisites.md#ack-cluster): Create and connect an ACK cluster in Alibaba Cloud that will hostBold Reports deployment.
 * Load Balancing- [Nginx](https://kubernetes.github.io/ingress-nginx/deploy/) : By default, an Alibaba Cloud Kubernetes (ACK) cluster has Nginx already installed in the kube-system namespace, so there is no need to install it manually. The Nginx Ingress Controller is available and can be utilized to enable load balancing for your Bold Reports deployment.
 
 Please ensure that you have fulfilled these prerequisites before proceeding with the deployment.
