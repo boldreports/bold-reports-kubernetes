@@ -1,4 +1,4 @@
-{{- if or (eq .Values.clusterProvider "eks") (eq .Values.clusterProvider "onpremise") }}
+{{- if or (eq .Values.clusterProvider "eks") (eq .Values.clusterProvider "ack") (eq .Values.clusterProvider "onpremise") }}
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -8,6 +8,8 @@ metadata:
   name: efs-sc
   {{- else if eq .Values.clusterProvider "aks" }}
   name: azurefile-csi-nfs
+  {{- else if eq .Values.clusterProvider "ack" }}
+  name : alibabacloud-cnfs-nas
   {{- else if eq .Values.clusterProvider "onpremise" }}
   name: boldreports-storageclass
   {{- end }}
@@ -20,6 +22,8 @@ metadata:
 provisioner: efs.csi.aws.com
 {{- else if eq .Values.clusterProvider "aks" }}
 provisioner: file.csi.azure.com
+{{- else if eq .Values.clusterProvider "ack" }}
+provisioner: nasplugin.csi.alibabacloud.com
 {{- else if eq .Values.clusterProvider "onpremise" }}
 provisioner: kubernetes.io/no-provisioner
 {{- end }}
@@ -75,8 +79,11 @@ spec:
    storage: {{ .Values.persistentVolume.capacity }}
  accessModes:
  - ReadWriteMany
- {{- if or (eq .Values.clusterProvider "eks") (eq .Values.clusterProvider "aks") }}
+ {{- if or (eq .Values.clusterProvider "eks") (eq .Values.clusterProvider "aks") (eq .Values.clusterProvider "ack") }}
  persistentVolumeReclaimPolicy: Retain
+ {{- end }}
+ {{- if eq .Values.clusterProvider "ack" }}
+ volumeMode: Filesystem
  {{- end }}
  {{- if eq .Values.clusterProvider "onpremise" }}
  storageClassName: boldreports-storageclass
@@ -106,6 +113,17 @@ spec:
  nfs:
    path: /{{ .Values.persistentVolume.gke.fileShareName }}
    server: {{ .Values.persistentVolume.gke.fileShareIp }}
+ {{- else if eq .Values.clusterProvider "ack" }}
+ storageClassName : alibabacloud-cnfs-nas
+ csi:
+   driver: nasplugin.csi.alibabacloud.com
+   volumeHandle: {{ .Values.persistentVolume.name }}
+   volumeAttributes:
+        server: {{ .Values.persistentVolume.ack.serverName }}
+        path: /{{ .Values.persistentVolume.ack.filePath }}
+ mountOptions:
+ - nolock,tcp,noresvport
+ - vers=3
  {{- end }}
 ---
 apiVersion: v1
@@ -126,6 +144,8 @@ spec:
  storageClassName: boldreports-storageclass
  {{- else if eq .Values.clusterProvider "eks" }}
  storageClassName: efs-sc
+ {{- else if eq .Values.clusterProvider "ack" }}
+ storageClassName : alibabacloud-cnfs-nas
  {{- else if and (eq .Values.clusterProvider "aks") ( .Values.persistentVolume.aks.nfs.fileShareName ) }}
  storageClassName: azurefile-csi-nfs
  {{- else if and (eq .Values.clusterProvider "aks") ( .Values.persistentVolume.aks.fileShareName ) }}

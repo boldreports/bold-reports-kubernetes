@@ -250,6 +250,54 @@ persistentVolume:
 </table>
 <br/>
 
+5. ACK
+
+````console
+clusterProvider: 'ack'
+
+persistentVolume:
+  ack:  
+    serverName: '<host_name_of_mount_target>'
+    filePath: '<file_path_name>'
+````
+
+<br/>
+<table>
+    <tr>
+      <td>
+       <b>Name</b>
+      </td>
+      <td>
+       <b>Description</b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       clusterProvider
+      </td>
+      <td>
+       The type of kubernetes cluster provider you are using. In this case the clusterProvider value is <i>gke</i>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       persistentVolume.ack.serverName
+      </td>
+      <td>
+       The <i>File share server name</i> of your filestore instance.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       persistentVolume.ack.filePath
+      </td>
+      <td>
+       The <i>Mount path</i> of your filestore instance.
+      </td>
+    </tr>
+</table>
+<br/>
+
 ## Load Balancing
 
 ### Ingress-Nginx

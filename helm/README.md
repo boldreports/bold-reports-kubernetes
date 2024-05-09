@@ -5,11 +5,12 @@ This chart installs [Bold Reports](https://www.boldreports.com/) on Kubernetes. 
 ## Deployment prerequisites
 
 * [Install Helm](https://helm.sh/docs/intro/install/) to deploy Bold Reports using Helm.
+* [Install kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 * [File Storage](docs/pre-requisites.md#file-storage)
 * [Create and connect a cluster](docs/pre-requisites.md#create-a-cluster)
 * [Load Balancing](docs/pre-requisites.md#load-balancing)
 
-> **Note:** Note the [Ingress IP address](docs/pre-requisites.md#get-ingress-ip) to use it while crafting values.yaml when installing Bold Reports with helm chart.
+> **Note:** Note the [Ingress IP address](docs/pre-requisites.md#get-ingress-ip) to use it while crafting values.yaml when installing Bold Reports with helm chart. 
 
 ## Get Repo Info
 
@@ -38,6 +39,7 @@ For Helm chart, you'll need to craft a `values.yaml`.
 * For `EKS` please download the values.yaml file [here](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/master/helm/custom-values/eks-values.yaml).
 * For `AKS` please download the values.yaml file [here](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/master/helm/custom-values/aks-values.yaml).
 * For `GKE` please download the values.yaml file [here](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/master/helm/custom-values/gke-values.yaml).
+* For `ACK` please download the values.yaml file [here](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/master/helm/custom-values/ack-values.yaml)
 
 <br/>
 

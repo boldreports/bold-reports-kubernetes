@@ -1,10 +1,10 @@
-# Default values for bold-services.
+# Default values for boldreports.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 namespace: bold-services
 appBaseUrl: ''
-optionalLibs: ''
-clusterProvider: ''
+optionalLibs: 'mysql,oracle,postgresql'
+clusterProvider: 'ack'
 
 persistentVolume:
   # persistent volumes were global resources. 
@@ -12,29 +12,10 @@ persistentVolume:
   # Change this name to avoid conflicts with previous Bold Reports persistent volumes.
   name: bold-services-fileserver
   capacity: 3Gi
-  gke:
-    fileShareName: ''
-    fileShareIp: ''
-  eks:
-    efsFileSystemId: ''
-  ack:  
+  ack:
     serverName: ''
-    filePath: ''
-  aks:
-    fileShareName: ''
-    # base64 string
-    azureStorageAccountName: ''
-    # base64 string
-    azureStorageAccountKey: ''
-    nfs:
-      # fileshare name as 'storageaccountname/filesharename' Ex:premiumstorage1234/boldreports.
-      fileShareName: ''
+    filePath: '/bold-services'
 
-      # hostname of the fileshare Ex:premiumstorage1234.file.core.windows.net.
-      hostName: ''
-  onpremise:
-    hostPath: ''
-    
 image:
   idRepo: us-docker.pkg.dev/boldreports/v6-1-34
   reportsRepo: us-docker.pkg.dev/boldreports/v6-1-34
@@ -53,13 +34,13 @@ loadBalancer:
   # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
   # ingressClassName: nginx
   singleHost: 
-    secretName: boldreports-tls
+    secretName: bold-tls
   # multipleHost:
     # hostArray:
       # - hosts: 
           # - kubernetes.docker.internal
           # - example.com
-        # secretName: boldreports-tls
+        # secretName: bold-tls
 
 instanceConfig:
   - app: id-web
@@ -116,11 +97,7 @@ instanceConfig:
     maxReplicas: 20
     cpuResourceRequests: 250m
     memoryResourceRequests: 750Mi
-    
-service:
-  type: ClusterIP
-  port: 80
-  
+
 autoscaling:
   enabled: true
   targetCPUUtilizationPercentage: 80
@@ -131,3 +108,4 @@ autoscaling:
     podsPeriodSeconds: 60
     percentValue: 10
     percentPeriodSeconds: 60
+  
