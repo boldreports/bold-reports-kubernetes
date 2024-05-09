@@ -54,7 +54,7 @@ Follow the documentation provided at [this link](https://www.alibabacloud.com/he
 * [Google Kubernetes Engine (GKE)](#gke-cluster)
 * [Amazon Elastic Kubernetes Service (EKS)](#eks-cluster)
 * [Azure Kubernetes Service (AKS)](#aks-cluster)
-* [Alibaba Cloud Container Service for Kubernets](#ack-cluster)
+* [Alibaba Cloud Kubernets](#ack-cluster)
 
 ### GKE Cluster
 

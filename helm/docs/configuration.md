@@ -22,7 +22,7 @@ If you wish to inlcude only specific client libraries note the optional client l
 
 Persistent volumes were global resources. So if you already have Bold Reports installed in your cluster, then the previous persistent volume name will conflict with current installation. Change this name to avoid conflicts with previous Bold Reports persistent volumes.
 
-By default the persistent volume name used in Bold Reports is `bold-fileserver`. 
+By default the persistent volume name used in Bold Reports is `bold-service-fileserver`. 
 
 ```console
 persistentVolume:
@@ -30,7 +30,7 @@ persistentVolume:
   # so if you already have Bold Reports installed in your cluster, 
   # then the previous persistent volume name will conflict with current installation.
   # Change this name to avoid conflicts with previous Bold Reports persistent volumes.
-  name: bold-fileserver
+  name: bold-service-fileserver
 ```
 
 ### Capacity
@@ -253,12 +253,12 @@ persistentVolume:
 5. ACK
 
 ````console
-clusterProvider: 'ack'
+clusterProvider: ack
 
 persistentVolume:
   ack:  
-    serverName: '<host_name_of_mount_target>'
-    filePath: '<file_path_name>'
+    serverName: <host_name_of_mount_target>
+    filePath: <file_path_name>
 ````
 
 <br/>

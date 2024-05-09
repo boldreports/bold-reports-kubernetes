@@ -7,11 +7,12 @@
 
 # Deploy Bold Reports using kubectl
 
-[Bold Reports](https://www.boldreports.com/) can be deployed manually on Kubernetes cluster. You can create Kubernetes cluster on cloud cluster providers (GKE, AKS, and EKS). After completing cluster creation, connect to it and you can download the configuration files [here](/deploy). This directory includes configuration YAML files, which contains all the configuration settings needed to deploy Bold Reports on Kubernetes cluster. The following links explain Bold Reports Kubernetes deployment in a specific cloud and on-premise environments.
+[Bold Reports](https://www.boldreports.com/) can be deployed manually on Kubernetes cluster. You can create Kubernetes cluster on cloud cluster providers (GKE, AKS, EKS and ACK). After completing cluster creation, connect to it and you can download the configuration files [here](/deploy). This directory includes configuration YAML files, which contains all the configuration settings needed to deploy Bold Reports on Kubernetes cluster. The following links explain Bold Reports Kubernetes deployment in a specific cloud and on-premise environments.
 
 * [Google Kubernetes Engine (GKE)](google-gke.md)
 * [Amazon Elastic Kubernetes Service (EKS)](amazon-eks.md)
 * [Azure Kubernetes Service (AKS)](microsoft-aks.md)
+* [Alibaba Cloud Kubernetes ACK](alibaba-ack.md)
 
 # Upgrade Bold Reports
 

@@ -35,8 +35,11 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 4. Once the file system is created, locate and click on the cube icon. This will allow you to view the mount target hostname. Take note of the mount target hostname, as you will need it for mounting the file system with our application.
 
    ![NAS-Mount-Target](images/ack-file-system.png)
+   
 5. Open the `pvclaim_ack.yaml` file and replace the `<host_name_of_mount_target>` placeholder with the actual mount target hostname noted in the previous step.
+
    ![PV Claim](images/pvcliam-ack.png)
+
 6. Connect with your Alibaba ACK cluster
 7. After connecting with your cluster, deploy the latest Nginx ingress controller to your cluster using the following command.
 
@@ -63,7 +66,7 @@ kubectl apply -f log4net_config.yaml
 14. Run the following command to create a TLS secret with your SSL certificate.
 
 ```sh
-kubectl create secret tls boldreports-tls -n boldreports --key <key-path> --cert <certificate-path>
+kubectl create secret tls boldreports-tls -n bold-services --key <key-path> --cert <certificate-path>
 ```
 
 15. Now, uncomment the `tls` section and replace your DNS hostname with `example.com` in ingress spec and save the file.

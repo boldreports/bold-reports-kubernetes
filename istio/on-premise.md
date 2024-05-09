@@ -48,7 +48,7 @@ jsonpath='{.status.loadBalancer.ingress[0].ip}'.
 11. Run the following command to create a TLS secret with your SSL certificate.
 
 ```sh
-kubectl create secret tls boldreports-tls -n boldreports--key <key-path> --cert <certificate-path>
+kubectl create secret tls boldreports-tls -n bold-services --key <key-path> --cert <certificate-path>
 ```
 
 12.	Now, uncomment the following section in istio_gateway.yaml file and replace your DNS hostname with example.com and save the file.

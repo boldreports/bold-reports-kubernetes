@@ -10,7 +10,7 @@ This chart installs [Bold Reports](https://www.boldreports.com/) on Kubernetes. 
 * [Create and connect a cluster](docs/pre-requisites.md#create-a-cluster)
 * [Load Balancing](docs/pre-requisites.md#load-balancing)
 
-> **Note:** Note the [Ingress IP address](docs/pre-requisites.md#get-ingress-ip) to use it while crafting values.yaml when installing Bold Reports with helm chart. 
+> **Note:** Note the [Ingress IP address](docs/pre-requisites.md#get-ingress-ip) to use it while crafting values.yaml when installing Bold Reports with helm chart.
 
 ## Get Repo Info
 
