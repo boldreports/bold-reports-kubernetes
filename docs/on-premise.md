@@ -48,7 +48,7 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 10. If you have the SSL certificate for your DNS and need to configure the site with your SSL certificate, run the following command to create a TLS secret with your SSL certificate.
 	```sh
-	kubectl create secret tls boldreports-tls -n boldreports--key <key-path> --cert <certificate-path>
+	kubectl create secret tls boldreports-tls -n bold-services --key <key-path> --cert <certificate-path>
 	```
 
 11. Now, uncomment the `tls` section and replace your DNS hostname with `example.com` in ingress spec and save the file.

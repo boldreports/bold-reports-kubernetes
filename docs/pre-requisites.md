@@ -40,11 +40,21 @@ For encoding the values to base64 please run the following command in powershell
 
 ![File Share details](images/aks-file-storage.png)
 
+
+### ACK File System
+
+Follow the documentation provided at [this link](https://www.alibabacloud.com/help/en/nas/latest/create-a-nas-file-system) to create a file system in Alibaba Cloud.
+
+2. Once the file system is created, locate and click on the cube icon. This will allow you to view the mount target hostname. Take note of the mount target hostname, as you will need it for mounting the file system with our application.
+
+![NAS-Mount-Target](images/ack-file-system.png)
+
 ## Create and connect a cluster
 
 * [Google Kubernetes Engine (GKE)](#gke-cluster)
 * [Amazon Elastic Kubernetes Service (EKS)](#eks-cluster)
 * [Azure Kubernetes Service (AKS)](#aks-cluster)
+* [Alibaba Cloud Kubernets](#ack-cluster)
 
 ### GKE Cluster
 
@@ -72,6 +82,14 @@ For encoding the values to base64 please run the following command in powershell
 
 2. Connect with your Microsoft AKS cluster.
    https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal#connect-to-the-cluster
+
+### ACK Cluster
+
+1. Follow the documentation provided at the below link to create a Kubernetes cluster in Alibaba Cloud for deploying Bold Reports.
+   https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/create-an-ack-managed-cluster
+
+2. Refer to the instructions provided at the below link to connect to your Alibaba ACK cluster using kubectl.
+   https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/connect-to-ack-clusters-by-using-kubectl
 
 ## Load Balancing
 

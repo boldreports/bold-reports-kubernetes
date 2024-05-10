@@ -22,7 +22,7 @@ If you wish to inlcude only specific client libraries note the optional client l
 
 Persistent volumes were global resources. So if you already have Bold Reports installed in your cluster, then the previous persistent volume name will conflict with current installation. Change this name to avoid conflicts with previous Bold Reports persistent volumes.
 
-By default the persistent volume name used in Bold Reports is `bold-fileserver`. 
+By default the persistent volume name used in Bold Reports is `bold-service-fileserver`. 
 
 ```console
 persistentVolume:
@@ -30,7 +30,7 @@ persistentVolume:
   # so if you already have Bold Reports installed in your cluster, 
   # then the previous persistent volume name will conflict with current installation.
   # Change this name to avoid conflicts with previous Bold Reports persistent volumes.
-  name: bold-fileserver
+  name: bold-service-fileserver
 ```
 
 ### Capacity
@@ -245,6 +245,54 @@ persistentVolume:
       </td>
       <td>
        The <i>IP address</i> of your filestore instance.
+      </td>
+    </tr>
+</table>
+<br/>
+
+5. ACK
+
+````console
+clusterProvider: ack
+
+persistentVolume:
+  ack:  
+    serverName: <host_name_of_mount_target>
+    filePath: <file_path_name>
+````
+
+<br/>
+<table>
+    <tr>
+      <td>
+       <b>Name</b>
+      </td>
+      <td>
+       <b>Description</b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       clusterProvider
+      </td>
+      <td>
+       The type of kubernetes cluster provider you are using. In this case the clusterProvider value is <i>gke</i>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       persistentVolume.ack.serverName
+      </td>
+      <td>
+       The <i>File share server name</i> of your filestore instance.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       persistentVolume.ack.filePath
+      </td>
+      <td>
+       The <i>Mount path</i> of your filestore instance.
       </td>
     </tr>
 </table>
