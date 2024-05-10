@@ -202,6 +202,14 @@ If you need to configure Bold Reports with Istio,
       https://cloud.google.com/istio/docs/istio-on-gke/installing
       </td>
     </tr>
+    <tr>
+      <td>
+       ACK Cluster
+      </td>
+      <td>
+      https://istio.io/v1.1/docs/setup/kubernetes/install/platform/alicloud/
+      </td>
+    </tr>
 </table>
 <br/>
 

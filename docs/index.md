@@ -12,7 +12,7 @@
 * [Google Kubernetes Engine (GKE)](google-gke.md)
 * [Amazon Elastic Kubernetes Service (EKS)](amazon-eks.md)
 * [Azure Kubernetes Service (AKS)](microsoft-aks.md)
-* [Alibaba Cloud Kubernetes ACK](alibaba-ack.md)
+* [Alibaba Cloud Kubernetes (ACK)](alibaba-ack.md)
 
 # Upgrade Bold Reports
 
