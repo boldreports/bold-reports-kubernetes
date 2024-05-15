@@ -5,6 +5,7 @@
 * [Google Kubernetes Engine (GKE)](#gke-file-storage)
 * [Amazon Elastic Kubernetes Service (EKS)](#eks-file-storage)
 * [Azure Kubernetes Service (AKS)](#aks-file-storage)
+* [Alibaba Cloud Kubernetes (ACK)](#ack-file-system)
 
 ### GKE File Storage
 
@@ -54,7 +55,7 @@ Follow the documentation provided at [this link](https://www.alibabacloud.com/he
 * [Google Kubernetes Engine (GKE)](#gke-cluster)
 * [Amazon Elastic Kubernetes Service (EKS)](#eks-cluster)
 * [Azure Kubernetes Service (AKS)](#aks-cluster)
-* [Alibaba Cloud Kubernets](#ack-cluster)
+* [Alibaba Cloud Kubernets (ACK)](#ack-cluster)
 
 ### GKE Cluster
 
@@ -133,6 +134,14 @@ If you need to configure Bold Reports with Ingress, [Install Nginx ingress contr
       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
       </td>
     </tr>
+	 <tr>
+      <td>
+       ACK Cluster
+      </td>
+      <td>
+      kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
+      </td>
+    </tr>
     <tr>
       <td>
        OnPremise
@@ -180,6 +189,14 @@ If you need to configure Bold Reports with Istio, [Install Istio ingress gateway
       </td>
       <td>
        https://docs.microsoft.com/en-us/azure/aks/servicemesh-istio-install
+      </td>
+    </tr>
+	 <tr>
+      <td>
+       ACK Cluster
+      </td>
+      <td>
+       https://istio.io/v1.1/docs/setup/kubernetes/install/platform/alicloud/
       </td>
     </tr>
     <tr>
