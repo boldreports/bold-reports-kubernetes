@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bold-services-fileserver
+  namespace: bold-services
+  labels:
+    alicloud-pvname: bold-services-fileserver
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteMany
+  csi:
+    driver: nasplugin.csi.alibabacloud.com
+    volumeHandle: bold-services-fileserver
+    volumeAttributes:
+      server: "<host_name_of_mount_target>"
+      path: "/bold-services"
+  mountOptions:
+  - nolock,tcp,noresvport
+  - vers=3
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name:  bold-services-fileserver-claim
+  namespace: bold-services
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Gi
+  selector:
+    matchLabels:
+      alicloud-pvname: bold-services-fileserver
