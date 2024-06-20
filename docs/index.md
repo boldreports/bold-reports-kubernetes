@@ -16,4 +16,4 @@
 
 # Upgrade Bold Reports
 
-If you are upgrading Bold Reports to 6.1.34, please follow the steps in this [link](/upgrade/upgrade.md).
+If you are upgrading Bold Reports to 6.1.45, please follow the steps in this [link](/upgrade/upgrade.md).

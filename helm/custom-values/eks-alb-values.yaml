@@ -16,17 +16,17 @@ persistentVolume:
     efsFileSystemId: ''
 
 image:
-  idRepo: us-docker.pkg.dev/boldreports/v6-1-34
-  reportsRepo: us-docker.pkg.dev/boldreports/v6-1-34
+  idRepo: us-docker.pkg.dev/boldreports/v6-1-45
+  reportsRepo: us-docker.pkg.dev/boldreports/v6-1-45
   # Overrides the image tag whose default is the chart appVersion.
-  idTag: 6.1.34
-  reportsTag: 6.1.34
+  idTag: 6.1.45
+  reportsTag: 6.1.45
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
 versions:
   idp: "4.23.1"
-  reports: "6.1.34"
+  reports: "6.1.45"
 
 loadBalancer:
   type: alb
