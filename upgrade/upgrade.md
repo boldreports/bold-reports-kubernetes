@@ -14,22 +14,17 @@ Before upgrading the Bold Reports to latest version, make sure to take the backu
 ## Proceeding with upgrade
 Bold Reports updates the database schema of your current version to the latest version. The upgrade process will retain all the resources and settings from the previous deployment.
 
-You can download the upgrade script from this [link](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1/upgrade/6-1_upgrade.sh) or use the below command.
+You can download the upgrade script from this [link](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/upgrade/upgrade.sh) or use the below command.
 
 ```sh
-curl -o upgrade.sh https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/upgrade/6-1_upgrade.sh
+curl -o upgrade.sh https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/upgrade/upgrade.sh
 ```
 
 Run the following command to execute the shell script to upgrade Bold Reports.
 
 ```sh
-./upgrade.sh --version="<image_tag>" --namespace="<namespace>" --application_base_url="<application_base_url>" --optional_libs="<comma_separated_library_names>" --tls_secret_name="<tls_secret_name>" --environment="<your_kubernetes_environment>" --load_balancer="<your_load_balancer_type>" --ingress_name="<ingress_name>" --pvc_name="<pvc_name>"
+./upgrade.sh --version="6.1.45" --namespace="bold-services"
 ```
-
-
-> **INFO:** 
-> 1. You can ignore `--ingress_name`,`--tls_secret_name` and `--pvc_name` arguments from the above upgrade command if you are using custom names for ingress,tls secret and pvc.
-> 2. You can also ignore `--optional_libs` argument if not needed.
 
 <table>
     <tr>
@@ -47,66 +42,6 @@ Run the following command to execute the shell script to upgrade Bold Reports.
       <td>
        namespace in which your existing Bold Reports application was running. </br>
        Default value: <i>default</i>
-      </td>
-    </tr>
-    <tr>
-      <td>
-       application_base_url
-      </td>
-      <td>
-       Application base URL of your Bold Reports Deployment.
-      </td>
-    </tr>
-    <tr>
-      <td>
-       comma_separated_library_names (optional)
-      </td>
-      <td>
-       Comma seperated optional libraries. </br>
-       Default value is <i>null</i>
-      </td>
-    </tr>
-    <tr>
-      <td>
-       tls_secret_name (optional)
-      </td>
-      <td>
-       Secret name created for tls. </br>
-       Default value: <i>boldreports-tls</i>
-      </td>
-    </tr>
-    <tr>
-      <td>
-       environment
-      </td>
-      <td>
-       Cloud Provider you chose for host the application in the kubernetes
-      </td>
-    </tr>
-    <tr>
-      <td>
-       load_balancer
-      </td>
-      <td>
-       Type of load balancer which is using in existing Bold Reports application was running. 
-      </td>
-    </tr>
-    <tr>
-      <td>
-       ingress_name (optional)
-      </td>
-      <td>
-       If you are using custom name for ingress. Give the name of the ingress which is using in existing ingress file. </br>
-       Default value: <i>boldreports-ingress</i>
-      </td>
-    </tr>
-    <tr>
-      <td>
-       pvc_name (optional)
-      </td>
-      <td>
-       If you are using custom name for persistent volume claim. Give the name of the PVC which is using existing pvc file. </br>
-       Default value: <i>bold-services-fileserver-claim</i>
       </td>
     </tr>
 </table>
