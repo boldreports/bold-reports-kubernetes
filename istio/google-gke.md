@@ -4,14 +4,14 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in GKE:
 
-    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/namespace.yaml)
-    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/log4net_config.yaml)
-    * [pvclaim_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/pvclaim_gke.yaml)
-    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/deployment.yaml)
-    * [hpa_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/hpa_gke.yaml)
-    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/service.yaml)
-    * [istio_gateway.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/istio_gateway.yaml)
-    * [destination_rule.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/destination_rule.yaml)
+    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/namespace.yaml)
+    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/log4net_config.yaml)
+    * [pvclaim_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/pvclaim_gke.yaml)
+    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/deployment.yaml)
+    * [hpa_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/hpa_gke.yaml)
+    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/service.yaml)
+    * [istio_gateway.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/istio_gateway.yaml)
+    * [destination_rule.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/destination_rule.yaml)
 
 2. Create a Kubernetes cluster in Google Cloud Platform (GCP) to deploy Bold Reports.
 

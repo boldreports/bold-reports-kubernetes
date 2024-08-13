@@ -23,13 +23,13 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in ACK:
 
-    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/namespace.yaml)
-    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/log4net_config.yaml)
-    * [pvclaim_ack.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/pvclaim_ack.yaml)
-    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/deployment.yaml)
-    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/hpa.yaml)
-    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/service.yaml)
-    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.1.45/deploy/ingress.yaml)
+    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/namespace.yaml)
+    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/log4net_config.yaml)
+    * [pvclaim_ack.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/pvclaim_ack.yaml)
+    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/deployment.yaml)
+    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/hpa.yaml)
+    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/service.yaml)
+    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/deploy/ingress.yaml)
 2. Navigate to the folder where the deployment files were downloaded in Step 1.
 3. Follow the documentation provided at [this link](https://www.alibabacloud.com/help/en/nas/latest/create-a-nas-file-system) to create a `file system` in Alibaba Cloud.
 4. Once the file system is created, locate and click on the cube icon. This will allow you to view the mount target hostname. Take note of the mount target hostname, as you will need it for mounting the file system with our application.
