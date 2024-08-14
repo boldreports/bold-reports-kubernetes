@@ -14,10 +14,10 @@ Before upgrading the Bold Reports to latest version, make sure to take the backu
 ## Proceeding with upgrade
 Bold Reports updates the database schema of your current version to the latest version. The upgrade process will retain all the resources and settings from the previous deployment.
 
-You can download the upgrade script from this [link](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/upgrade/upgrade.sh) or use the below command.
+You can download the upgrade script from this [link](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/upgrade/upgrade.sh) or use the below command.
 
 ```sh
-curl -o upgrade.sh https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/upgrade/upgrade.sh
+curl -o upgrade.sh https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.2.32/upgrade/upgrade.sh
 ```
 
 Run the following command to execute the shell script to upgrade Bold Reports.
