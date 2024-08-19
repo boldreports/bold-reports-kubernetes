@@ -4,11 +4,16 @@ By giving consent to install client libraries to connect with Oracle, PostgreSQL
 
 ## Oracle.ManagedDataAccess
 * Oracle
+* Amazon RDS
 
 [Oracle License](https://www.oracle.com/downloads/licenses/distribution-license.html)
 
 ## Npgsql 8.0.3
 * PostgreSQL
+* Google Cloud
+* Amazon Aurora
+* Amazon RDS
+* Amazon Redshift
 
 [PostgreSQL License](https://github.com/npgsql/npgsql/blob/main/LICENSE)
 
@@ -16,6 +21,9 @@ By giving consent to install client libraries to connect with Oracle, PostgreSQL
 * MySQL
 * MemSQL
 * MariaDB
+* Google Cloud
+* Amazon Aurora
+* Amazon RDS
 
 [MIT License](https://github.com/mysql-net/MySqlConnector/blob/master/LICENSE)
 
