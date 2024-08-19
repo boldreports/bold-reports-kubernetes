@@ -5,7 +5,7 @@
 The following are the client libraries used in Bold Reports.
 
 ```console
-optionalLibs: 'mysql,oracle,postgresql'
+optionalLibs: 'mysql,oracle,postgresql,snowflake'
 ```
 
 Read the optional client library license agreement from the following link.
