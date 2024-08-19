@@ -112,6 +112,40 @@ For Helm chart, you'll need to craft a `values.yaml`.
        By default autoscaling is enabled in Bold Reports. Please refer to <a href='docs/configuration.md#auto-scaling'>this</a> section to configure autoscaling in Bold Reports.
       </td>
     </tr>
+    <tr>
+      <td>
+       tolerationEnable: false<br />
+       tolerations:
+       </td>
+      <td>
+       Tolerations allow the pods to be scheduled into nodes with matching taints. Set this to true if you use tolerations in your cluster. If you need more than one toleration, you can add multiple tolerations below.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       nodeAffinityEnable: false<br />
+       nodeAffinity:
+      </td>
+      <td>
+       Node affinity ensures that the pods are scheduled into nodes with matching labels. Set this to true if you use node affinity in your cluster.
+      </td>
+    </tr>
+    <tr>
+      <td>
+         podAffinityEnable: false
+      </td>
+      <td>
+        Pod affinity ensures that the pods are scheduled into nodes with matching pods. Set this to true if you use pod affinity in your cluster
+      </td>
+    </tr>
+    <tr>
+      <td>
+         podAntiAffinityEnable: false
+      </td>
+      <td>
+        Pod anti-affinity ensures that the pods are not scheduled into nodes with matching pods. Set this to true if you use pod anti-affinity in your cluster.
+      </td>
+    </tr>
 </table>
 <br/>
 
