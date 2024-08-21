@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 namespace: bold-services
 appBaseUrl: ''
-optionalLibs: 'mysql,oracle,postgresql'
+optionalLibs: 'mysql,oracle,postgresql,snowflake'
 clusterProvider: 'eks'
 
 persistentVolume:
@@ -38,6 +38,13 @@ loadBalancer:
     enable: true
     tls: arn
     arn: ''
+
+  nginxIngressAnnotations:
+    # Enter annotations here for adding annotations in nginx ingress
+    # Example:
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+    # nginx.ingress.kubernetes.io/rewrite-target: /
+
   singleHost: 
     secretName: bold-tls
 
@@ -120,4 +127,29 @@ autoscaling:
     podsPeriodSeconds: 60
     percentValue: 10
     percentPeriodSeconds: 60
-    
+
+# Tolerations allow the pods to be scheduled into nodes with matching taints.
+# Set this to true if you use tolerations in your cluster.
+# If you need more than one toleration, you can add tolerations below.
+tolerationEnable: false 
+tolerations:
+  - key: ""
+    operator: ""
+    value: ""
+    effect: ""
+
+# Node affinity ensures that the pods are scheduled into nodes with matching labels.
+# Set this to true if you use Node affinity in your cluster.
+nodeAffinityEnable: false
+nodeAffinity:
+  key: ""
+  operator: ""
+  value: ""
+
+# Pod affinity ensures that the pods are scheduled into nodes with matching pods.
+# Set this to true if you use pod Affinity in your cluster.
+podAffinityEnable: false
+
+# Pod anti-affinity ensures that the pods are not scheduled into nodes with matching pods.
+# Set this to true if you use pod AntiAffinity in your cluster.
+podAntiAffinityEnable: false    
