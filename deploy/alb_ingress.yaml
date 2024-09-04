@@ -1,0 +1,86 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: boldreports-ingress
+  namespace: eks
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/session-cookie-name: "boldreports.k8s.pod.id"
+    alb.ingress.kubernetes.io/session-cookie-max-age: "432000"
+    alb.ingress.kubernetes.io/session-cookie-expires: "200"
+    alb.ingress.kubernetes.io/auth-session-timeout: "600"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/load-balancer-attributes: deletion_protection.enabled=true
+    alb.ingress.kubernetes.io/success-codes: 200,404
+    alb.ingress.kubernetes.io/healthcheck-path: /health-check
+
+spec:
+   ingressClassName: "alb"
+   tls:
+   - hosts:
+     - aws-testing.boldreports.com
+     secretName: boldreports-tls
+   rules:
+   - host: aws-testing.boldreports.com
+     http:
+      paths:
+      - path: "/reporting/reportservice/*"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: reports-reportservice-service
+            port:
+              number: 6553
+      - path: "/reporting/viewer/*"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: reports-viewer-service
+            port:
+              number: 6554
+      - path: "/reporting/api/*"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: reports-api-service
+            port:
+              number: 6551
+      - path: "/reporting/jobs/*"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: reports-jobs-service
+            port:
+              number: 6552
+      - path: "/reporting/*"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: reports-web-service
+            port:
+              number: 6550
+      - path: "/api/*"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: id-api-service
+            port:
+              number: 6001
+      - path: "/ums/*"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: id-ums-service
+            port:
+              number: 6002
+      - path: "/*"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: id-web-service
+            port:
+              number: 6000
