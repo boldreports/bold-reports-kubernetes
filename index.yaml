@@ -96,7 +96,7 @@ entries:
     digest: EC7BC82D8297EBE4DF3F2E581C58C01CA74DAB0EA136F4635FF37BE919553230
     home: https://www.boldreports.com/
     icon: https://on-premise-demo.boldreports.com/reporting/images/application/boldreports/main_logo.svg
-    name: kc269938
+    name: kc355012
     type: application
     urls:
     - https://boldreports.github.io/bold-reports-kubernetes/kc355012-6.2.32.tgz
