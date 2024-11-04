@@ -99,6 +99,6 @@ entries:
     name: kc269938
     type: application
     urls:
-    - https://Bowres1511.github.io/bold-reports-kubernetes/kc355012-6.2.32.tgz
+    - https://boldreports.github.io/bold-reports-kubernetes/kc355012-6.2.32.tgz
     version: 6.2.32
 generated: "2024-02-21T12:20:20.3833077+05:30"
