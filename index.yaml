@@ -86,7 +86,7 @@ entries:
     urls:
     - https://boldreports.github.io/bold-reports-kubernetes/boldreports-6.2.32.tgz
     version: 6.2.32
-  kc269938:
+  kc355012:
   - apiVersion: v2
     appVersion: 6.2.32
     created: "2024-11-04T17:26:20.3843848+05:30"
