@@ -29,11 +29,11 @@ persistentVolume:
       hostName: ''
 
 image:
-  idRepo: us-docker.pkg.dev/boldreports/v6-2-32
-  reportsRepo: us-docker.pkg.dev/boldreports/v6-2-32
+  idRepo: us-docker.pkg.dev/boldreports/v6-3-16
+  reportsRepo: us-docker.pkg.dev/boldreports/v6-3-16
   # Overrides the image tag whose default is the chart appVersion.
-  idTag: 6.2.32
-  reportsTag: 6.2.32
+  idTag: 6.3.16
+  reportsTag: 6.3.16
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
