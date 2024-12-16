@@ -62,7 +62,7 @@ else
 		tls_secret_name="boldreports-tls"
 	fi
 	
-	if [[ "$version" == *"6.3.16"* ]]
+	if [[ "$version" == *"6.3.24"* ]]
 	then
 		[ -n "$application_base_url" ] || read -p 'Enter the application_base_url: ' application_base_url
 		
