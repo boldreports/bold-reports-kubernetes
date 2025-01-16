@@ -328,7 +328,7 @@ loadBalancer:
 ```
 ### Kong-API Ingress
 
-If you need to configure Bold BI with Kong Api Gateway then you can change the value as `kong` in your configuration like below:
+If you need to configure Bold Reports with Kong Api Gateway then you can change the value as `kong` in your configuration like below:
 
 ```console
 loadBalancer:
