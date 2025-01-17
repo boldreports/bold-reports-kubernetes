@@ -31,6 +31,8 @@ By giving consent to install client libraries to connect with Oracle, PostgreSQL
 ## Snowflake.data
 * Snowflake
 
+[Apache License, Version 2.0](https://github.com/snowflakedb/snowflake-connector-net/blob/master/LICENSE)
+
 
 ## Google.Cloud.BigQuery.V2 3.10.0
 * GoogleBigQuery
