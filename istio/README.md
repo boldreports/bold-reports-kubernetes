@@ -15,4 +15,4 @@ Bold Reports can be deployed manually on Kubernetes cluster. You can create Kube
 
 # Upgrade Bold Reports
 
-If you are upgrading Bold Reports to 6.3.24, please follow the steps in this [link](/upgrade/upgrade.md).
+If you are upgrading Bold Reports to 7.1.9, please follow the steps in this [link](/upgrade/upgrade.md).

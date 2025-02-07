@@ -4,13 +4,13 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in GKE:
 
-    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/namespace.yaml)
-    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/log4net_config.yaml)
-    * [pvclaim_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/pvclaim_gke.yaml)
-    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/deployment.yaml)
-    * [hpa_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/hpa_gke.yaml)
-    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/service.yaml)
-    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/ingress.yaml)
+    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/namespace.yaml)
+    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/log4net_config.yaml)
+    * [pvclaim_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/pvclaim_gke.yaml)
+    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/deployment.yaml)
+    * [hpa_gke.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/hpa_gke.yaml)
+    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/service.yaml)
+    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/ingress.yaml)
 
 2. Create a Kubernetes cluster in Google Cloud Platform (GCP) to deploy Bold Reports.
 

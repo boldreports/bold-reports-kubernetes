@@ -4,14 +4,14 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in Amazon EKS:
 
-    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/namespace.yaml)
-    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/log4net_config.yaml)
-    * [pvclaim_eks.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/pvclaim_eks.yaml)
-    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/deployment.yaml)
-    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/hpa.yaml)
-    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/service.yaml)
-    * [istio_gateway.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/istio_gateway.yaml)
-    * [destination_rule.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v6.3.24/deploy/destination_rule.yaml)
+    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/namespace.yaml)
+    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/log4net_config.yaml)
+    * [pvclaim_eks.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/pvclaim_eks.yaml)
+    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/deployment.yaml)
+    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/hpa.yaml)
+    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/service.yaml)
+    * [istio_gateway.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/istio_gateway.yaml)
+    * [destination_rule.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/destination_rule.yaml)
 
 2. Create an Amazon EKS cluster and [node group](https://docs.aws.amazon.com/eks/latest/userguide/eks-compute.html) to deploy Bold Reports.
 

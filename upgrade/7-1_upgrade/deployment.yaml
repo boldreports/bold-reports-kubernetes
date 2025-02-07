@@ -1,0 +1,471 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: id-web-deployment
+  namespace: <namespace>
+spec:
+  selector:
+    matchLabels:
+      app: id-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: id-web
+    spec:
+      containers:
+      - name: id-web-container
+        image: us-docker.pkg.dev/boldreports/v7-1-9/bold-identity:<image_tag>
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        env:
+        - name: APP_BASE_URL
+          value: <application_base_url>
+        - name: INSTALL_OPTIONAL_LIBS
+          value: <comma_separated_library_names>
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 200
+          periodSeconds: 10
+          timeoutSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-web-volume
+        - mountPath: /application/idp/web/logs
+          name: log4net-config-volume
+      volumes:
+      - name: id-web-volume
+        persistentVolumeClaim:
+          claimName: <pvc_name>
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: id-api-deployment
+  namespace: <namespace>
+spec:
+  selector:
+    matchLabels:
+      app: id-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: id-api
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-api-volume
+      containers:
+      - name: id-api-container
+        image: us-docker.pkg.dev/boldreports/v7-1-9/bold-idp-api:<image_tag>
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 200
+          periodSeconds: 10
+          timeoutSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-api-volume
+        - mountPath: /application/idp/api/logs
+          name: log4net-config-volume
+      volumes:
+      - name: id-api-volume
+        persistentVolumeClaim:
+          claimName: <pvc_name>
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: id-ums-deployment
+  namespace: <namespace>
+spec:
+  selector:
+    matchLabels:
+      app: id-ums
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: id-ums
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-ums-volume
+      containers:
+      - name: id-ums-container
+        image: us-docker.pkg.dev/boldreports/v7-1-9/bold-ums:<image_tag>
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 200
+          periodSeconds: 10
+          timeoutSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: id-ums-volume
+        - mountPath: /application/idp/ums/logs
+          name: log4net-config-volume
+      volumes:
+      - name: id-ums-volume
+        persistentVolumeClaim:
+          claimName: <pvc_name>
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-web-deployment
+  namespace: <namespace>
+spec:
+  selector:
+    matchLabels:
+      app: reports-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-web
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-web-volume
+      containers:
+      - name: reports-web-container
+        image: us-docker.pkg.dev/boldreports/v7-1-9/boldreports-server:<image_tag>
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-web-volume
+        - mountPath: /application/reporting/web/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-web-volume
+        persistentVolumeClaim:
+          claimName: <pvc_name>
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-api-deployment
+  namespace: <namespace>
+spec:
+  selector:
+    matchLabels:
+      app: reports-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-api
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-api-volume
+      containers:
+      - name: reports-api-container
+        image: us-docker.pkg.dev/boldreports/v7-1-9/boldreports-server-api:<image_tag>
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-api-volume
+        - mountPath: /application/reporting/api/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-api-volume
+        persistentVolumeClaim:
+          claimName: <pvc_name>
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-jobs-deployment
+  namespace: <namespace>
+spec:
+  selector:
+    matchLabels:
+      app: reports-jobs
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-jobs
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-jobs-volume
+      containers:
+      - name: reports-jobs-container
+        image: us-docker.pkg.dev/boldreports/v7-1-9/boldreports-server-jobs:<image_tag>
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-jobs-volume
+        - mountPath: /application/reporting/jobs/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-jobs-volume
+        persistentVolumeClaim:
+          claimName: <pvc_name>
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-reportservice-deployment
+  namespace: <namespace>
+spec:
+  selector:
+    matchLabels:
+      app: reports-reportservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-reportservice
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-reportservice-volume
+      containers:
+      - name: reports-reportservice-container
+        image: us-docker.pkg.dev/boldreports/v7-1-9/boldreports-designer:<image_tag>
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 40
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-reportservice-volume
+        - mountPath: /application/reporting/reportservice/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-reportservice-volume
+        persistentVolumeClaim:
+          claimName: <pvc_name>
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-viewer-deployment
+  namespace: <namespace>
+spec:
+  selector:
+    matchLabels:
+      app: reports-viewer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: reports-viewer
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-viewer-volume
+      containers:
+      - name: reports-viewer-container
+        image: us-docker.pkg.dev/boldreports/v7-1-9/boldreports-viewer:<image_tag>
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 40
+          periodSeconds: 10
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: reports-viewer-volume
+        - mountPath: /application/reporting/viewer/logs
+          name: log4net-config-volume
+      volumes:
+      - name: reports-viewer-volume
+        persistentVolumeClaim:
+          claimName: <pvc_name>
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bold-etl-deployment
+  namespace: <namespace>
+spec:
+  selector:
+    matchLabels:
+      app: bold-etl
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bold-etl
+    spec:
+      initContainers:
+      - name: id-web-initialization
+        image: busybox:1.28
+        command: ["/bin/sh","-c"]
+        args: ["if [ ! -f /application/app_data/configuration/config.xml ]; then echo waiting for id-web; sleep 5; else echo config.xml file exist; fi"]
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: bold-etl-volume
+      containers:
+      - name: bold-etl-container
+        image: us-docker.pkg.dev/boldreports/v7-1-9/bold-etl:<image_tag>
+        ports:
+        - containerPort: 80
+        env:
+        - name: BOLD_SERVICES_HOSTING_ENVIRONMENT
+          value: k8s
+        resources:
+          requests:
+            cpu: 250m
+            memory: 750Mi
+        readinessProbe:
+          httpGet:
+            path: /health-check
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 15
+          timeoutSeconds: 5
+        volumeMounts:
+        - mountPath: /application/app_data
+          name: bold-etl-volume
+        - mountPath: /application/etl/etlservice/logs/k8s
+          name: log4net-config-volume
+      volumes:
+      - name: bold-etl-volume
+        persistentVolumeClaim:
+          claimName: <pvc_name>
+          readOnly: false
+      - name: log4net-config-volume
+        configMap:
+          name: log4net-config
