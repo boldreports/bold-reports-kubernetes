@@ -44,9 +44,10 @@ Find the names of client libraries, which needs to be passed as a comma separate
 | Npgsql 8.0.3              | postgresql    |
 | MySQLConnector 1.1.0      | mysql         |
 | Snowflake.Data            | snowflake     |
+| Google.Cloud.BigQuery.V2  | googlebigquery|
 
 If you want to use all client libraries in the Bold Reports application, then pass the following string as value for `INSTALL_OPTIONAL_LIBS` environment variable. You need to add the names only for the libraries, which you are consenting to use with Bold Reports application.
 
-`mysql,oracle,postgresql,snowflake`
+`mysql,oracle,postgresql,snowflake,googlebigquery`
 
 ![Client Libraries](images/client-library.png) 
