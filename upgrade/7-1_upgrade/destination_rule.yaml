@@ -1,0 +1,125 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: <namespace>
+  name: id-web-rule
+spec:
+  host: id-web-service.bold-services.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: boldreports.k8s.id.web.pod.id
+          ttl: 600s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: <namespace>
+  name: id-api-rule
+spec:
+  host: id-api-service.bold-services.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: boldreports.k8s.id.api.pod.id
+          ttl: 600s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: <namespace>
+  name: id-ums-rule
+spec:
+  host: id-ums-service.bold-services.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: boldreports.k8s.id.ums.pod.id
+          ttl: 600s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: <namespace>
+  name: reports-web-rule
+spec:
+  host: reports-web-service.bold-services.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: boldreports.k8s.reports.web.pod.id
+          ttl: 600s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: <namespace>
+  name: reports-api-rule
+spec:
+  host: reports-api-service.bold-services.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: boldreports.k8s.reports.api.pod.id
+          ttl: 600s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: <namespace>
+  name: reports-jobs-rule
+spec:
+  host: reports-jobs-service.bold-services.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: boldreports.k8s.reports.jobs.pod.id
+          ttl: 600s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: <namespace>
+  name: reports-reportservice-rule
+spec:
+  host: reports-reportservice-service.bold-services.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: boldreports.k8s.reports.reportservice.pod.id
+          ttl: 600s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: <namespace>
+  name: reports-viewer-rule
+spec:
+  host: reports-viewer-service.bold-services.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: boldreports.k8s.reports.viewer.pod.id
+          ttl: 600s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  namespace: <namespace>
+  name: bold-etl-rule
+spec:
+  host: bold-etl-service.bold-services.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: bold.k8s.bold.etl.pod.id
+          ttl: 600s
