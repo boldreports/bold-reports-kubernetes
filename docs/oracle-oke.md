@@ -11,7 +11,6 @@ For fresh installation, continue with the following steps to deploy Bold Reports
     * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/hpa.yaml)
     * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/service.yaml)
     * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/ingress.yaml)
-    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/ingress.yaml)
 
 2. Create a Kubernetes cluster in Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) to deploy Bold Reports by following the blow link.
 
