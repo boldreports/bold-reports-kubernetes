@@ -21,7 +21,7 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
     https://docs.oracle.com/en-us/iaas/compute-cloud-at-customer/topics/file/creating-a-file-system-mount-target-and-export.htm
 	
-	![PV Claim](images/images/oke_filesystem.png)
+	![PV Claim](images/oke_filesystem.png)
 	
 	 Where:
     - `<FileSystemOCID>` is the OCID of the file system defined in the File Storage service.
