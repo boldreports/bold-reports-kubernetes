@@ -22,14 +22,15 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 	
 	![PV Claim](images/oke_filesystem.png)
 	
-	 Where:
+4. Open **pvclaim_oke.yaml** file, downloaded in **Step 1**. Update the volumeHandle value to `<FileSystemOCID>:<MountTargetIP>:<path>`
+
+    ![PV Claim](images/oke_pvclaim.png)
+
+     Where:
     - `<FileSystemOCID>` is the OCID of the file system defined in the File Storage service.
     - `<MountTargetIP>` is the IP address assigned to the mount target.
     - `<path>` is the mount path to the file system relative to the mount target IP address, starting with a slash. For example: `ocid1.filesystem.oc1.iad.aaaa______j2xw:10.0.0.6:/FileSystem1`
 
-4. Open **pvclaim_oke.yaml** file, downloaded in **Step 1**. Update the volumeHandle value to `<FileSystemOCID>:<MountTargetIP>:<path>`
-
-    ![PV Claim](images/oke_pvclaim.png)
 
 5. Connect with your Microsoft OKE cluster.
 
