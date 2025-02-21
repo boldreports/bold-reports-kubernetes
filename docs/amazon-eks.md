@@ -4,13 +4,13 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in Amazon EKS:
 
-    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/namespace.yaml)
-    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/log4net_config.yaml)
-    * [pvclaim_eks.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/pvclaim_eks.yaml)
-    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/deployment.yaml)
-    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/hpa.yaml)
-    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/service.yaml)
-    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/ingress.yaml)
+    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/namespace.yaml)
+    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/log4net_config.yaml)
+    * [pvclaim_eks.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/pvclaim_eks.yaml)
+    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/deployment.yaml)
+    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/hpa.yaml)
+    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/service.yaml)
+    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/ingress.yaml)
 
 2. Create an Amazon EKS cluster and [node group](https://docs.aws.amazon.com/eks/latest/userguide/eks-compute.html) to deploy Bold Reports.
 

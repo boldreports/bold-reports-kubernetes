@@ -4,14 +4,14 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in On-Premise.
 
-    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/namespace.yaml)
-    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/log4net_config.yaml)
-    * [pvclaim_onpremise.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/pvclaim_onpremise.yaml)
-    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/deployment.yaml)
-    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/hpa.yaml)
-    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/service.yaml)
-    * [istio_gateway.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/istio_gateway.yaml)
-    * [destination_rule.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/destination_rule.yaml)
+    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/namespace.yaml)
+    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/log4net_config.yaml)
+    * [pvclaim_onpremise.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/pvclaim_onpremise.yaml)
+    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/deployment.yaml)
+    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/hpa.yaml)
+    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/service.yaml)
+    * [istio_gateway.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/istio_gateway.yaml)
+    * [destination_rule.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v8.1.1/deploy/destination_rule.yaml)
     
 2. Create a folder in your machine to store the shared folders for applications usage.
 
