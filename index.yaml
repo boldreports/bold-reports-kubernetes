@@ -128,6 +128,20 @@ entries:
     urls:
     - https://boldreports.github.io/bold-reports-kubernetes/boldreports-7.1.9.tgz
     version: 7.1.9
+  - apiVersion: v2
+    appVersion: 8.1.1
+    created: "2025-02-07T16:34:20.3843848+05:30"
+    description: Make bolder business decisions with complete reporting solutions
+      and unleash the power of your data with paginated, printable reports and make
+      intelligent decisions.
+    digest: 6B88C31F8BB5E9FCB4CDB02657C85DC2DFCA4BB22724318CD3E3FF01452684DB
+    home: https://www.boldreports.com/
+    icon: https://on-premise-demo.boldreports.com/reporting/images/application/boldreports/main_logo.svg
+    name: boldreports
+    type: application
+    urls:
+    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-8.1.1.tgz
+    version: 8.1.1
   kc355012:
   - apiVersion: v2
     appVersion: 6.2.32
