@@ -75,6 +75,19 @@ spec:
         - name: INSTALL_OPTIONAL_LIBS
           value: {{ $.Values.optionalLibs }}
         {{- end }}
+        {{- else if eq $service.app "id-ums" }}
+        - name: BOLD_SERVICES_USE_SITE_IDENTIFIER
+          value: "true"
+        envFrom:
+        - secretRef:
+              name: bold-user-secret
+        - secretRef:
+              name: bold-db-secret
+        - secretRef:
+              name: bold-license-key
+        - configMapRef:
+              name: branding-config
+              optional: true
         {{- end }}
         readinessProbe:
           httpGet:
