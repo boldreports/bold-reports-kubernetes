@@ -84,7 +84,8 @@ kubectl apply -f ingress.yaml
 kubectl get ingress -n bold-services
 ```
 Repeat the above command till you get the IP address in ADDRESS tab as shown in the following image.
-![Ingress Address](images/ingress_address.png) 
+
+![Ingress Address](images/ingress_address_oke.png) 
 
 18. Note the ingress IP address and map it with your DNS, if you have added the DNS in **ingress.yaml** file. If you do not have the DNS and want to use the application, then you can use the ingress IP address.
 
@@ -127,7 +128,7 @@ kubectl apply -f service.yaml
 ```sh
 kubectl get pods -n bold-services
 ```
-![Pod status](images/pod_status.png) 
+![Pod status](images/pod_status_oke.png) 
 
 25. Wait till you see the applications in running state. Then use your DNS or ingress IP address you got from **Step 16** to access the application in the browser.
 
