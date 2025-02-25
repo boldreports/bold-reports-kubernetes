@@ -12,13 +12,15 @@ For fresh installation, continue with the following steps to deploy Bold Reports
     * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/service.yaml)
     * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v7.1.9/deploy/ingress.yaml)
 
-2. Create a Kubernetes cluster in Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) to deploy Bold Reports by following the blow link.
+2. Create a Kubernetes cluster in Oracle Cloud Infrastructure Container Engine for Kubernetes (OKE) to deploy Bold Reports.
 
 	https://www.oracle.com/webfolder/technetwork/tutorials/obe/oci/oke-full/index.html#DefineClusterDetails
 
-3. Create a File System volume by following the link below to store the Bold Reports application data and note the File System OCID, Mount Target IP, and Export Path to store the shared folders for application usage.
+3. Create a File System volume by following the link below to store the Bold Reports application data.
 
     https://docs.oracle.com/en-us/iaas/compute-cloud-at-customer/topics/file/creating-a-file-system-mount-target-and-export.htm
+
+    Note the File System OCID, Mount Target IP, and Export Path to store the shared folders for application usage.
 	
 	![PV Claim](images/oke_filesystem.png)
 	
@@ -68,7 +70,7 @@ kubectl create secret tls boldreports-tls -n bold-services --key <key-path> --ce
 
 15. Now, uncomment the `tls` section and replace your DNS hostname with `example.com` in ingress spec and save the file.
 
-![ingress DNS](images/ingress_yaml.png)
+    ![ingress DNS](images/ingress_yaml.png)
 
 16. Run the following command for applying the Bold Reports ingress to get the IP address of Nginx ingress.
 
