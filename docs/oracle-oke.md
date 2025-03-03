@@ -20,11 +20,11 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
     https://docs.oracle.com/en-us/iaas/compute-cloud-at-customer/topics/file/creating-a-file-system-mount-target-and-export.htm
 
-    Note the File System OCID, Mount Target IP, and Export Path to store the shared folders for application usage.
+4. Note the File System OCID, Mount Target IP, and Export Path to store the shared folders for application usage.
 	
 	![PV Claim](images/oke_filesystem.png)
 	
-4. Open **pvclaim_oke.yaml** file, downloaded in **Step 1**. Update the volumeHandle value to `<FileSystemOCID>:<MountTargetIP>:<path>`
+5. Open **pvclaim_oke.yaml** file, downloaded in **Step 1**. Update the volumeHandle value to `<FileSystemOCID>:<MountTargetIP>:<path>`
 
     ![PV Claim](images/oke_pvclaim.png)
 
@@ -34,9 +34,9 @@ For fresh installation, continue with the following steps to deploy Bold Reports
     - `<path>` is the mount path to the file system relative to the mount target IP address, starting with a slash. For example: `ocid1.filesystem.oc1.iad.aaaa______j2xw:10.0.0.6:/FileSystem1`
 
 
-5. Connect with your Microsoft OKE cluster.
+6. Connect with your Microsoft OKE cluster.
 
-6. After connecting with your cluster, deploy the latest Nginx ingress controller to your cluster using the following command.
+7. After connecting with your cluster, deploy the latest Nginx ingress controller to your cluster using the following command.
 
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
