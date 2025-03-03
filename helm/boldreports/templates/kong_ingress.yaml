@@ -1,0 +1,118 @@
+
+{{- if eq .Values.loadBalancer.type "kong" }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    {{- include "boldreports.labels" . | nindent 4 }}
+  name: boldreports-ingress
+  {{- include "boldreports.namespace" . | nindent 2 }}
+  annotations:
+    kubernetes.io/ingress.class: kong
+    {{- range $key, $value := .Values.loadBalancer.kongIngressAnnotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  {{- if eq (split ":" .Values.appBaseUrl)._0 "https" }}
+  tls:
+    - hosts:
+        - {{ (split "/" .Values.appBaseUrl)._2 }}
+      secretName: {{ .Values.loadBalancer.singleHost.secretName }}
+  {{- end }}
+  rules:
+    - host: {{ (split "/" .Values.appBaseUrl)._2 }}
+      http:
+        paths:
+        - path: /reporting/reportservice
+          pathType: Prefix
+          backend:
+            service:
+              name: reports-reportservice-service
+              port:
+                number: 6553 
+        - path: /reporting/api
+          pathType: Prefix
+          backend:
+            service:
+              name: reports-api-service
+              port:
+                number: 6551
+        - path: /reporting/jobs
+          pathType: Prefix
+          backend:
+            service:
+              name: reports-jobs-service
+              port:
+                number: 6552
+        - path: /reporting/viewer
+          pathType: Prefix
+          backend:
+            service:
+              name: reports-viewer-service
+              port:
+                number: 6554  
+        - path: /reporting
+          pathType: Prefix
+          backend:
+            service:
+              name: reports-web-service
+              port:
+                number: 6550
+        - path: /api
+          pathType: Prefix
+          backend:
+            service:
+              name: id-api-service
+              port:
+                number: 6001  
+        - path: /ums
+          pathType: Prefix
+          backend:
+            service:
+              name: id-ums-service
+              port:
+                number: 6002  
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: id-web-service
+              port:
+                number: 6000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    {{- include "boldreports.labels" . | nindent 4 }}
+  name: boldreports-etl-ingress
+  {{- include "boldreports.namespace" . | nindent 2 }}
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/strip-path: "true"
+    {{- range $key, $value := .Values.loadBalancer.kongIngressAnnotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  {{- if eq (split ":" .Values.appBaseUrl)._0 "https" }}
+  tls:   
+    - hosts:
+        - {{ (split "/" .Values.appBaseUrl)._2 }}
+      secretName: {{ .Values.loadBalancer.singleHost.secretName }}
+  {{- end }}
+  rules:
+    {{- if .Values.loadBalancer.multipleHost }}
+    - http:
+    {{- else }}
+    - host: {{ (split "/" .Values.appBaseUrl)._2 }}
+      http:
+    {{- end }}
+        paths:
+        - path: /etlservice/
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: bold-etl-service
+              port:
+                number: 6009            
+{{- end }}
