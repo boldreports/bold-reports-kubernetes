@@ -149,6 +149,199 @@ For Helm chart, you'll need to craft a `values.yaml`.
 </table>
 <br/>
 
+## Environment variables for configuring Application Startup in backend
+
+The following environment variables are optional. If not provided, a manual Application Startup configuration is needed.
+
+<table>
+    <tr>
+      <td>
+       <b>Name</b>
+      </td>
+      <td>
+       <b>Description</b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       licenseKey
+      </td>
+      <td>
+       License key of Bold Reports
+      </td>
+    </tr>
+    <tr>
+      <td>
+       email *
+      </td>
+      <td>
+       It should be a valid email.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       password *
+      </td>
+      <td>
+       It should meet our password requirements. <br /> <br />Note: <br />Password must meet the following requirements. It must contain,At least 6 characters, 1 uppercase character, 1 lowercase character, 1 numeric character, 1 special character
+      </td>
+    </tr>
+    <tr>
+      <td>
+       dbType *
+      </td>
+      <td>
+       Type of database server can be used for configuring the Bold Reports.<br/><br />The following DB types are accepted:<br />1. mssql – Microsoft SQL Server/Azure SQL Database<br />2. postgresql – PostgreSQL Server<br />3. mysql – MySQL/MariaDB Server
+      </td>
+    </tr>
+    <tr>
+      <td>
+       dbHost *
+      </td>
+      <td>
+       Name of the Database Server
+      </td>
+    </tr>
+    <tr>
+      <td>
+       dbPort
+      </td>
+      <td>
+       The system will use the following default port numbers based on the database server type.<br />PostgrSQL – 5432<br />MySQL -3306<br /><br />Please specify the port number for your database server if it is configured on a different port.<br /><br />For MS SQL Server, this parameter is not necessary.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       dbUser *
+      </td>
+      <td>
+       Username for the database server.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       dbPassword *
+      </td>
+      <td>
+       The database user's password
+      </td>
+    </tr>
+    <tr>
+      <td>
+       dbName
+      </td>
+      <td>
+       If the database name is not specified, the system will create a new database called bold-services.<br /><br />If you specify a database name, it should already exist on the server.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       maintenanceDB
+      </td>
+      <td>
+       For PostgreSQL DB Servers, this is an optional parameter.<br />The system will use the database name `postgres` by default.<br />If your database server uses a different default database, please provide it here.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       dbAdditionalParameters
+      </td>
+      <td>
+       If your database server requires additional connection string parameters, include them here.<br /><br />Connection string parameters can be found in the official document.<br />My SQL: https://dev.mysql.com/doc/connector-net/en/connector-net-8-0-connection-options.html<br />PostgreSQL: https://www.npgsql.org/doc/connection-string-parameters.html<br />MS SQL: https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring<br /><br /><b>Note:</b> A semicolon(;) should be used to separate multiple parameters.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       dbSchema
+      </td>
+      <td>
+       A database schema defines the structure, organization, and constraints of data within a database, including tables, fields, relationships, and indexes<br /><br />In MSSQL, the default schema is dbo.<br />
+       In PostgreSQL, the default schema is public.<br /><br />
+       Both schemas contain tables and other database objects by default.
+      </td>
+    </tr>
+</table>
+<br/>
+
+## Environment variables for configuring Branding in backend
+
+The following environment variables are optional. If they are not provided, Bold Reports will use the default configured values.
+
+<table>
+   <tr>
+      <td>
+       <b>Name</b>
+      </td>
+      <td>
+       <b>Description</b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       mainLogo
+      </td>
+      <td>   
+       This is header logo for the applicationand the preferred image size is 40 x 40 pixels.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       loginLogo
+      </td>
+      <td>     
+       This is login logo for the application and the preferred image size is 200 x 40 pixels.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       emailLogo
+      </td>
+      <td>     
+       This is email logo, and the preferred image size is 200 x 40 pixels.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       favicon
+      </td>
+      <td>     
+       This is favicon and the preferred image size is 40 x 40 pixels. 
+      </td>
+    </tr>
+    <tr>
+      <td>
+       footerLogo
+      </td>
+      <td>     
+       This is powered by logo and the preferred size is 100 x 25 pixels.
+       <br />
+       <br />
+       <b>Note:</b><br/>• All the branding variables are accepted as URL.<br/>• <b>Ex:</b> https://example.com/loginlogo.jpg <br/>• <b>Image type:</b> png, svg, jpg, jpeg.<br/>• If you want to use the custom branding, provide the value for all branding variables If all variable values are given, application will use the branding images, otherwise it will take the default logos. 
+      </td>
+    </tr>
+    <tr>
+      <td>
+       siteName
+      </td>
+      <td>
+      This is organization name.     
+      <br />
+       If the value is not given, the site will be deployed using the default name.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       siteIdentifier
+      </td>
+      <td>     
+       This is site identifier, and it will be the part of the application URL.
+      <br />
+      If the value is not given, the site will be deployed using the default value.
+      </td>
+    </tr>
+</table>
+<br/>
+
 > **Note:** Items marked with `*` are mandatory fields in values.yaml
 
 Run the following command to delpoy Bold Reports in your cluster.
