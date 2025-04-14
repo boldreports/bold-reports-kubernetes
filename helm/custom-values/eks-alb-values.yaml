@@ -25,7 +25,7 @@ image:
 imagePullSecrets: []
 
 versions:
-  idp: "5.1.7"
+  idp: "9.1.7"
   reports: "9.1.7"
 
 loadBalancer:

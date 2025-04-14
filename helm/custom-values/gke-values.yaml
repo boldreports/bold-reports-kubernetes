@@ -20,7 +20,7 @@ image:
   idrepo: us-docker.pkg.dev/boldreports/v9-1-7
   reportsRepo: us-docker.pkg.dev/boldreports/v9-1-7
   # Overrides the image tag whose default is the chart appVersion.
-  idTag: 5.1.7
+  idTag: 9.1.7
   reportsTag: 9.1.7
   pullPolicy: IfNotPresent
 imagePullSecrets: []
