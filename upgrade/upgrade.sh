@@ -26,13 +26,13 @@ else
 		namespace="default"
 	fi
 	
-	kubectl set image deployment/id-web-deployment id-web-container=us-docker.pkg.dev/boldreports/v8-1-1/bold-identity:$version --namespace=$namespace --record 
-	kubectl set image deployment/id-api-deployment id-api-container=us-docker.pkg.dev/boldreports/v8-1-1/bold-idp-api:$version --namespace=$namespace --record 
-	kubectl set image deployment/id-ums-deployment id-ums-container=us-docker.pkg.dev/boldreports/v8-1-1/bold-ums:$version --namespace=$namespace --record 
-	kubectl set image deployment/reports-web-deployment reports-web-container=us-docker.pkg.dev/boldreports/v8-1-1/boldreports-server:$version --namespace=$namespace --record 
-	kubectl set image deployment/reports-api-deployment reports-api-container=us-docker.pkg.dev/boldreports/v8-1-1/boldreports-server-api:$version --namespace=$namespace --record 
-	kubectl set image deployment/reports-jobs-deployment reports-jobs-container=us-docker.pkg.dev/boldreports/v8-1-1/boldreports-server-jobs:$version --namespace=$namespace --record 
-	kubectl set image deployment/reports-reportservice-deployment reports-reportservice-container=us-docker.pkg.dev/boldreports/v8-1-1/boldreports-designer:$version --namespace=$namespace --record 
-	kubectl set image deployment/reports-viewer-deployment reports-viewer-container=us-docker.pkg.dev/boldreports/v8-1-1/boldreports-viewer:$version --namespace=$namespace --record
-	kubectl set image deployment/bold-etl-deployment bold-etl-container=us-docker.pkg.dev/boldreports/v8-1-1/bold-etl:$version --namespace=$namespace --record 	
+	kubectl set image deployment/id-web-deployment id-web-container=us-docker.pkg.dev/boldreports/v9-1-7/bold-identity:$version --namespace=$namespace --record 
+	kubectl set image deployment/id-api-deployment id-api-container=us-docker.pkg.dev/boldreports/v9-1-7/bold-idp-api:$version --namespace=$namespace --record 
+	kubectl set image deployment/id-ums-deployment id-ums-container=us-docker.pkg.dev/boldreports/v9-1-7/bold-ums:$version --namespace=$namespace --record 
+	kubectl set image deployment/reports-web-deployment reports-web-container=us-docker.pkg.dev/boldreports/v9-1-7/boldreports-server:$version --namespace=$namespace --record 
+	kubectl set image deployment/reports-api-deployment reports-api-container=us-docker.pkg.dev/boldreports/v9-1-7/boldreports-server-api:$version --namespace=$namespace --record 
+	kubectl set image deployment/reports-jobs-deployment reports-jobs-container=us-docker.pkg.dev/boldreports/v9-1-7/boldreports-server-jobs:$version --namespace=$namespace --record 
+	kubectl set image deployment/reports-reportservice-deployment reports-reportservice-container=us-docker.pkg.dev/boldreports/v9-1-7/boldreports-designer:$version --namespace=$namespace --record 
+	kubectl set image deployment/reports-viewer-deployment reports-viewer-container=us-docker.pkg.dev/boldreports/v9-1-7/boldreports-viewer:$version --namespace=$namespace --record
+	kubectl set image deployment/bold-etl-deployment bold-etl-container=us-docker.pkg.dev/boldreports/v9-1-7/bold-etl:$version --namespace=$namespace --record 	
 fi
