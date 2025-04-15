@@ -133,6 +133,21 @@ spec:
           requests:
             cpu: 250m
             memory: 750Mi
+        env:
+          - name: BOLD_SERVICES_HOSTING_ENVIRONMENT
+            value: k8s
+          - name: BOLD_SERVICES_USE_SITE_IDENTIFIER
+            value: "true"
+        envFrom:
+        - secretRef:
+              name: bold-user-secret
+        - secretRef:
+              name: bold-db-secret
+        - secretRef:
+              name: bold-license-key
+        - configMapRef:
+              name: branding-config
+              optional: true
         readinessProbe:
           httpGet:
             path: /health-check
