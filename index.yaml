@@ -15,6 +15,21 @@ entries:
     urls:
     - https://boldreports.github.io/bold-reports-kubernetes/kc269938-5.3.8.tgz
     version: 5.3.8
+  kc14447:
+  - apiVersion: v2
+    appVersion: 9.1.7
+    created: "2023-12-16T17:26:20.3843848+05:30"
+    description: Make bolder business decisions with complete reporting solutions
+      and unleash the power of your data with paginated, printable reports and make
+      intelligent decisions.
+    digest: 68896666B6A1A1286A6381D31169CBF776446BFDA189647C8B03DCB4F6034426 
+    home: https://www.boldreports.com/
+    icon: https://on-premise-demo.boldreports.com/reporting/images/application/boldreports/main_logo.svg
+    name: kc14447
+    type: application
+    urls:
+    - https://boldreports.github.io/bold-reports-kubernetes/kc14447-9.1.7.tgz
+    version: 9.1.7
   boldreports:
   - apiVersion: v2
     appVersion: 5.4.20
