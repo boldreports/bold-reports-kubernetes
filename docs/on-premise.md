@@ -4,13 +4,13 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 1. Download the following files for Bold Reports deployment in On-Premise.
 
-    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v9.1.7/deploy/namespace.yaml)
-    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v9.1.7/deploy/log4net_config.yaml)
-    * [pvclaim_onpremise.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v9.1.7/deploy/pvclaim_onpremise.yaml)
-    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v9.1.7/deploy/deployment.yaml)
-    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v9.1.7/deploy/hpa.yaml)
-    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v9.1.7/deploy/service.yaml)
-    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v9.1.7/deploy/ingress.yaml)
+    * [namespace.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v10.1.11/deploy/namespace.yaml)
+    * [log4net_config.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v10.1.11/deploy/log4net_config.yaml)
+    * [pvclaim_onpremise.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v10.1.11/deploy/pvclaim_onpremise.yaml)
+    * [deployment.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v10.1.11/deploy/deployment.yaml)
+    * [hpa.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v10.1.11/deploy/hpa.yaml)
+    * [service.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v10.1.11/deploy/service.yaml)
+    * [ingress.yaml](https://raw.githubusercontent.com/boldreports/bold-reports-kubernetes/v10.1.11/deploy/ingress.yaml)
     
 2. Create a folder in your machine to store the shared folders for applications usage.
 
