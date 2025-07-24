@@ -39,11 +39,19 @@ loadBalancer:
     tls: arn
     arn: ''
 
+# To change the ALB Ingress type or routing method, update the scheme or targetType below
+  scheme: internet-facing
+  targetType: ip
+
   nginxIngressAnnotations:
     # Enter annotations here for adding annotations in nginx ingress
     # Example:
     # cert-manager.io/cluster-issuer: letsencrypt-prod
     # nginx.ingress.kubernetes.io/rewrite-target: /
+  albIngressAnnotations:
+    # Enter annotations here for adding annotations in ALB ingress
+    # Example:
+    # alb.ingress.kubernetes.io/subnets: 
 
   singleHost: 
     secretName: bold-tls
