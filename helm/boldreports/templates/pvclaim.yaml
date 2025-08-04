@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "boldreports.labels" . | nindent 4 }}
   {{- if eq .Values.clusterProvider "eks" }}
-  name: efs-sc
+  name: {{ default "efs-sc" .Values.persistentVolume.eks.storageClass }}
   {{- else if eq .Values.clusterProvider "aks" }}
   name: azurefile-csi-nfs
   {{- else if eq .Values.clusterProvider "ack" }}
@@ -38,6 +38,10 @@ parameters:
   protocol: nfs
 mountOptions:
   - nconnect=4
+{{- else if and (eq .Values.clusterProvider "eks") (.Values.persistentVolume.eks.efsAccessPointId) }}
+parameters:
+  fileSystemId: {{ .Values.persistentVolume.eks.efsFileSystemId }}
+  directoryPerms: "0777"
 {{- end }}
 ---
 {{- end }}
@@ -89,11 +93,16 @@ spec:
  storageClassName: boldreports-storageclass
  hostPath:
    path: "{{ .Values.persistentVolume.onpremise.hostPath }}"
- {{- else if eq .Values.clusterProvider "eks" }}
- storageClassName: efs-sc
+{{- else if eq .Values.clusterProvider "eks" }}
+ storageClassName: {{ default "efs-sc" .Values.persistentVolume.eks.storageClass }}
  csi:
    driver: efs.csi.aws.com
-   volumeHandle: {{ .Values.persistentVolume.eks.efsFileSystemId }}
+   volumeHandle: {{ .Values.persistentVolume.eks.efsFileSystemId }}{{- if .Values.persistentVolume.eks.efsAccessPointId }}::{{ .Values.persistentVolume.eks.efsAccessPointId }}{{- end }}
+{{- if and (eq .Values.clusterProvider "eks") (.Values.persistentVolume.eks.efsAccessPointId) }}
+ mountOptions:
+  - rw
+  - vers=4.1
+{{- end }}
  {{- else if and (eq .Values.clusterProvider "aks") ( .Values.persistentVolume.aks.nfs.fileShareName ) }}
  storageClassName: azurefile-csi-nfs
  nfs:
