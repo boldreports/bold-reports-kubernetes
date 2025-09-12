@@ -17,22 +17,24 @@ persistentVolume:
     fileShareIp: ''
 
 image:
-  idrepo: us-docker.pkg.dev/boldreports/v10-1-11
+  idRepo: us-docker.pkg.dev/boldreports/v10-1-11
   reportsRepo: us-docker.pkg.dev/boldreports/v10-1-11
+  initContainersRepo: busybox
   # Overrides the image tag whose default is the chart appVersion.
   idTag: 10.1.11
   reportsTag: 10.1.11
+  initContainersTag: 1.28
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
 loadBalancer:
   type: nginx
+  # ingressClassName: nginx
   affinityCookie:
     enable: true
     affinityCookieExpiration: 600
   # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
   # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-  # ingressClassName: nginx
 
   nginxIngressAnnotations:
     # Enter annotations here for adding annotations in nginx ingress

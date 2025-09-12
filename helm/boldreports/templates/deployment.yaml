@@ -31,12 +31,16 @@ spec:
       {{- if ne $service.app "id-web" }}
       initContainers:
       - name: id-web-initialization
-        image: busybox:1.28
+        image: "{{ $.Values.image.initContainersRepo }}:{{ $.Values.image.initContainersTag }}"
         command: ["/bin/sh","-c"]
         args: ["while [ ! -f /application/app_data/configuration/config.json ] || [ ! -f /application/app_data/configuration/privatekeys.dat ]; do echo 'Waiting for required files...'; sleep 10; done; echo 'Both config.json and privatekeys.dat files exist.'"]
         volumeMounts:
         - mountPath: /application/app_data
           name: {{ $service.app }}-volume
+      {{- end }}
+      {{- if $.Values.imagePullSecrets }}
+      imagePullSecrets:
+      - name: {{ $.Values.imagePullSecrets }}
       {{- end }}
       containers:
       - name: {{ $service.app }}-container
