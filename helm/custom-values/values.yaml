@@ -29,11 +29,9 @@ persistentVolume:
 image:
   idRepo: us-docker.pkg.dev/boldreports/v10-1-11
   reportsRepo: us-docker.pkg.dev/boldreports/v10-1-11
-  initContainersRepo: busybox
   # Overrides the image tag whose default is the chart appVersion.
   idTag: 10.1.11
   reportsTag: 10.1.11
-  initContainersTag: 1.28
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
