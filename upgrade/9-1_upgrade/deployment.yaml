@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: id-web-container
-        image: us-docker.pkg.dev/boldreports/v10-1-11/bold-identity:<image_tag>
+        image: us-docker.pkg.dev/boldreports/v11-1-10/bold-identity:<image_tag>
         ports:
         - containerPort: 80
         resources:
@@ -73,7 +73,7 @@ spec:
           name: id-api-volume
       containers:
       - name: id-api-container
-        image: us-docker.pkg.dev/boldreports/v10-1-11/bold-idp-api:<image_tag>
+        image: us-docker.pkg.dev/boldreports/v11-1-10/bold-idp-api:<image_tag>
         ports:
         - containerPort: 80
         resources:
@@ -126,7 +126,7 @@ spec:
           name: id-ums-volume
       containers:
       - name: id-ums-container
-        image: us-docker.pkg.dev/boldreports/v10-1-11/bold-ums:<image_tag>
+        image: us-docker.pkg.dev/boldreports/v11-1-10/bold-ums:<image_tag>
         ports:
         - containerPort: 80
         resources:
@@ -179,7 +179,7 @@ spec:
           name: reports-web-volume
       containers:
       - name: reports-web-container
-        image: us-docker.pkg.dev/boldreports/v10-1-11/boldreports-server:<image_tag>
+        image: us-docker.pkg.dev/boldreports/v11-1-10/boldreports-server:<image_tag>
         ports:
         - containerPort: 80
         resources:
@@ -231,7 +231,7 @@ spec:
           name: reports-api-volume
       containers:
       - name: reports-api-container
-        image: us-docker.pkg.dev/boldreports/v10-1-11/boldreports-server-api:<image_tag>
+        image: us-docker.pkg.dev/boldreports/v11-1-10/boldreports-server-api:<image_tag>
         ports:
         - containerPort: 80
         resources:
@@ -283,7 +283,7 @@ spec:
           name: reports-jobs-volume
       containers:
       - name: reports-jobs-container
-        image: us-docker.pkg.dev/boldreports/v10-1-11/boldreports-server-jobs:<image_tag>
+        image: us-docker.pkg.dev/boldreports/v11-1-10/boldreports-server-jobs:<image_tag>
         ports:
         - containerPort: 80
         resources:
@@ -335,7 +335,7 @@ spec:
           name: reports-reportservice-volume
       containers:
       - name: reports-reportservice-container
-        image: us-docker.pkg.dev/boldreports/v10-1-11/boldreports-designer:<image_tag>
+        image: us-docker.pkg.dev/boldreports/v11-1-10/boldreports-designer:<image_tag>
         ports:
         - containerPort: 80
         resources:
@@ -387,7 +387,7 @@ spec:
           name: reports-viewer-volume
       containers:
       - name: reports-viewer-container
-        image: us-docker.pkg.dev/boldreports/v10-1-11/boldreports-viewer:<image_tag>
+        image: us-docker.pkg.dev/boldreports/v11-1-10/boldreports-viewer:<image_tag>
         ports:
         - containerPort: 80
         resources:
@@ -439,7 +439,7 @@ spec:
           name: bold-etl-volume
       containers:
       - name: bold-etl-container
-        image: us-docker.pkg.dev/boldreports/v10-1-11/bold-etl:<image_tag>
+        image: us-docker.pkg.dev/boldreports/v11-1-10/bold-etl:<image_tag>
         ports:
         - containerPort: 80
         env:
