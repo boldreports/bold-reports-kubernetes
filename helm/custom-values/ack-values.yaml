@@ -17,11 +17,11 @@ persistentVolume:
     filePath: '/bold-services'
 
 image:
-  idRepo: us-docker.pkg.dev/boldreports/v10-1-11
-  reportsRepo: us-docker.pkg.dev/boldreports/v10-1-11
+  idRepo: us-docker.pkg.dev/boldreports/v11-1-10
+  reportsRepo: us-docker.pkg.dev/boldreports/v11-1-10
   # Overrides the image tag whose default is the chart appVersion.
-  idTag: 10.1.11
-  reportsTag: 10.1.11
+  idTag: 11.1.10
+  reportsTag: 11.1.10
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
