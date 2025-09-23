@@ -37,6 +37,7 @@ imagePullSecrets: []
 
 loadBalancer:
   type: nginx
+  # ingresspathtype: Implementspecific
   # ingressClassName: nginx
   affinityCookie:
     enable: true
