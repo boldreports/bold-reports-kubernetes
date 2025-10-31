@@ -1,4 +1,4 @@
-<a href="https://www.boldreports.com"><img alt="boldreports" width="400" src="https://www.boldreports.com/wp-content/uploads/2019/08/bold-reports-logo.svg"></a>
+<a href="https://www.boldreports.com"><img alt="boldreports" width="400" src="https://cdn.boldreports.com/website/images/logo/boldreports.png"></a>
 <br/>
 <br/>
 
