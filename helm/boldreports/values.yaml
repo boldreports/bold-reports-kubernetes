@@ -32,6 +32,24 @@ persistentVolume:
 
       # hostname of the fileshare Ex:premiumstorage1234.file.core.windows.net.
       hostName: ''
+
+    # When using AKS workload identity or a user-assigned managed identity,
+    # provide the following values. The identity must have the
+    # "Storage Account Key Operator Service Role" (or equivalent) role on storage account.
+    
+    managedIdentity:
+      # Name of the Azure Files share (no path)
+      fileShareName: ''
+
+      # Name of the storage account (not base64)
+      azureStorageAccountName: ''
+
+      # Resource group that contains the storage account
+      resourceGroup: ''
+      
+      # Azure subscription ID that contains the storage account
+      subscriptionId: ''
+      
   onpremise:
     hostPath: ''
     
