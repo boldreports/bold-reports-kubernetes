@@ -1,8 +1,8 @@
 apiVersion: v2
 name: boldreports
 type: application
-appVersion: 11.1.10
-version: 11.1.10
+appVersion: 12.1.12
+version: 12.1.12
 description: Make bolder business decisions with complete reporting solutions, unleash the power of your data with paginated, printable reports, and make intelligent decisions.
 home: https://www.boldreports.com/
 icon: https://on-premise-demo.boldreports.com/reporting/images/application/boldreports/main_logo.svg
