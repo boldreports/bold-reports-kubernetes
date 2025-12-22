@@ -9,9 +9,7 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: instance
     alb.ingress.kubernetes.io/backend-protocol: HTTP
-    alb.ingress.kubernetes.io/session-cookie-name: "boldreports.k8s.pod.id"
-    alb.ingress.kubernetes.io/session-cookie-max-age: "432000"
-    alb.ingress.kubernetes.io/session-cookie-expires: "200"
+    alb.ingress.kubernetes.io/target-group-attributes: stickiness.enabled=true,stickiness.lb_cookie.duration_seconds=432000
     alb.ingress.kubernetes.io/auth-session-timeout: "600"
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
