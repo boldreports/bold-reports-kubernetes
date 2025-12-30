@@ -51,6 +51,7 @@ kubectl apply -f namespace.yaml
 
 ```sh
 kubectl apply -f log4net_config.yaml
+kubectl apply -f local_services_url_config.yaml
 ```
 
 12. If you have a DNS to map with the application, you can continue with the following steps, else skip to **Step 16**. 

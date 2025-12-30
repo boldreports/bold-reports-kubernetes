@@ -37,6 +37,10 @@ spec:
         volumeMounts:
         - mountPath: /application/app_data
           name: id-web-volume
+        - mountPath: /application/app_data/configuration/local_service_url.json
+          name: local-service-url-volume
+          subPath: local_service_url.json
+          readOnly: false
         - mountPath: /application/idp/web/logs
           name: log4net-config-volume
       volumes:
@@ -47,6 +51,9 @@ spec:
       - name: log4net-config-volume
         configMap:
           name: log4net-config
+      - name: local-service-url-volume
+        configMap:
+          name: local-service-url-config
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -90,6 +97,10 @@ spec:
         volumeMounts:
         - mountPath: /application/app_data
           name: id-api-volume
+        - mountPath: /application/app_data/configuration/local_service_url.json
+          name: local-service-url-volume
+          subPath: local_service_url.json
+          readOnly: false
         - mountPath: /application/idp/api/logs
           name: log4net-config-volume
       volumes:
@@ -100,6 +111,9 @@ spec:
       - name: log4net-config-volume
         configMap:
           name: log4net-config
+      - name: local-service-url-volume
+        configMap:
+          name: local-service-url-config
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -143,6 +157,10 @@ spec:
         volumeMounts:
         - mountPath: /application/app_data
           name: id-ums-volume
+        - mountPath: /application/app_data/configuration/local_service_url.json
+          name: local-service-url-volume
+          subPath: local_service_url.json
+          readOnly: false
         - mountPath: /application/idp/ums/logs
           name: log4net-config-volume
       volumes:
@@ -153,6 +171,9 @@ spec:
       - name: log4net-config-volume
         configMap:
           name: log4net-config
+      - name: local-service-url-volume
+        configMap:
+          name: local-service-url-config
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -195,6 +216,10 @@ spec:
         volumeMounts:
         - mountPath: /application/app_data
           name: reports-web-volume
+        - mountPath: /application/app_data/configuration/local_service_url.json
+          name: local-service-url-volume
+          subPath: local_service_url.json
+          readOnly: false
         - mountPath: /application/reporting/web/logs
           name: log4net-config-volume
       volumes:
@@ -205,6 +230,9 @@ spec:
       - name: log4net-config-volume
         configMap:
           name: log4net-config
+      - name: local-service-url-volume
+        configMap:
+          name: local-service-url-config
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -247,6 +275,10 @@ spec:
         volumeMounts:
         - mountPath: /application/app_data
           name: reports-api-volume
+        - mountPath: /application/app_data/configuration/local_service_url.json
+          name: local-service-url-volume
+          subPath: local_service_url.json
+          readOnly: false
         - mountPath: /application/reporting/api/logs
           name: log4net-config-volume
       volumes:
@@ -257,6 +289,9 @@ spec:
       - name: log4net-config-volume
         configMap:
           name: log4net-config
+      - name: local-service-url-volume
+        configMap:
+          name: local-service-url-config
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -299,6 +334,10 @@ spec:
         volumeMounts:
         - mountPath: /application/app_data
           name: reports-jobs-volume
+        - mountPath: /application/app_data/configuration/local_service_url.json
+          name: local-service-url-volume
+          subPath: local_service_url.json
+          readOnly: false
         - mountPath: /application/reporting/jobs/logs
           name: log4net-config-volume
       volumes:
@@ -309,6 +348,9 @@ spec:
       - name: log4net-config-volume
         configMap:
           name: log4net-config
+      - name: local-service-url-volume
+        configMap:
+          name: local-service-url-config
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -351,6 +393,10 @@ spec:
         volumeMounts:
         - mountPath: /application/app_data
           name: reports-reportservice-volume
+        - mountPath: /application/app_data/configuration/local_service_url.json
+          name: local-service-url-volume
+          subPath: local_service_url.json
+          readOnly: false
         - mountPath: /application/reporting/reportservice/logs
           name: log4net-config-volume
       volumes:
@@ -361,6 +407,9 @@ spec:
       - name: log4net-config-volume
         configMap:
           name: log4net-config
+      - name: local-service-url-volume
+        configMap:
+          name: local-service-url-config
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -403,6 +452,10 @@ spec:
         volumeMounts:
         - mountPath: /application/app_data
           name: reports-viewer-volume
+        - mountPath: /application/app_data/configuration/local_service_url.json
+          name: local-service-url-volume
+          subPath: local_service_url.json
+          readOnly: false
         - mountPath: /application/reporting/viewer/logs
           name: log4net-config-volume
       volumes:
@@ -413,6 +466,9 @@ spec:
       - name: log4net-config-volume
         configMap:
           name: log4net-config
+      - name: local-service-url-volume
+        configMap:
+          name: local-service-url-config
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -459,6 +515,10 @@ spec:
         volumeMounts:
         - mountPath: /application/app_data
           name: bold-etl-volume
+        - mountPath: /application/app_data/configuration/local_service_url.json
+          name: local-service-url-volume
+          subPath: local_service_url.json
+          readOnly: false
         - mountPath: /application/etl/etlservice/logs/k8s
           name: log4net-config-volume
       volumes:
@@ -469,3 +529,6 @@ spec:
       - name: log4net-config-volume
         configMap:
           name: log4net-config
+      - name: local-service-url-volume
+        configMap:
+          name: local-service-url-config

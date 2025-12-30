@@ -1,0 +1,104 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: bold-gateway
+  namespace: bold-services
+  annotations:
+    alb.networking.azure.io/alb-namespace: <Azure_Application_Loadbalancer_Namespace>
+    alb.networking.azure.io/alb-name: <Azure_Application_Loadbalancer_Name>
+spec:
+  gatewayClassName: nginx
+  listeners:
+  - name: http
+    protocol: HTTP
+    port: 80
+  # - name: https
+  #   protocol: HTTPS
+  #   port: 443
+  #   tls:
+  #     mode: Terminate
+  #     certificateRefs:
+  #     - name: bold-tls
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: bold-main-route
+  namespace: bold-services
+spec:
+  # hostnames:
+  # - "example.com"
+  parentRefs:
+  - name: bold-gateway
+    sectionName: http
+    # sectionName: https
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /reporting/api
+    backendRefs:
+    - name: reports-api-service
+      port: 6551
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /reporting/jobs
+    backendRefs:
+    - name: reports-jobs-service
+      port: 6552
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /reporting/viewer
+    backendRefs:
+    - name: reports-viewer-service
+      port: 6554
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /reporting/reportservice
+    backendRefs:
+    - name: reports-reportservice-service
+      port: 6553
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /reporting
+    backendRefs:
+    - name: reports-web-service
+      port: 6550
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api
+    backendRefs:
+    - name: id-api-service
+      port: 6001
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /ums
+    backendRefs:
+    - name: id-ums-service
+      port: 6002
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: id-web-service
+      port: 6000
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /etlservice
+    backendRefs:
+    - name: bold-etl-service
+      port: 6009
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /

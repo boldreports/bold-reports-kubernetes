@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: local-service-url-config
+{{ include "boldreports.namespace" . | indent 2 }}
+data:
+  local_service_url.json: |
+    {{- $subPath := "" }}
+    {{- if .Values.loadBalancer.subApplication.enabled }}
+      {{- $subPath = printf "/%s" (.Values.loadBalancer.subApplication.subPath | default "boldservices") }}
+    {{- end }}
+    {
+      "Idp": "http://id-web-service:6000{{ $subPath }}",
+      "IdpApi": "http://id-api-service:6001{{ $subPath }}/api",
+      "Ums": "http://id-ums-service:6002{{ $subPath }}/ums",
+      "Bi": "http://bi-web-service:6004{{ $subPath }}/bi",
+      "BiApi": "http://bi-api-service:6005{{ $subPath }}/bi/api",
+      "BiJob": "http://bi-jobs-service:6006{{ $subPath }}/bi/jobs",
+      "BiDesigner": "http://bi-dataservice-service:6007{{ $subPath }}/bi/designer",
+      "BiDesignerHelper": "http://bi-dataservice-service:6007{{ $subPath }}/bi/designer/helper",
+      "Etl": "http://bold-etl-service:6009{{ $subPath }}",
+      "EtlBlazor": "http://bold-etl-service:6009{{ $subPath }}/framework/blazor.server.js",
+      "Ai": "http://bold-ai-service:6010{{ $subPath }}/aiservice",
+      "Reports": "http://reports-web-service:6550{{ $subPath }}/reporting",
+      "ReportsApi": "http://reports-api-service:6551{{ $subPath }}/reporting/api",
+      "ReportsJob": "http://reports-jobs-service:6552{{ $subPath }}/reporting/jobs",
+      "ReportsService": "http://reports-reportservice-service:6553{{ $subPath }}/reporting/reportservice",
+      "ReportsViewer": "http://reports-viewer-service:6554{{ $subPath }}/reporting/viewer"
+    }
