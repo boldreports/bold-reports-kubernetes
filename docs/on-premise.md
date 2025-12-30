@@ -42,6 +42,7 @@ For fresh installation, continue with the following steps to deploy Bold Reports
 
 	```sh
 	kubectl apply -f log4net_config.yaml
+    kubectl apply -f local_services_url_config.yaml
 	```
 
 9. Open the **ingress.yaml** file. Uncomment the host value and replace your DNS hostname with `example.com` and save the file.

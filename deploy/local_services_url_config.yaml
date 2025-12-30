@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: local-service-url-config
+  namespace: bold-services
+data:
+  local_service_url.json: |
+    {
+      "Idp": "http://id-web-service:6000",
+      "IdpApi": "http://id-api-service:6001/api",
+      "Ums": "http://id-ums-service:6002/ums",
+      "Bi": "http://bi-web-service:6004/bi",
+      "BiApi": "http://bi-api-service:6005/bi/api",
+      "BiJob": "http://bi-jobs-service:6006/bi/jobs",
+      "BiDesigner": "http://bi-dataservice-service:6007/bi/designer",
+      "BiDesignerHelper": "http://bi-dataservice-service:6007/bi/designer/helper",
+      "Etl": "http://bold-etl-service:6009",
+      "EtlBlazor": "http://bold-etl-service:6009/framework/blazor.server.js",
+      "Ai": "http://bold-ai-service:6010/aiservice",
+      "Reports": "http://reports-web-service:6550/reporting",
+      "ReportsApi": "http://reports-api-service:6551/reporting/api",
+      "ReportsJob": "http://reports-jobs-service:6552/reporting/jobs",
+      "ReportsService": "http://reports-reportservice-service:6553/reporting/reportservice",
+      "ReportsViewer": "http://reports-viewer-service:6554/reporting/viewer"
+    }

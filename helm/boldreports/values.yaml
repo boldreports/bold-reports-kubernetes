@@ -64,7 +64,15 @@ imagePullSecrets: []
 
 
 loadBalancer:
-  type: nginx
+  type: nginx # Supported options: nginx (default), istio, alb, azure-alb, nginx-fabric
+
+  # # Azure-ALB configuration is only applicable AKS cluster
+  azureAlb:
+    # Name of the existing Application Gateway for Containers resource in Azure (required for type: alb)
+    azureAlbName: ''
+    # Namespace in the cluster where the ALB Controller manages resources (usually 'azure-alb-system')
+    azureAlbNamespace: ''
+  
   # ingressClassName: nginx
   affinityCookie:
     enable: true
@@ -86,6 +94,12 @@ loadBalancer:
           # - kubernetes.docker.internal
           # - example.com
         # secretName: bold-tls
+
+  # At present, this feature is supported only on Nginx Fabric and Azure ALB Gateway.
+  subApplication:
+    enabled: false
+    # Specify the subpath. The default subpath value is 'boldservices'
+    subPath: ''
 
 instanceConfig:
   - app: id-web

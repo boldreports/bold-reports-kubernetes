@@ -31,7 +31,7 @@ image:
 imagePullSecrets: []
 
 loadBalancer:
-  type: nginx
+  type: nginx  # Supported options: nginx (default), istio, alb, nginx-fabric
   # ingresspathtype: Implementspecific
   # ingressClassName: nginx
   affinityCookie:
@@ -54,6 +54,13 @@ loadBalancer:
           # - kubernetes.docker.internal
           # - example.com
         # secretName: bold-tls
+
+  # At present, this feature is supported only on Nginx Fabric and Azure ALB Gateway.
+  subApplication:
+    enabled: false
+    # Specify the subpath. The default subpath value is 'boldservices'
+    subPath: ''
+
         
 instanceConfig:
   - app: id-web

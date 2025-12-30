@@ -1,0 +1,124 @@
+{{- if or (eq .Values.loadBalancer.type "azure-alb") (eq .Values.loadBalancer.type "nginx-fabric") }}
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: bold-gateway
+  namespace: {{ .Values.namespace }}
+  annotations:
+    {{- if eq .Values.loadBalancer.type "azure-alb" }}
+    alb.networking.azure.io/alb-namespace: {{ .Values.loadBalancer.azureAlb.azureAlbNamespace }}
+    alb.networking.azure.io/alb-name: {{ .Values.loadBalancer.azureAlb.azureAlbName }}
+    {{- end }}
+spec:
+  {{- if eq .Values.loadBalancer.type "azure-alb" }}
+  gatewayClassName: azure-alb-external
+  {{- else if eq .Values.loadBalancer.type "nginx-fabric" }}
+  gatewayClassName: nginx
+  {{- end }}
+  listeners:
+  {{- if hasPrefix "https://" .Values.appBaseUrl }}
+  - name: https
+    protocol: HTTPS
+    port: 443
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: {{ .Values.loadBalancer.singleHost.secretName | default "bold-tls" }}
+  {{- else }}
+  - name: http
+    protocol: HTTP
+    port: 80
+  {{- end }}
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: bold-main-route
+  namespace: {{ .Values.namespace }}
+spec:
+  {{- $subPath := "" }}
+  {{- if .Values.loadBalancer.subApplication.enabled }}
+    {{- $subPath = printf "/%s" (.Values.loadBalancer.subApplication.subPath | default "boldservices") }}
+  {{- end }}
+  {{- if hasPrefix "https://" .Values.appBaseUrl }}
+  hostnames:
+  - "{{ index (splitList "/" .Values.appBaseUrl) 2 }}"
+  {{- end }}
+  parentRefs:
+  - name: bold-gateway
+    {{- if hasPrefix "https://" .Values.appBaseUrl }}
+    sectionName: https
+    {{- else }}
+    sectionName: http
+    {{- end }}
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: {{ $subPath }}/reporting/api
+    backendRefs:
+    - name: reports-api-service
+      port: 6551
+  - matches:
+    - path:
+        type: PathPrefix
+        value: {{ $subPath }}/reporting/jobs
+    backendRefs:
+    - name: reports-jobs-service
+      port: 6552
+  - matches:
+    - path:
+        type: PathPrefix
+        value: {{ $subPath }}/reporting/viewer
+    backendRefs:
+    - name: reports-viewer-service
+      port: 6554
+  - matches:
+    - path:
+        type: PathPrefix
+        value: {{ $subPath }}/reporting/reportservice
+    backendRefs:
+    - name: reports-reportservice-service
+      port: 6553
+  - matches:
+    - path:
+        type: PathPrefix
+        value: {{ $subPath }}/reporting
+    backendRefs:
+    - name: reports-web-service
+      port: 6550
+  - matches:
+    - path:
+        type: PathPrefix
+        value: {{ $subPath }}/api
+    backendRefs:
+    - name: id-api-service
+      port: 6001
+  - matches:
+    - path:
+        type: PathPrefix
+        value: {{ $subPath }}/ums
+    backendRefs:
+    - name: id-ums-service
+      port: 6002
+  - matches:
+    - path:
+        type: PathPrefix
+        value: {{ $subPath }}/
+    backendRefs:
+    - name: id-web-service
+      port: 6000
+  - matches:
+    - path:
+        type: PathPrefix
+        value: {{ $subPath }}/etlservice
+    backendRefs:
+    - name: bold-etl-service
+      port: 6009
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /
+{{- end }}
