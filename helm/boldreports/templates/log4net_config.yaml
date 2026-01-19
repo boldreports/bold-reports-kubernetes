@@ -18,7 +18,7 @@ data:
         </root>
         <!-- === File Appender for NON-ERROR messages file === -->
         <appender name="FILE_DEBUG_APPENDER" type="log4net.Appender.RollingFileAppender" class="ch.qos.logback.classic.AsyncAppender">
-          <file type="log4net.Util.PatternString" value="%property{AppDataPath}/logs/%property{loggername}/debug-info-%env{HOSTNAME}.txt" />
+          <file type="log4net.Util.PatternString" value="%property{AppDataPath}/logs/%property{LoggerName}/debug-info-%env{HOSTNAME}.txt" />
           <filter type="log4net.Filter.LevelMatchFilter">
             <levelToMatch value="INFO" />
           </filter>
@@ -30,13 +30,13 @@ data:
           <rollingStyle value="Size" />
           <staticLogFileName value="true" />
           <layout type="log4net.Layout.PatternLayout">
-            <header type="log4net.Util.PatternString" value="#Software: %property{loggername} %newline#Date: %date %newline#Fields: date thread namespace methodname message %newline" />
-            <conversionPattern value="%date	[%thread]	%message%newline" />
+            <header type="log4net.Util.PatternString" value="#Software: %property{LoggerName} %newline#Date: %date %newline#Fields: date thread namespace methodname message %newline" />
+            <conversionPattern value="%date	[%thread]	%message%property{OptionalData}%newline" />
           </layout>
         </appender>
         <!-- === File Appender for ERROR messages file === -->
         <appender name="FILE_ERROR_APPENDER" type="log4net.Appender.RollingFileAppender" class="ch.qos.logback.classic.AsyncAppender">
-          <file type="log4net.Util.PatternString" value="%property{AppDataPath}/logs/%property{loggername}/errors-%env{HOSTNAME}.txt" />
+          <file type="log4net.Util.PatternString" value="%property{AppDataPath}/logs/%property{LoggerName}/errors-%env{HOSTNAME}.txt" />
           <filter type="log4net.Filter.LevelMatchFilter">
             <levelToMatch value="ERROR" />
           </filter>
@@ -48,14 +48,14 @@ data:
           <rollingStyle value="Size" />
           <staticLogFileName value="true" />
           <layout type="log4net.Layout.PatternLayout">
-            <header type="log4net.Util.PatternString" value="#Software: %property{loggername} %newline#Date: %date %newline#Fields: date thread namespace methodname message %newline" />
-            <conversionPattern value="%date	[%thread]	%-5level	%message%newline" />
+            <header type="log4net.Util.PatternString" value="#Software: %property{LoggerName} %newline#Date: %date %newline#Fields: date thread namespace methodname message %newline" />
+            <conversionPattern value="%date	[%thread]	%-5level	%message%property{OptionalData}%newline" />
           </layout>
         </appender>
         <!-- === Console Appender to use in BufferingForwardingAppender === -->
         <appender name="ConsoleAppender" type="log4net.Appender.ConsoleAppender">
           <layout type="log4net.Layout.PatternLayout">
-            <conversionPattern type="log4net.Util.PatternString" value="%newline%%-5level  %property{loggername}  %env{HOSTNAME}  %%date	[%%thread]	%%message%newline" />
+            <conversionPattern type="log4net.Util.PatternString" value="%newline%%-5level  %property{LoggerName}  %env{HOSTNAME}  %%date	[%%thread]	%%message%property{OptionalData}%newline" />
           </layout>
         </appender>  
       </log4net>

@@ -49,8 +49,8 @@ image:
   idRepo: us-docker.pkg.dev/boldreports/multi-container
   reportsRepo: us-docker.pkg.dev/boldreports/multi-container
   # Overrides the image tag whose default is the chart appVersion.
-  idTag: 12.1.12
-  reportsTag: 12.1.12
+  idTag: 12.2.6
+  reportsTag: 12.2.6
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
