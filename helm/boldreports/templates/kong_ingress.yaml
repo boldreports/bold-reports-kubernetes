@@ -1,0 +1,128 @@
+{{- if eq .Values.loadBalancer.type "kong" }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: boldreports-kong-ingress
+  labels:
+    {{- include "boldreports.labels" . | nindent 4 }}
+  {{- include "boldreports.namespace" . | nindent 2 }}
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/strip-path: "false"              # IMPORTANT FIX
+    konghq.com/preserve-host: "true"
+    konghq.com/regex-priority: "10"
+    konghq.com/connect-timeout: "300000"
+    konghq.com/read-timeout: "300000"
+    konghq.com/write-timeout: "300000"
+    konghq.com/retries: "3"
+
+spec:
+  ingressClassName: kong
+
+  {{- if hasPrefix "https://" .Values.appBaseUrl }}
+  tls:
+    {{- if .Values.loadBalancer.multipleHost }}
+    {{- range $host := .Values.loadBalancer.multipleHost.hostArray }}
+    - hosts:
+      {{- range $dns := $host.hosts }}
+        - {{ $dns }}
+      {{- end }}
+      secretName: {{ $host.secretName }}
+    {{- end }}
+    {{- else }}
+    - hosts:
+        - {{ (split "/" .Values.appBaseUrl)._2 }}
+      secretName: {{ .Values.loadBalancer.singleHost.secretName }}
+    {{- end }}
+  {{- end }}
+
+  rules:
+    {{- if .Values.loadBalancer.multipleHost }}
+    - http:
+    {{- else }}
+    - host: {{ (split "/" .Values.appBaseUrl)._2 }}
+      http:
+    {{- end }}
+        paths:
+
+          # Reporting API
+          - path: /reporting/api
+            pathType: Prefix
+            backend:
+              service:
+                name: reports-api-service
+                port:
+                  number: 6551
+
+          # Reporting Jobs
+          - path: /reporting/jobs
+            pathType: Prefix
+            backend:
+              service:
+                name: reports-jobs-service
+                port:
+                  number: 6552
+
+          # Reporting Designer Service
+          - path: /reporting/reportservice
+            pathType: Prefix
+            backend:
+              service:
+                name: reports-reportservice-service
+                port:
+                  number: 6553
+
+          # Reporting Viewer
+          - path: /reporting/viewer
+            pathType: Prefix
+            backend:
+              service:
+                name: reports-viewer-service
+                port:
+                  number: 6554
+
+          # Reporting Web (base)
+          - path: /reporting
+            pathType: Prefix
+            backend:
+              service:
+                name: reports-web-service
+                port:
+                  number: 6550
+
+          # UMS
+          - path: /ums
+            pathType: Prefix
+            backend:
+              service:
+                name: id-ums-service
+                port:
+                  number: 6002
+
+          # ID API
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: id-api-service
+                port:
+                  number: 6001
+
+          # ETL Service
+          - path: /etlservice(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: bold-etl-service
+                port:
+                  number: 6009
+
+          # ID WEB (ROOT)
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: id-web-service
+                port:
+                  number: 6000
+{{- end }}
