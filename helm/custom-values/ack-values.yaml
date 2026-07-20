@@ -16,6 +16,25 @@ persistentVolume:
     serverName: ''
     filePath: '/bold-services'
 
+# For OCI configuration, set enabled as true.
+ociStorage:
+  # Enable OCI storage backend (required: set to true to use OCI)
+  enabled: false
+  # OCI access key for authentication (e.g., your OCI user access key)
+  accessKey:
+  # Name of the OCI bucket to use for storage
+  bucketName:
+  # OCI namespace (tenant OCID or namespace name)
+  namespace:
+  # OCI region where the bucket is located (e.g., us-ashburn-1)
+  region:
+  # Root folder path within the bucket for storing data
+  rootFolderName:
+  # OCI secret key for authentication (e.g., your OCI user secret key)
+  secretKey: 
+  # Type of OCI storage
+  storageType: 3
+
 image:
   idRepo: us-docker.pkg.dev/boldreports/multi-container
   reportsRepo: us-docker.pkg.dev/boldreports/multi-container
