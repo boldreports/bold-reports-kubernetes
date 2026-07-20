@@ -13,7 +13,7 @@ entries:
     name: kc269938
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/kc269938-5.3.8.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/kc269938-5.3.8.tgz
     version: 5.3.8
   kc14447:
   - apiVersion: v2
@@ -28,7 +28,7 @@ entries:
     name: kc14447
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/kc14447-9.1.7.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/kc14447-9.1.7.tgz
     version: 9.1.7
   kc8343:
   - apiVersion: v2
@@ -43,7 +43,7 @@ entries:
     name: kc8343
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/kc8343-11.1.10.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/kc8343-11.1.10.tgz
     version: 11.1.10
   boldreports:
   - apiVersion: v2
@@ -58,7 +58,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-5.4.20.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-5.4.20.tgz
     version: 5.4.20
   - apiVersion: v2
     appVersion: 5.4.30
@@ -72,7 +72,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-5.4.30.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-5.4.30.tgz
     version: 5.4.30
   - apiVersion: v2
     appVersion: 6.1.34
@@ -86,7 +86,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-6.1.34.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-6.1.34.tgz
     version: 6.1.34
   - apiVersion: v2
     appVersion: 6.1.45
@@ -100,7 +100,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-6.1.45.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-6.1.45.tgz
     version: 6.1.45
   - apiVersion: v2
     appVersion: 6.2.32
@@ -114,7 +114,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-6.2.32.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-6.2.32.tgz
     version: 6.2.32
   - apiVersion: v2
     appVersion: 6.3.16
@@ -128,7 +128,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-6.3.16.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-6.3.16.tgz
     version: 6.3.16
   - apiVersion: v2
     appVersion: 6.3.24
@@ -142,7 +142,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-6.3.24.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-6.3.24.tgz
     version: 6.3.24
   - apiVersion: v2
     appVersion: 7.1.9
@@ -156,7 +156,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-7.1.9.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-7.1.9.tgz
     version: 7.1.9
   - apiVersion: v2
     appVersion: 8.1.1
@@ -170,7 +170,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-8.1.1.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-8.1.1.tgz
     version: 8.1.1
   - apiVersion: v2
     appVersion: 9.1.7
@@ -184,7 +184,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-9.1.7.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-9.1.7.tgz
     version: 9.1.7
   - apiVersion: v2
     appVersion: 10.1.11
@@ -198,7 +198,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-10.1.11.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-10.1.11.tgz
     version: 10.1.11
   - apiVersion: v2
     appVersion: 11.1.10
@@ -212,7 +212,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-11.1.10.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-11.1.10.tgz
     version: 11.1.10
   - apiVersion: v2
     appVersion: 12.1.12
@@ -226,7 +226,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-12.1.12.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-12.1.12.tgz
     version: 12.1.12
   - apiVersion: v2
     appVersion: 12.2.6
@@ -240,7 +240,7 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-12.2.6.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-12.2.6.tgz
     version: 12.2.6
   - apiVersion: v2
     appVersion: 13.1.26
@@ -254,8 +254,22 @@ entries:
     name: boldreports
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/boldreports-13.1.26.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-13.1.26.tgz
     version: 13.1.26
+  - apiVersion: v2
+    appVersion: 14.1.12
+    created: "2025-09-15T19:00:26.6615214+05:30"
+    description: Make bolder business decisions with complete reporting solutions
+      and unleash the power of your data with paginated, printable reports and make
+      intelligent decisions.
+    digest: 6B88C31F8BB5E9FCB4CDB02657C85DC2DFCA4BB22724318CD3E3FF01452684DB
+    home: https://www.boldreports.com/
+    icon: https://on-premise-demo.boldreports.com/reporting/images/application/boldreports/main_logo.svg
+    name: boldreports
+    type: application
+    urls:
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/boldreports-14.1.12.tgz
+    version: 14.1.12
   kc355012:
   - apiVersion: v2
     appVersion: 6.2.32
@@ -269,7 +283,7 @@ entries:
     name: kc355012
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/kc355012-6.2.32.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/kc355012-6.2.32.tgz
     version: 6.2.32
   KC5254:
   - apiVersion: v2
@@ -284,6 +298,6 @@ entries:
     name: kc355012
     type: application
     urls:
-    - https://boldreports.github.io/bold-reports-kubernetes/KC5254-11.1.10.tgz
+    - https://boldreports.github.io/boldreports-server-in-kubernetes/KC5254-11.1.10.tgz
     version: 11.1.10
 generated: "2024-02-21T12:20:20.3833077+05:30"
