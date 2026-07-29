@@ -1,0 +1,182 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: bold-ingressroute
+  namespace: bold-services
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  # entryPoints:
+  #   - websecure
+  entryPoints:
+    - web
+  # tls:
+  #   secretName: bold-tls
+  routes:
+    # - match: Host(`example.com`)
+    - match: PathPrefix(`/`)
+      kind: Rule
+      middlewares:
+        - name: gzip-compress
+        - name: body-limit-200m
+      services:
+        - name: id-web-service
+          port: 6000
+          serversTransport: long-timeouts-transport
+          sticky:
+            cookie:
+              name: bold.k8s.pod.id
+              maxAge: 600
+    # - match: Host(`example.com`) && PathPrefix(`/api`)
+    - match: PathPrefix(`/api`)
+      kind: Rule
+      middlewares:
+        - name: gzip-compress
+        - name: body-limit-200m
+      services:
+        - name: id-api-service
+          port: 6001
+          serversTransport: long-timeouts-transport
+          sticky:
+            cookie:
+              name: bold.k8s.pod.id
+              maxAge: 600
+    # - match: Host(`example.com`) && PathPrefix(`/ums`)
+    - match: PathPrefix(`/ums`)
+      kind: Rule
+      middlewares:
+        - name: gzip-compress
+        - name: body-limit-200m
+      services:
+        - name: id-ums-service
+          port: 6002
+          serversTransport: long-timeouts-transport
+          sticky:
+            cookie:
+              name: bold.k8s.pod.id
+              maxAge: 600
+    # - match: Host(`example.com`) && PathPrefix(`/reporting/api`)
+    - match: PathPrefix(`/reporting/api`)
+      kind: Rule
+      middlewares:
+        - name: gzip-compress
+        - name: body-limit-200m
+      services:
+        - name: reports-api-service
+          port: 6551
+          serversTransport: long-timeouts-transport
+          sticky:
+            cookie:
+              name: bold.k8s.pod.id
+              maxAge: 600
+    # - match: Host(`example.com`) && PathPrefix(`/reporting/jobs`)
+    - match: PathPrefix(`/reporting/jobs`)
+      kind: Rule
+      middlewares:
+        - name: gzip-compress
+        - name: body-limit-200m
+      services:
+        - name: reports-jobs-service
+          port: 6552
+          serversTransport: long-timeouts-transport
+          sticky:
+            cookie:
+              name: bold.k8s.pod.id
+              maxAge: 600
+    # - match: Host(`example.com`) && PathPrefix(`/reporting/reportservice`)
+    - match: PathPrefix(`/reporting/reportservice`)
+      kind: Rule
+      middlewares:
+        - name: gzip-compress
+        - name: body-limit-200m
+      services:
+        - name: reports-reportservice-service
+          port: 6553
+          serversTransport: long-timeouts-transport
+          sticky:
+            cookie:
+              name: bold.k8s.pod.id
+              maxAge: 600
+    # - match: Host(`example.com`) && PathPrefix(`/reporting/reportservice`)
+    - match: PathPrefix(`/reporting/viewer`)
+      kind: Rule
+      middlewares:
+        - name: gzip-compress
+        - name: body-limit-200m
+      services:
+        - name: reports-viewer-service
+          port: 6554
+          serversTransport: long-timeouts-transport
+          sticky:
+            cookie:
+              name: bold.k8s.pod.id
+              maxAge: 600
+    # - match: Host(`example.com`) && PathPrefix(`/reporting`)
+    - match: PathPrefix(`/reporting`)
+      kind: Rule
+      middlewares:
+        - name: gzip-compress
+        - name: body-limit-200m
+      services:
+        - name: reports-web-service
+          port: 6550
+          serversTransport: long-timeouts-transport
+          sticky:
+            cookie:
+              name: bold.k8s.pod.id
+              maxAge: 600
+    # - match: Host(`example.com`) && PathRegexp(`^/etlservice(/|$)(.*)`)
+    - match: PathRegexp(`^/etlservice(/|$)(.*)`)
+      kind: Rule
+      middlewares:
+        - name: gzip-compress
+        - name: body-limit-200m
+        - name: etl-rewrite
+      services:
+        - name: bold-etl-service
+          port: 6009
+          serversTransport: long-timeouts-transport
+          sticky:
+            cookie:
+              name: bold.k8s.pod.id
+              maxAge: 600
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: gzip-compress
+  namespace: bold-services
+spec:
+  compress:
+    minResponseBodyBytes: 1024
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: body-limit-200m
+  namespace: bold-services
+spec:
+  buffering:
+    maxRequestBodyBytes: 209715200
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: etl-rewrite
+  namespace: bold-services
+spec:
+  replacePathRegex:
+    regex: ^/etlservice(/|$)(.*)
+    replacement: /$2
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: long-timeouts-transport
+  namespace: bold-services
+spec:
+  forwardingTimeouts:
+    dialTimeout: 300s
+    responseHeaderTimeout: 300s
+    idleConnTimeout: 300s
+    readIdleTimeout: 300s
