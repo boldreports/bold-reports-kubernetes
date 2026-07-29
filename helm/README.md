@@ -17,7 +17,7 @@ This chart installs [Bold Reports](https://www.boldreports.com/) on Kubernetes. 
 1. Add the Bold Reports helm repository
 
 ```console
-helm repo add boldreports https://boldreports.github.io/bold-reports-kubernetes
+helm repo add boldreports https://boldreports.github.io/boldreports-server-in-kubernetes
 helm repo update
 ```
 
@@ -27,7 +27,7 @@ helm repo update
 helm search repo boldreports
 
 NAME            CHART VERSION   APP VERSION     DESCRIPTION
-boldreports/boldreports   13.1.26           13.1.26         Make bolder business decisions with complete reporting solutions...
+boldreports/boldreports   14.1.12           14.1.12         Make bolder business decisions with complete reporting solutions...
 ```
 
 _See [helm repo](https://helm.sh/docs/helm/helm_repo/) for command documentation._
@@ -151,6 +151,89 @@ For Helm chart, you'll need to craft a `values.yaml`.
 
 > **Note:** Items marked with `*` are mandatory fields in values.yaml
 
+## Environment variables for configuring Storage in backend
+The following environment variables are optional. If not provided, Bold Reports will use the default configured values.
+
+### OCI Storage Configuration
+
+To use OCI storage, set `ociStorage.enabled: true`.
+
+<table>
+    <tr>
+      <td>
+       <b>Name</b>
+      </td>
+      <td>
+       <b>Description</b>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       ociStorage.enabled
+      </td>
+      <td>
+       Enable OCI storage backend. Set to <code>true</code> to use OCI storage.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       ociStorage.accessKey
+      </td>
+      <td>
+       OCI access key for authentication (e.g., your OCI user access key).
+      </td>
+    </tr>
+    <tr>
+      <td>
+       ociStorage.bucketName
+      </td>
+      <td>
+       Name of the OCI bucket to use for storage.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       ociStorage.namespace
+      </td>
+      <td>
+       OCI namespace (tenant OCID or namespace name).
+      </td>
+    </tr>
+    <tr>
+      <td>
+       ociStorage.region
+      </td>
+      <td>
+       OCI region where the bucket is located (e.g., us-ashburn-1).
+      </td>
+    </tr>
+    <tr>
+      <td>
+       ociStorage.rootFolderName
+      </td>
+      <td>
+       Root folder path within the bucket for storing data.
+      </td>
+    </tr>
+    <tr>
+      <td>
+       ociStorage.secretKey
+      </td>
+      <td>
+       OCI secret key for authentication (e.g., your OCI user secret key).
+      </td>
+    </tr>
+    <tr>
+      <td>
+       ociStorage.storageType
+      </td>
+      <td>
+       Type of OCI storage. Default value is <code>4</code>.
+      </td>
+    </tr>
+</table>
+<br/>
+
 Run the following command to delpoy Bold Reports in your cluster.
 
 ```console
@@ -177,6 +260,24 @@ helm upgrade [RELEASE_NAME] boldreports/boldreports -f [Crafted values.yaml file
 ```
 
 Ex:  `helm upgrade boldreports boldreports/boldreports -f my-values.yaml`
+
+**Troubleshooting: repo 404 when running `helm repo update`**
+
+If you see an error like:
+
+```
+Hang tight while we grab the latest from your chart repositories...
+...Unable to get an update from the "boldreports" chart repository (https://boldreports.github.io/bold-reports-kubernetes):
+        failed to fetch https://boldreports.github.io/bold-reports-kubernetes/index.yaml : 404 Not Found
+```
+
+remove and re-add the repository (this fixes a stale/incorrect repo entry), then update:
+
+```console
+helm repo remove boldreports
+helm repo add boldreports https://boldreports.github.io/boldreports-server-in-kubernetes
+helm repo update
+```
 
 ## Uninstall Chart
 
