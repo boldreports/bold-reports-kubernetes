@@ -16,4 +16,4 @@
 
 # Upgrade Bold Reports
 
-If you are upgrading Bold Reports to 14.1.12, please follow the steps in this [link](/upgrade/upgrade.md).
+If you are upgrading Bold Reports to 14.1.18, please follow the steps in this [link](/upgrade/upgrade.md).
